@@ -10,122 +10,38 @@
 			
 			/*贴标签页*/
 			
-			.bb-left{
+			.bw-left{
 				width: 67.3%;
 				float: left;
 			}
-			.bb-right{
+			.bw-right{
 				width: 31.8%;
 				float: right;
 			}
 		</style>
 	</head>
 	<body>
-		<header>
-			<nav class="top-nav clearfix">
-				<div class="nav-left">
-					<a href="javascript:">Dashboard</a>
-					<a href="javascript:">Content</a>
-					<a href="">Construction</a>
-					<a href="">User</a>
-					<a href="">Module</a>
-					<a href="">Configuration</a>
-					<a href="">Report</a>
-					<a href="">Help</a>
-				</div>
-				<div class="btn-keys">
-					<div class="triangle-down">
-						
-					</div>
-				</div>
-				<div class="nav-right">
-					<span class="nr-left">welcome</span>
-					<span class="nr-right">3ti</span>
-					<span class="icon-exit">&nbsp;</span>
-					
-				</div>
-				
-			</nav>
-			<div class="keys-wrapper clearfix">
-				<div class="kw-left">
-					<span class="kwl-add">+ Add</span>
-					<span class="kwl-find">Find Content</span>
-				</div>
-				<div class="kw-right">编辑快捷键</div>
-			</div>
-		</header>	
-		<div class="left-menu">
-			<div class="lm-icon-wrapper">
-				<div class="lm-icon icon-list"></div>
-			</div>
-			<div class="lm-icon-wrapper">
-				<div class="lm-icon icon-home"></div>
-			</div>
-			<div class="lm-icon-wrapper">
-				<div class="lm-icon icon-user"></div>
-			</div>
-			<div class="lm-icon-wrapper">
-				<div class="lm-icon icon-products"></div>
-			</div>
-			<div class="lm-icon-wrapper">
-				<div class="lm-icon icon-channel"></div>
-			</div>
-			<div class="lm-icon-wrapper">
-				<div class="lm-icon icon-label"></div>
-			</div>
-			<div class="lm-icon-wrapper">
-				<div class="lm-icon icon-analysis"></div>
-			</div>
-		</div>
+		
 		<div class="content">
-			<div class="nav-path">
-				<div class="np-prs">PRS</div>
-				<div class="prs-left">
-					<span class="prs-text fl">PRS System</span>
-					<select name="" >
-						<option value="">标签管理</option>
-					</select>
-					<div class="breadcrumb fl">
-						<div class="breadcrumb-item">
-							产品分类
-						</div>
-						<span class="arrow-gt"> > </span>
-						<div class="breadcrumb-item">
-							手机
-						</div>
-					</div>
-				</div>
-				<div class="prs-right">邮箱</div>
-			</div>
-			<div class="bb-left">
-				<div class="basic-block">
+			<div class="bw-left">
+				<div class="block">
 					<span class="title-prefix-md">选择对象</span>
 					<div class="label-lg fr">
 						<span class="label-lg-text">所选对象:</span>
 						<span class="label-lg-obj">Note 8</span>
 					</div>
 				</div>
-				<div class="basic-block">222222</div>
+				<div class="block">222222</div>
 			</div>
-			<div class="bb-right">
-				<div class="basic-block">33333</div>
+			<div class="bw-right">
+				<div class="block">33333</div>
 			</div>
 			
 			
 		</div>
-		<script
-		  src="https://code.jquery.com/jquery-3.2.1.js"
-		  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-		  crossorigin="anonymous">
-		</script>
+		<script src="lib/jquery/jquery-3.2.1.js"></script>
 		<script src="lib/selectify/jquery.selectify.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			$( "select" ).selectify({
-				btnText: '',
-			});
-			$( "select" ).on( "change", function ( ) {
-				console.log( "Yes, these events work as they did on the native UI!" );
-			});
-		</script>
+		<script src="js/frame.js" type="text/javascript" charset="utf-8"></script>
+		
 	</body>
 </html>

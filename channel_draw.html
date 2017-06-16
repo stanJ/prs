@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>框架</title>
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+		<link rel="stylesheet" type="text/css" href="css/frame.css"/>
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="lib/selectify/silver.default.css"/>
+		
+		
+		<style type="text/css">
+			
+			/*贴标签页*/
+			[class*='bwl']:not([class*="bwl__"]){
+				float: left;
+				box-sizing: border-box;
+			}
+			[class*='bwr']:not([class*="bwr__"]){
+				float: right;
+				box-sizing: border-box;
+			}
+			.bwl--a{
+				width: 58.4%;
+			}
+			.bwr--a{
+				width: 40.7%;
+			}
+			.select--date{
+				width: 216px;
+			}
+			.select--project{
+				width: 122px;
+			}
+			.bwl--b{
+				width: 58.5%;
+				border-right: 1px solid #ddd;
+    			padding-right: 10px;
+			}
+			.bwr--b{
+				width: 41.5%;
+				padding-left: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="content" id="app">
+			<div class="block clearfix">
+				<select class="select select--date">
+					<option value="">2017-04-16</option>
+				</select>
+				<select class="select select--project">
+					<option value="">筛选</option>
+					<option value="">筛选项目1</option>
+					<option value="">筛选项目2</option>
+				</select>
+				<div class="triangle--lg fl"></div>
+				<div class="block__text">
+					<span class="bt--lg">筛选条件</span>
+					<span class="bt">版本:<span class="bt__info">1.2</span></span>
+					<span class="bt">人群:<span class="bt__info">青年人群</span></span>
+				</div>
+			</div>
+			<div class="block clearfix">
+				<div class="bwl--b clearfix">
+					<div class="section clearfix">
+						<span class="title-prefix-md">渠道基础数据</span>
+						<div class="fr clearfix letter-spacing">
+							<input type="text" name="" class="input--lg mr10"/>
+							<button class="button--md">渠道管理</button>
+						</div>
+					</div>
+					<div class="tabs">
+						<div class="tab-item">数量分析</div>
+						<div class="tab-item active">质量分析</div>
+					</div>
+					<el-table :data="qualityData" stripe class="table-wrapper" height="160">
+						<el-table-column 
+							label="渠道名称" 
+							prop="1" 
+							width="137px"
+							align="center"
+							:show-overflow-tooltip="true"> 
+						</el-table-column>
+						<el-table-column 
+							label="专家类别" 
+							prop="2"
+							align="center"
+							:show-overflow-tooltip="true">
+						</el-table-column>
+						<el-table-column label="创建人" 
+							prop="3"
+							align="center"
+							:show-overflow-tooltip="true"> 
+						</el-table-column>
+						<el-table-column 
+							label="操作" 
+							width="200px"
+							align="center">
+							<template scope="scope">
+								<el-button 
+									@click="check(scope.$index,scope.row)" 
+									type="text" 
+									class="bs-default">
+									查看
+								</el-button>
+								<el-button 
+									@click="modify(scope.$index,scope.row)" 
+									type="text">
+									修改
+								</el-button>
+							</template>
+						</el-table-column>
+					</el-table>
+					<!--<div class="table">
+						<div class="table__header-wrapper">
+							<table border="" cellspacing="" cellpadding="">
+								<tr><th>Header</th></tr>
+							</table>
+						</div>
+						<div class="table__body-wrapper">
+							<table border="" cellspacing="" cellpadding="">
+								<tr><td>Data</td></tr>
+							</table>
+						</div>
+					</div>-->
+				</div>
+				<div class="bwr--b clearfix">
+					asdfadfa
+				</div>
+			</div>
+			
+			<div class="bwl--a">
+				<div class="block clearfix">
+					
+				</div>
+				<div class="block clearfix">222222</div>
+			</div>
+			<div class="bwr--a">
+				<div class="block clearfix">33333</div>
+			</div>
+			
+			
+		</div>
+		<script src="lib/jquery/jquery-3.2.1.js"></script>
+		<script src="lib/selectify/jquery.selectify.js" type="text/javascript" charset="utf-8"></script>
+		<!--先引入vue-->
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<!-- 引入组件库 -->
+		<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+		<script src="js/frame.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var app = new Vue({
+				el: '#app',
+				data: {
+					qualityData: []
+				},
+				created: function () {
+					this.fetchData();
+				},
+				methods: {
+					fetchData: function(){
+						this.loadQualityList();
+					},
+					loadQualityList: function(){
+						this.qualityData = [{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+						},{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+						},{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+						},{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+						},{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+						},]
+					}
+				}
+			})
+		</script>
+		
+	</body>
+</html>

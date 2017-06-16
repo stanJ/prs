@@ -3,6 +3,7 @@ body{
 	margin: 0;
 	background: #b3b3b3;
 	min-width: 1200px;
+	font-size: 12px;
 }
 .left-menu{
 	position: fixed;
@@ -13,6 +14,7 @@ body{
     background: #004494;
     padding-top: 15px;
     text-align: center;
+    z-index: 10;
 }
 .lm-icon-wrapper{
 	width: 32px;
@@ -58,7 +60,7 @@ header{
     background: #fff;
     /*width: 100%;*/
     /*z-index: 20;*/
-    min-width: 991px;
+    min-width: 1014px;
     z-index: 10;
 }
 .top-nav{
@@ -83,10 +85,9 @@ header{
 	float: right;
 	margin-right: 74px;
 	font-size: 14px;
+	display: table-cell;
 }
 .nav-right>span{
-	line-height: 60px;
-    height: 60px;
     display: inline-block;
     
 }
@@ -112,6 +113,9 @@ header{
     background-position: center;
     background-repeat: no-repeat;
     background-image: url(../img/top_icon_signout.png);
+    cursor: pointer;
+    height: 20px;
+    vertical-align: middle;
 }
 .btn-keys{
 	position: absolute;
