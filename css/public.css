@@ -5,6 +5,14 @@
 	line-height: 0;
 	clear: both;
 }
+[class*='bwl']:not([class*="bwl__"]){
+	float: left;
+	box-sizing: border-box;
+}
+[class*='bwr']:not([class*="bwr__"]){
+	float: right;
+	box-sizing: border-box;
+}
 a:link{
 	color: #004494;
 	text-decoration: none;
@@ -178,7 +186,7 @@ a:visited{
     display: inline-block;
     float: left;
     padding-left: 15px;
-    margin: 10px 0 0 10px;
+    margin: 10px 27px 0 10px;
     font-size: 15px;
     line-height: 22px;
 }
@@ -288,6 +296,7 @@ a:visited{
 }
 .tabs{
 	letter-spacing: -4px;
+	display: inline-block;
 }
 .tab-item{
 	display: inline-block;
@@ -298,7 +307,7 @@ a:visited{
     text-align: center;
     line-height: 40px;
 }
-.tab-item.active{
+.tab-item.is-active{
 	background: #8194ab;
 	color: #fff;
 }
@@ -322,4 +331,63 @@ a:visited{
 .el-table--striped .el-table__body tr.el-table__row--striped td {
     background: #fff;
     background-clip: padding-box;
+}
+.line{
+    margin-left: -10px;
+    margin-right: -10px;
+    border: 0;
+    border-bottom: 1px solid #ebebeb;
+}
+.title--normal{
+	font-size: 15px;
+    line-height: 22px;
+}
+/*.el-tabs__header{
+	margin-bottom: 0;
+}
+.el-tabs__item{
+	padding: 0 2px;
+	margin-right: 92px;
+}
+.el-tabs__active-bar{
+	height: 4px;
+	background-color: #004494;
+}
+
+.el-tabs__item.is-active {
+    color: #004494;
+}*/
+.tabs__nav{
+	background: #fff;
+	margin-bottom: 10px;
+	height: 52px;
+	font-size: 14px;
+	padding-left: 40px;
+	border-radius: 5px;
+}
+.tab-title{
+    line-height: 52px;
+    margin-right: 94px;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 52px;
+    padding: 0 6px;
+}
+.tab-title.is-active{
+	border-bottom: 4px solid #004494;
+	color: #004094;
+}
+.el-select{
+	width: 130px;
+    line-height: 40px;
+    margin-right: 20px
+}
+.el-input__inner{
+	height: 40px;
+}
+.table-wrapper{
+	margin: 0 26px 0 10px;
+}
+.block{
+	box-sizing: border-box;
 }

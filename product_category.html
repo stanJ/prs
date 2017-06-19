@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>框架</title>
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+		<link rel="stylesheet" type="text/css" href="css/frame.css"/>
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="lib/selectify/silver.default.css"/>
+		<style type="text/css">
+			.bwl--a{
+				width: 49.5%;
+				
+			}
+			.bwr--a{
+				width: 49.6%;
+				
+			}
+			.bwl--b{
+			    width: 50%;
+			    border-right: 1px solid #ddd;
+			    padding-right: 10px;
+				
+			}
+			.bwr--b{
+				width: 50%;
+    			padding-left: 10px;
+				
+			}
+			.chart--line1{
+				height: 280px;
+			}
+			.chart--line2{
+				height: 280px;
+			}
+			.chart--pie1{
+				height: 300px;
+			}
+			.chart--map1{
+				height: 340px;
+			}
+			.score-wrapper{
+				font-size: 15px;
+			    font-weight: bold;
+			    line-height: 40px;
+			    height: 40px;
+			    display: table-cell;
+			    float: right;
+			}
+			.score__text{
+				margin-right: 12px;
+    			vertical-align: middle;
+			}
+			.score__value{
+				color: #4a90e2;
+			}
+			.el-rate{
+				display: inline-block;
+			}
+			.products{
+				color: #8a7979;
+    			font-size: 14px;
+				
+			}
+			.product-brand{
+				padding-left: 60px;
+			}
+			.product-params{
+				padding: 10px 0 10px 60px;
+			}
+			.brand-name{
+				color: #004494;
+				margin: 0 8px 0 6px;
+			}
+			.line--product{
+				margin-left: 20px;
+			    border: 0;
+			    border-bottom: 1px solid #d8d8d8;
+			}
+			.param__value{
+				margin-left: 10px;
+			}
+			.params--right{
+				line-height: 32px;
+			}
+			/*.bwl--a>.block{
+				height: 346px;
+				box-sizing: border-box;
+			}*/
+			
+		</style>
+	</head>
+	<body>
+		
+		<div class="content" id="app">
+			<div class="tabs__nav">
+				<div class="tab-title" data-name="tab1">标注总览</div>
+				<div class="tab-title is-active" data-name="tab2">属性分析</div>
+				<div class="tab-title " data-name="tab3">销售分析</div>
+				<div class="tab-title" data-name="tab4">点评分析</div>
+				<div class="tab-title" data-name="tab5">竞品分析</div>
+			</div>
+			<div class="tabs__content clearfix">
+				<div class="tab-pane" data-name="tab6">
+					<div class="bwl--a">
+						<div class="block clearfix">
+							<div class="section clearfix">
+								<span class="title-prefix-md">渠道基础数据</span>
+							</div>
+							<div class="table-wrapper">
+								<el-table :data="categoryData" stripe >
+									
+									<el-table-column 
+										label="型号" 
+										prop="1" 
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="属性" 
+										prop="2"
+										align="center"
+										:show-overflow-tooltip="true">
+									</el-table-column>
+									<el-table-column label="价格" 
+										prop="3"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+								</el-table>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" data-name="tab5">
+					<div class="bwl--a">
+						<div class="block clearfix">
+							<div class="section clearfix">
+								<span class="title-prefix-md">产品亮点分析</span>
+								<el-select placeholder="人群筛选"></el-select>
+								<el-select placeholder="产品筛选"></el-select>
+							</div>
+							<div class="table-wrapper">
+								
+								<el-table :data="highlightData" stripe>
+									<el-table-column 
+										label="" 
+										width="100"
+										prop="0" 
+										align="left"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="苹果" 
+										prop="1" 
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="小米" 
+										prop="2"
+										align="center"
+										:show-overflow-tooltip="true">
+									</el-table-column>
+									<el-table-column label="华为" 
+										prop="3"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+								</el-table>
+							</div>
+							
+						</div>
+					
+					</div>
+					<div class="bwr--a">
+						<div class="block clearfix">
+							<div class="section clearfix">
+								<span class="title-prefix-md">品牌销量分析</span>
+								<el-select placeholder="最近一个月"></el-select>
+								<el-select placeholder="人群筛选"></el-select>
+							</div>
+							<div class="table-wrapper">
+								
+								<el-table :data="salesData" stripe>
+									<el-table-column 
+										label="品牌名称" 
+										prop="1" 
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="销量趋势" 
+										prop="2"
+										align="center"
+										:show-overflow-tooltip="true">
+									</el-table-column>
+									<el-table-column label="网店均价" 
+										prop="3"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column label="实体店价格" 
+										prop="4"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column label="热销指数" 
+										prop="5"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+								</el-table>
+							</div>
+							
+						</div>
+					
+					</div>
+				</div>
+				<div class="tab-pane" data-name="tab4">
+					<div class="bwl--a">
+						<div class="block clearfix" style="height: 346px;">
+							<div class="section clearfix">
+								<span class="title-prefix-md">产品评论活跃度</span>
+								<el-select placeholder="网站筛选"></el-select>
+								<el-select placeholder="时间筛选"></el-select>
+							</div>
+							<div class="table-wrapper">
+								
+								<el-table :data="commentActiveData" stripe>
+									<el-table-column 
+										label="网站" 
+										prop="1" 
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="好评" 
+										prop="2"
+										align="center"
+										:show-overflow-tooltip="true">
+									</el-table-column>
+									<el-table-column label="中评" 
+										prop="3"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column label="差评" 
+										prop="4"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column label="追评" 
+										prop="5"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column label="晒图" 
+										prop="6"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column label="无情感" 
+										prop="7"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column label="活跃指数" 
+										prop="8"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+								</el-table>
+							</div>
+							
+						</div>
+						
+						<div class="block clearfix" style="height: 360px;">
+							<div class="section clearfix">
+								<span class="title-prefix-md">产品情感分析</span>
+							</div>
+							<div class="table-wrapper">
+								
+								<el-table :data="commentActiveData" stripe>
+									<el-table-column 
+										label="项目" 
+										prop="1" 
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="用户情感" 
+										prop="2"
+										align="center"
+										:show-overflow-tooltip="true">
+									</el-table-column>
+									<el-table-column label="有效评价数网站" 
+										prop="3"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+								</el-table>
+								<div class="score-wrapper">
+									<span class="score__text">情感综合评分</span>
+									<span class="score__text"><span class="score__value">85</span>分</span>
+									 <el-rate v-model="score"></el-rate>
+								</div>
+							</div>
+							
+						</div>
+						<div class="block clearfix" style="height: 346px;">
+							<div class="section clearfix">
+								<span class="title-prefix-md">用户评论热点</span>
+							</div>
+							
+						</div>
+						
+					</div>
+					<div class="bwr--a">
+						<div class="block clearfix" style="height: 346px;">
+							<div class="section clearfix">
+								<span class="title-prefix-md">渠道用户停留时间</span>
+							</div>
+							<div class="chart chart--line1"></div>
+									
+						</div>
+						<div class="block clearfix" style="height: 360px;">
+							<div class="section clearfix">
+								<span class="title-prefix-md">情感指数趋势</span>
+								<el-select placeholder="全部网站"></el-select>
+								<el-select placeholder="最近一周"></el-select>
+							</div>
+							<div class="table-wrapper">
+								
+								<el-table :data="commentActiveData" stripe>
+									<el-table-column 
+										label="网站" 
+										prop="1" 
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="好评" 
+										prop="2"
+										align="center"
+										:show-overflow-tooltip="true">
+									</el-table-column>
+									<el-table-column label="中评" 
+										prop="3"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column label="差评" 
+										prop="4"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column label="追评" 
+										prop="5"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column label="晒图" 
+										prop="6"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column label="无情感" 
+										prop="7"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column label="活跃指数" 
+										prop="8"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+								</el-table>
+							</div>
+							
+						</div>
+						
+					</div>
+				</div>
+				
+				<div class="tab-pane" data-name="tab3">
+					<div class="clearfix">
+						<div class="bwl--a">
+							<div class="block clearfix" style="height: 346px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">产品销售数量</span>
+									<el-select placeholder="按季度"></el-select>
+								</div>
+								<div class="table-wrapper">
+									
+									<el-table :data="commentActiveData" stripe>
+										<el-table-column 
+											label="季度" 
+											prop="1" 
+											align="center"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column 
+											label="总销量(台)" 
+											prop="2"
+											align="center"
+											:show-overflow-tooltip="true">
+										</el-table-column>
+										<el-table-column label="移动营销(台)" 
+											prop="3"
+											align="center"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column label="门店销售(台)" 
+											prop="4"
+											align="center"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column label="均价" 
+											prop="5"
+											align="center"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column label="销量增长" 
+											prop="6"
+											align="center"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column label="同比增率" 
+											prop="7"
+											align="center"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+									</el-table>
+								</div>
+								
+							</div>
+							
+						</div>
+						<div class="bwr--a">
+							<div class="block clearfix" style="height: 346px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">产品价格走势</span>
+									<el-select placeholder="按年份"></el-select>
+								</div>
+								<div class="chart chart--line2"></div>
+										
+							</div>
+						</div>
+					</div>
+					
+					<div class="block clearfix">
+						<div class="bwl--b" style="height: 360px;">
+							<div class="section clearfix">
+								<span class="title-prefix-md">销售价格市场分布</span>
+							</div>
+							<div class="chart chart--pie1"></div>	
+						</div>
+						<div class="bwr--b" style="height: 360px;">
+							<div class="chart chart--map1"></div>
+						</div>
+					</div>
+					<div class="block clearfix">
+						<div class="bwl--b" style="height: 360px;">
+							<div class="section clearfix">
+								<span class="title-prefix-md">促销方式</span>
+								<el-select placeholder="按季度"></el-select>
+							</div>
+							<div class="tabs">
+								<div class="tab-item is-active">一季度</div>
+								<div class="tab-item ">二季度</div>
+								<div class="tab-item ">三季度</div>
+								<div class="tab-item ">四季度</div>
+							</div>
+							<el-table :data="commentActiveData" stripe>
+								<el-table-column 
+									label="促销方式" 
+									prop="1" 
+									align="center"
+									:show-overflow-tooltip="true"> 
+								</el-table-column>
+								<el-table-column 
+									label="销量" 
+									prop="2"
+									align="center"
+									:show-overflow-tooltip="true">
+								</el-table-column>
+								<el-table-column label="均价" 
+									prop="3"
+									align="center"
+									:show-overflow-tooltip="true"> 
+								</el-table-column>
+								<el-table-column label="销量增长" 
+									prop="4"
+									align="center"
+									:show-overflow-tooltip="true"> 
+								</el-table-column>
+								<el-table-column label="平台" 
+									prop="5"
+									align="center"
+									:show-overflow-tooltip="true"> 
+								</el-table-column>
+							</el-table>
+						</div>
+						<div class="bwr--b">
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" data-name="tab2">
+					<div class="bwl--a">
+						<div class="block clearfix" style="height: 346px;">
+							<div class="section clearfix">
+								<span class="title-prefix-md">产品基本属性</span>
+							</div>
+							<div class="clearfix products">
+								<div class="bwl--b">
+									<div class="product-brand">品牌:
+										<span class="brand-name">Apple</span>
+										<el-button size="small">+关注</el-button>
+									</div>
+									<div class="product-params">
+										<div class="param--product">分辨率:<span class="param__value">1334*750(iphone6s)</span></div>
+									</div>
+									<hr class="line--product"/>
+									<div class="product-params">
+										<div class="param--product">后置摄像头:<span class="param__value">其他</span></div>
+										<div class="param--product">前置摄像头:<span class="param__value">其他</span></div>
+									</div>
+									<hr class="line--product">
+									<div class="product-params">
+										<div class="param--product">核数:<span class="param__value">其他</span></div>
+										<div class="param--product">频率:<span class="param__value">其他</span></div>
+									</div>
+									<hr class="line--product">
+								</div>
+								<div class="bwr--b">
+									<div class="params--right">
+										<div class="param--product">核数:<span class="param__value">其他</span></div>
+										<div class="param--product">核数:<span class="param__value">其他</span></div>
+										<div class="param--product">核数:<span class="param__value">其他</span></div>
+										<div class="param--product">核数:<span class="param__value">其他</span></div>
+										<div class="param--product">核数:<span class="param__value">其他</span></div>
+										<div class="param--product">核数:<span class="param__value">其他</span></div>
+										<div class="param--product">核数:<span class="param__value">其他</span></div>
+									</div>
+								</div>
+							</div>
+						</div>		
+						<div class="block clearfix" style="height: 346px;">
+							<div class="section clearfix">
+								<span class="title-prefix-md">热点关键字</span>
+							</div>
+							
+						</div>
+						
+					</div>
+					<div class="bwr--a">
+						<div class="block clearfix" style="height: 346px;">
+							<div class="section clearfix">
+								<span class="title-prefix-md">基础标签分析</span>
+							</div>
+							<div class="chart chart--line1"></div>
+									
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+			
+		</div>
+		<script src="lib/jquery/jquery-3.2.1.js"></script>
+		<script src="lib/selectify/jquery.selectify.js" type="text/javascript" charset="utf-8"></script>
+		<!--先引入vue-->
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<!-- 引入组件库 -->
+		<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+		<script src="lib/echarts/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/frame.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var app = new Vue({
+				el: "#app",
+				data: {
+					categoryData: [],
+					highlightData: [],
+					salesData: [],
+					commentActiveData: [],
+					score:null,
+				},
+				created: function () {
+					this.fetchData();
+				},
+				methods: {
+					fetchData: function(){
+						this.loadCategoryList();
+						this.loadHighlightList();
+						this.loadSalesList();
+						this.loadCommentActiveList();
+					},
+					loadCategoryList: function(){
+						this.categoryData = [{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+						},{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+						},{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+						},]
+					},
+					loadHighlightList: function(){
+						this.highlightData = [{
+							'0': '双卡双待',
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+						},{
+							'0': '指纹识别',
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+						},{
+							'0': '拍照神器',
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+						},]
+					},
+					loadSalesList: function(){
+						this.salesData = [{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+							'4': 'xxx',
+							'5': 'xxx',
+						},{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+							'4': 'xxx',
+							'5': 'xxx',
+						},{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+							'4': 'xxx',
+							'5': 'xxx',
+						},]
+					},
+					loadCommentActiveList: function(){
+						this.commentActiveData = [{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+							'4': 'xxx',
+							'5': 'xxx',
+							'6': 'xxx',
+							'7': 'xxx',
+							'8': 'xxx',
+						},{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+							'4': 'xxx',
+							'5': 'xxx',
+							'6': 'xxx',
+							'7': 'xxx',
+							'8': 'xxx',
+						},{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+							'4': 'xxx',
+							'5': 'xxx',
+							'6': 'xxx',
+							'7': 'xxx',
+							'8': 'xxx',
+						},]
+					},
+				}
+			})
+			var line1 = echarts.init($(".chart--line1")[0]);
+			var line2 = echarts.init($(".chart--line2")[0]);
+			var option = {
+	            title: {
+	                text: 'LINE CHART 2'
+	            },
+	            tooltip: {},
+	            legend: {
+	                data:['PARTNER 1']
+	            },
+	            xAxis: {
+	                type: 'time',
+	                splitLine: {
+	                	show: false
+	                }
+	            },
+	            yAxis: {},
+	            series: [{
+	                name: '新增客户',
+	                type: 'line',
+	                lineStyle: {
+	                	normal: {
+	                		color: '#51a5de'
+	                	}
+	                	
+	                },
+	                itemStyle: {
+	                	normal: {
+	                		color: '#51a5de'
+	                	}
+	                	
+	                },
+	                'symbol': 'emptyCircle',
+	                symbolSize: 10,
+	                data: [
+	                	['2017-04-26', 100],
+	                	['2017-04-27', 200],
+	                	['2017-04-28', 500],
+	                	['2017-04-29', 300],
+	                	['2017-04-30', 400],
+	                	['2017-05-01', 700],
+	                ]
+	            }]
+	        };
+	        line1.setOption(option)
+	        line2.setOption(option)
+	        
+	        var pie1 = echarts.init($(".chart--pie1")[0]);
+	        var option = {
+			    title : {
+			        text: '某站点用户访问来源',
+			        subtext: '纯属虚构',
+			        x:'center'
+			    },
+			    tooltip : {
+			        trigger: 'item',
+			        formatter: "{a} <br/>{b} : {c} ({d}%)"
+			    },
+			    legend: {
+			        orient: 'vertical',
+			        left: 'left',
+			        data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+			    },
+			    series : [
+			        {
+			            name: '访问来源',
+			            type: 'pie',
+			            radius : '55%',
+			            center: ['50%', '60%'],
+			            data:[
+			                {value:335, name:'直接访问'},
+			                {value:310, name:'邮件营销'},
+			                {value:234, name:'联盟广告'},
+			                {value:135, name:'视频广告'},
+			                {value:1548, name:'搜索引擎'}
+			            ],
+			            itemStyle: {
+			                emphasis: {
+			                    shadowBlur: 10,
+			                    shadowOffsetX: 0,
+			                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+			                }
+			            }
+			        }
+			    ]
+			};
+			pie1.setOption(option)
+		</script>
+		<script src="lib/echarts/china.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/map.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

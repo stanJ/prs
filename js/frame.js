@@ -1,6 +1,29 @@
 $(function(){
-	loadFrame();
+	frameObj.init();
 })
+var frameObj = {
+	init: function(){
+		loadFrame();
+		this.loadTabs();
+		this.bindEvent();
+	},
+	bindEvent: function(){
+		var _this = this;
+		$(".tab-title").click(function(){
+			$(".tab-title").removeClass('is-active');
+			$(this).addClass('is-active')
+			_this.loadTabs();
+		})
+	},
+	loadTabs: function(){
+		var tab = $(".tab-title.is-active")
+		if(tab){
+			$(".tab-pane").hide();
+			var name = tab.data('name');
+			$(".tab-pane[data-name='"+name+"']").show();
+		}
+	}
+}
 function loadFrame(){
 	var h1 = `<header>
 			<nav class="top-nav clearfix">

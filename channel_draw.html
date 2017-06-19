@@ -13,19 +13,15 @@
 		<style type="text/css">
 			
 			/*贴标签页*/
-			[class*='bwl']:not([class*="bwl__"]){
-				float: left;
-				box-sizing: border-box;
-			}
-			[class*='bwr']:not([class*="bwr__"]){
-				float: right;
-				box-sizing: border-box;
-			}
 			.bwl--a{
 				width: 58.4%;
 			}
 			.bwr--a{
 				width: 40.7%;
+			}
+			.bwr--a>.block{
+				height: 508px;
+    			box-sizing: border-box;
 			}
 			.select--date{
 				width: 216px;
@@ -41,6 +37,12 @@
 			.bwr--b{
 				width: 41.5%;
 				padding-left: 10px;
+			}
+			.chart--line1{
+				height: 340px;
+			}
+			.chart--bar1{
+				height: 324px;
 			}
 		</style>
 	</head>
@@ -64,82 +66,213 @@
 				</div>
 			</div>
 			<div class="block clearfix">
-				<div class="bwl--b clearfix">
-					<div class="section clearfix">
-						<span class="title-prefix-md">渠道基础数据</span>
-						<div class="fr clearfix letter-spacing">
-							<input type="text" name="" class="input--lg mr10"/>
-							<button class="button--md">渠道管理</button>
+				<div class="clearfix">
+					<div class="bwl--b clearfix">
+						<div class="section clearfix">
+							<span class="title-prefix-md">渠道基础数据</span>
+							<div class="fr clearfix letter-spacing">
+								<input type="text" name="" class="input--lg mr10"/>
+								<button class="button--md">渠道管理</button>
+							</div>
 						</div>
+						<div class="tabs">
+							<div class="tab-item">数量分析</div>
+							<div class="tab-item is-active">质量分析</div>
+						</div>
+						<el-table :data="qualityData" stripe  height="160">
+							<el-table-column 
+								label="渠道名称" 
+								prop="1" 
+								align="center"
+								:show-overflow-tooltip="true"> 
+							</el-table-column>
+							<el-table-column 
+								label="今日启动次数" 
+								prop="2"
+								align="center"
+								:show-overflow-tooltip="true">
+							</el-table-column>
+							<el-table-column label="今日活跃次数" 
+								prop="3"
+								align="center"
+								:show-overflow-tooltip="true"> 
+							</el-table-column>
+							<el-table-column label="昨日活跃用户(%)" 
+								prop="4"
+								align="center"
+								:show-overflow-tooltip="true"> 
+							</el-table-column>
+							<el-table-column label="回访用户(%)" 
+								prop="5"
+								align="center"
+								:show-overflow-tooltip="true"> 
+							</el-table-column>
+							<el-table-column label="一次性用户(%)" 
+								prop="6"
+								align="center"
+								:show-overflow-tooltip="true"> 
+							</el-table-column>
+							<el-table-column 
+								label="操作"
+								width="150"
+								align="center">
+								<template scope="scope">
+									<el-button 
+										@click="check(scope.$index,scope.row)" 
+										type="text" 
+										class="bs-default">
+										趋势
+									</el-button>
+									<el-button 
+										@click="modify(scope.$index,scope.row)" 
+										type="text">
+										明细
+									</el-button>
+								</template>
+							</el-table-column>
+						</el-table>
+	
 					</div>
+					<div class="bwr--b clearfix">
+						asdfadfa
+					</div>
+				</div>
+
+				<hr class="line"/>
+				<div>
+					<span class="title--normal mr20">渠道基础数据</span>
 					<div class="tabs">
-						<div class="tab-item">数量分析</div>
-						<div class="tab-item active">质量分析</div>
+						<div class="tab-item is-active">新增用户</div>
+						<div class="tab-item">活跃用户</div>
+						<div class="tab-item">启动次数</div>
+						<div class="tab-item">销量</div>
+						<div class="tab-item">成交金额</div>
+						<div class="tab-item">成交店铺</div>
 					</div>
-					<el-table :data="qualityData" stripe class="table-wrapper" height="160">
+				</div>
+				<div class="chart chart--line1"></div>
+			</div>
+			<div class="bwl--a">
+				<div class="block clearfix">
+					<div class="section clearfix">
+						<span class="title-prefix-md">渠道关注度分析</span>
+					</div>
+					<el-table :data="focusData" stripe  height="160">
 						<el-table-column 
 							label="渠道名称" 
 							prop="1" 
-							width="137px"
 							align="center"
 							:show-overflow-tooltip="true"> 
 						</el-table-column>
 						<el-table-column 
-							label="专家类别" 
+							label="今日关注数" 
 							prop="2"
 							align="center"
 							:show-overflow-tooltip="true">
 						</el-table-column>
-						<el-table-column label="创建人" 
+						<el-table-column label="昨日关注数" 
 							prop="3"
+							align="center"
+							:show-overflow-tooltip="true"> 
+						</el-table-column>
+						<el-table-column label="页面停留时间" 
+							prop="4"
+							align="center"
+							:show-overflow-tooltip="true"> 
+						</el-table-column>
+						<el-table-column label="累计关注数" 
+							prop="5"
+							align="center"
+							:show-overflow-tooltip="true"> 
+						</el-table-column>
+						<el-table-column label="重复关注次数" 
+							prop="6"
 							align="center"
 							:show-overflow-tooltip="true"> 
 						</el-table-column>
 						<el-table-column 
 							label="操作" 
-							width="200px"
+							width="150"
 							align="center">
 							<template scope="scope">
 								<el-button 
 									@click="check(scope.$index,scope.row)" 
 									type="text" 
 									class="bs-default">
-									查看
+									趋势
 								</el-button>
 								<el-button 
 									@click="modify(scope.$index,scope.row)" 
 									type="text">
-									修改
+									明细
 								</el-button>
 							</template>
 						</el-table-column>
 					</el-table>
-					<!--<div class="table">
-						<div class="table__header-wrapper">
-							<table border="" cellspacing="" cellpadding="">
-								<tr><th>Header</th></tr>
-							</table>
-						</div>
-						<div class="table__body-wrapper">
-							<table border="" cellspacing="" cellpadding="">
-								<tr><td>Data</td></tr>
-							</table>
-						</div>
-					</div>-->
 				</div>
-				<div class="bwr--b clearfix">
-					asdfadfa
-				</div>
-			</div>
-			
-			<div class="bwl--a">
 				<div class="block clearfix">
-					
+					<div class="section clearfix">
+						<span class="title-prefix-md">渠道成熟度分析</span>
+					</div>
+					<div class="tabs">
+						<div class="tab-item">成交额</div>
+						<div class="tab-item">成交商品数</div>
+						<div class="tab-item">成交人数</div>
+						<div class="tab-item">活跃店铺</div>
+						<div class="tab-item is-active">成交店铺</div>
+						<div class="tab-item">质量分析</div>
+					</div>
+					<el-table :data="maturityData" stripe  height="160">
+						<el-table-column 
+							label="渠道名称" 
+							prop="1" 
+							align="center"
+							:show-overflow-tooltip="true"> 
+						</el-table-column>
+						<el-table-column 
+							label="今日成交店铺" 
+							prop="2"
+							align="center"
+							:show-overflow-tooltip="true">
+						</el-table-column>
+						<el-table-column label="昨日成交店铺" 
+							prop="3"
+							align="center"
+							:show-overflow-tooltip="true"> 
+						</el-table-column>
+						<el-table-column label="店铺增长率" 
+							prop="4"
+							align="center"
+							:show-overflow-tooltip="true"> 
+						</el-table-column>
+						<el-table-column 
+							label="操作" 
+							width="150"
+							align="center">
+							<template scope="scope">
+								<el-button 
+									@click="check(scope.$index,scope.row)" 
+									type="text" 
+									class="bs-default">
+									趋势
+								</el-button>
+								<el-button 
+									@click="modify(scope.$index,scope.row)" 
+									type="text">
+									明细
+								</el-button>
+							</template>
+						</el-table-column>
+					</el-table>
 				</div>
-				<div class="block clearfix">222222</div>
 			</div>
 			<div class="bwr--a">
-				<div class="block clearfix">33333</div>
+				<div class="block clearfix">
+					<div class="section clearfix">
+						<span class="title-prefix-md">渠道用户停留时间</span>
+					</div>
+					<div class="chart chart--bar1"></div>
+				</div>
 			</div>
 			
 			
@@ -150,12 +283,15 @@
 		<script src="https://unpkg.com/vue/dist/vue.js"></script>
 		<!-- 引入组件库 -->
 		<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+		<script src="lib/echarts/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/frame.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			var app = new Vue({
 				el: '#app',
 				data: {
-					qualityData: []
+					qualityData: [],
+					focusData: [],
+					maturityData: [],
 				},
 				created: function () {
 					this.fetchData();
@@ -163,33 +299,184 @@
 				methods: {
 					fetchData: function(){
 						this.loadQualityList();
+						this.loadFocusList();
+						this.loadMaturityList();
 					},
 					loadQualityList: function(){
 						this.qualityData = [{
 							'1': 'xxx',
 							'2': 'xxx',
 							'3': 'xxx',
+							'4': 'xxx',
+							'5': 'xxx',
+							'6': 'xxx',
 						},{
 							'1': 'xxx',
 							'2': 'xxx',
 							'3': 'xxx',
+							'4': 'xxx',
+							'5': 'xxx',
+							'6': 'xxx',
 						},{
 							'1': 'xxx',
 							'2': 'xxx',
 							'3': 'xxx',
+							'4': 'xxx',
+							'5': 'xxx',
+							'6': 'xxx',
 						},{
 							'1': 'xxx',
 							'2': 'xxx',
 							'3': 'xxx',
+							'4': 'xxx',
+							'5': 'xxx',
+							'6': 'xxx',
+						},]
+					},
+					loadFocusList: function(){
+						this.focusData = [{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+							'4': 'xxx',
+							'5': 'xxx',
+							'6': 'xxx',
 						},{
 							'1': 'xxx',
 							'2': 'xxx',
 							'3': 'xxx',
+							'4': 'xxx',
+							'5': 'xxx',
+							'6': 'xxx',
+						},{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+							'4': 'xxx',
+							'5': 'xxx',
+							'6': 'xxx',
+						},{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+							'4': 'xxx',
+							'5': 'xxx',
+							'6': 'xxx',
+						},]
+					},
+					loadMaturityList: function(){
+						this.maturityData = [{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+							'4': 'xxx',
+						},{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+							'4': 'xxx',
+						},{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+							'4': 'xxx',
+						},{
+							'1': 'xxx',
+							'2': 'xxx',
+							'3': 'xxx',
+							'4': 'xxx',
 						},]
 					}
 				}
 			})
+			
 		</script>
-		
+		<script type="text/javascript">
+			var line1 = echarts.init($(".chart--line1")[0]);
+			var option = {
+	            title: {
+	                text: 'LINE CHART 2'
+	            },
+	            tooltip: {},
+	            legend: {
+	                data:['PARTNER 1']
+	            },
+	            xAxis: {
+	                type: 'time',
+	                splitLine: {
+	                	show: false
+	                }
+	            },
+	            yAxis: {},
+	            series: [{
+	                name: '新增客户',
+	                type: 'line',
+	                lineStyle: {
+	                	normal: {
+	                		color: '#51a5de'
+	                	}
+	                	
+	                },
+	                itemStyle: {
+	                	normal: {
+	                		color: '#51a5de'
+	                	}
+	                	
+	                },
+	                'symbol': 'emptyCircle',
+	                symbolSize: 10,
+	                data: [
+	                	['2017-04-26', 100],
+	                	['2017-04-27', 200],
+	                	['2017-04-28', 500],
+	                	['2017-04-29', 300],
+	                	['2017-04-30', 400],
+	                	['2017-05-01', 700],
+	                ]
+	            }]
+	        };
+	        line1.setOption(option)
+		</script>
+		<script type="text/javascript">
+			var bar1 = echarts.init($(".chart--bar1")[0]);
+			var option = {
+			    color: ['#3398DB'],
+			    tooltip : {
+			        trigger: 'axis',
+			        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+			            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			        }
+			    },
+			    grid: {
+			        left: '3%',
+			        right: '4%',
+			        bottom: '3%',
+			        containLabel: true
+			    },
+			    xAxis : [
+			        {
+			            type : 'category',
+			            data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			            axisTick: {
+			                alignWithLabel: true
+			            }
+			        }
+			    ],
+			    yAxis : [
+			        {
+			            type : 'value'
+			        }
+			    ],
+			    series : [
+			        {
+			            name:'直接访问',
+			            type:'bar',
+			            barWidth: '60%',
+			            data:[10, 52, 200, 334, 390, 330, 220]
+			        }
+			    ]
+			};
+	        bar1.setOption(option)
+		</script>
 	</body>
 </html>
