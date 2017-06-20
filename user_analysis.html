@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>框架</title>
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+		<link rel="stylesheet" type="text/css" href="css/frame.css"/>
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="lib/selectify/silver.default.css"/>
+		<style type="text/css">
+			.bwl--b{
+			    width: 22.6%;
+			    padding-right: 10px;
+			    position: relative;
+				
+			}
+			.bwr--b{
+				width: 77.4%;
+    			padding-left: 10px;
+				
+			}
+			.bwl--b:after{
+				content: '';
+			    height: 408px;
+			    border-right: 1px solid #d8d8d8;
+			    position: absolute;
+			    right: 0;
+			    top: 0;
+			}
+			}
+			.bwl--c{
+			    width: 50%;
+			    padding-right: 10px;
+			    position: relative;
+				
+			}
+			.bwr--c{
+				width: 50%;
+    			padding-left: 10px;
+				
+			}
+			.bwl--c:after{
+				content: '';
+			    height: 300px;
+			    border-right: 1px solid #d8d8d8;
+			    position: absolute;
+			    right: 0px;
+			    top: -36px;
+			}
+			.bwl--d{
+			    width: 47.7%;
+			    padding-right: 10px;
+			    position: relative;
+			    
+				
+			}
+			.bwr--d{
+				width: 52.3%;
+    			padding-left: 10px;
+				
+			}
+			.bwl--d:after{
+			    content: '';
+			    height: 462px;
+			    border-right: 1px solid #d8d8d8;
+			    position: absolute;
+			    right: 0px;
+			    top: 0px;
+			}
+			.bwl--e{
+			    width: 37.5%;
+			    padding-right: 10px;
+			    position: relative;
+				
+			}
+			.bwr--e{
+				width: 62.5%;
+    			padding-left: 10px;
+				
+			}
+			.bwl--e:after{
+			    content: '';
+			    height: 400px;
+			    border-right: 1px solid #d8d8d8;
+			    position: absolute;
+			    right: 0px;
+			    top: 5px;
+			}
+			.bwl--f{
+			    width: 37.9%;
+			    padding-right: 10px;
+			    position: relative;
+				
+			}
+			.bwr--f{
+				width: 62.1%;
+    			padding-left: 10px;
+				
+			}
+			.bwl--f:after{
+			    content: '';
+			    height: 380px;
+			    border-right: 1px solid #d8d8d8;
+			    position: absolute;
+			    right: 0px;
+			    top: 20px;
+			}
+			.chart--line1{
+				height: 280px;
+			}
+			.chart--line2{
+				height: 280px;
+			}
+			.chart--line3{
+				height: 280px;
+			}
+			.chart--pie1{
+				height: 300px;
+			}
+			.chart--map1{
+				height: 340px;
+			}
+			.chart--bar-h1{
+				height: 276px;
+			}
+			.chart--bar-h2{
+				height: 276px;
+			}
+			.chart--bar-h3{
+				height: 300px;
+			}
+			.chart--bar-h4{
+				height: 300px;
+			}
+			.chart--radar1{
+				height: 320px;
+				margin-top: 20px;
+			}
+			/*用户分析css*/
+			.query-control{
+				float: right;
+			}
+			.cards{
+			    margin: 0 auto;
+				padding: 0 10px;
+			}
+			.card{
+			    background: #f4f4f4;
+			    width: 160px;
+			    height: 273px;
+			    margin-right: 3.5%;
+			    float: left;
+				
+			}
+			.card__title{
+				height: 40px;
+			    text-align: center;
+			    font-size: 14px;
+			    padding: 4px 0;
+			    color: #fff;
+			}
+			.card--purple>.card__title{
+				background: #6c8fde;
+			}
+			.card--blue>.card__title{
+				background: #53a8e2;
+			}
+			.card--green>.card__title{
+				background: #62c7b3;
+			}
+			.card:last-of-type{
+				margin-right: 0px;
+			}
+			.card__avator{
+				width: 78px;
+				height: 78px;
+				margin: 0 auto;
+				border-radius: 39px;
+				margin-top: 10px;
+			}
+			.card--purple>.card__avator{
+				background: #6c8fde;
+			}
+			.card--blue>.card__avator{
+				background: #53a8e2;
+			}
+			.card--green>.card__avator{
+				background: #62c7b3;
+			}
+			.card__personality{
+			    height: 115px;
+    			margin-top: 10px;
+			}
+			.title--reason{
+			    font-size: 18px;
+			    font-weight: bold;
+			    margin-left: 27px;
+			    margin-top: 34px;
+			    margin-bottom: 30px;
+			}
+			.cards--reason{
+				margin-left: 20px;
+			}
+			.cards--reason>.card{
+				margin-right: 40px;
+			}
+			.card__reason{
+				margin-top: 26px;
+			}
+			.reason__main{
+			    font-size: 14px;
+			    padding: 0 4px 0 20px;
+			}
+			.card--purple .reason__main{
+				color: #6c8fde;
+			}
+			.card--blue .reason__main{
+				color: #53a8e2;
+			}
+			.card--green .reason__main{
+				color: #62c7b3;
+			}
+			.reason__ul{
+				font-size: 12px;
+			}
+			.row{
+				margin: 10px 10px 10px 20px;
+    			font-size: 15px;
+			}
+			.row__left{
+			    height: 40px;
+    			line-height: 40px;
+			}
+			.blue-text{
+				color: #0c4d90;
+			}
+			.tabs--card{
+				height: 100px;
+			}
+			.tab--card{
+			    height: 100%;
+			    background: #f4f4f4;
+			    box-sizing: border-box;
+			    border: 1px solid #d8d8d8;
+			    border-left: 0;
+			    width: 14.2%;
+			    float: left;
+			}
+			.tab--card:first-of-type{
+				margin-left: 0.3%;
+				border-left: 1px solid #d8d8d8;
+			}
+					
+		</style>
+	</head>
+	<body>
+		
+		<div class="content" id="app">
+			<div class="tabs__nav">
+				<div class="nav--tab">
+					<div class="tab-title" data-name="tab1">用户标签维护</div>
+					<div class="tab-title" data-name="tab2">消费人群属性分析</div>
+					<div class="tab-title is-active" data-name="tab3">用户购买转换分析</div>
+					<div class="tab-title" data-name="tab4">用户购买特征分析</div>
+					<div class="tab-title" data-name="tab5">用户网络行为分析</div>
+				</div>
+				<div class="nav__title clearfix">
+					<span class="title-prefix-md">用户网络行为分析</span>
+					<div class="query-control">
+						<el-select placeholder="人群筛选" style="margin-right: 6px;"></el-select>
+						<button class="button--lg">开始分析</button>
+					</div>
+				</div>
+			</div>
+			<div class="tabs__content clearfix">
+				<div class="tab-pane" data-name="tab5">
+					<div class="clearfix">
+						<div class="bwl--half">
+							<div class="block clearfix" style="height: 400px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">浏览时长</span>
+								</div>
+								<div class="chart chart--line1" style="height: 350px;"></div>
+							</div>
+						
+						</div>
+						<div class="bwr--half" >
+							<div class="block clearfix" style="height: 400px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">页面浏览量</span>
+								</div>
+								<div class="chart chart--line2" style="height: 350px;"></div>
+							</div>
+						
+						</div>
+					</div>
+					
+					<div class="block clearfix" style="height: 526px;">
+						<div class="section clearfix" style="margin-bottom: 10px;">
+							<span class="title-prefix-md">页面停留时间</span>
+							<div class="search-wrapper fr mr10">
+								<input type="text" class="input--lg input--search" placeholder="Search"/>
+								<div class="icon-search"></div>
+							</div>
+						</div>
+						<hr class="line"/>
+						<div class="table-wrapper" style="margin-top: 12px;margin-right: 5px;">
+								
+							<el-table :data="pageStayData" stripe>
+								<el-table-column 
+									label="浏览次数" 
+									prop="1" 
+									align="center"
+									:show-overflow-tooltip="true"> 
+								</el-table-column>
+								<el-table-column 
+									label="百分比" 
+									prop="2"
+									align="center"
+									:show-overflow-tooltip="true">
+								</el-table-column>
+								<el-table-column label="独立访客" 
+									prop="3"
+									align="center"
+									:show-overflow-tooltip="true"> 
+								</el-table-column>
+								<el-table-column label="IP" 
+									prop="4"
+									align="center"
+									:show-overflow-tooltip="true"> 
+								</el-table-column>
+								<el-table-column label="人均浏览次数" 
+									prop="5"
+									align="center"
+									:show-overflow-tooltip="true"> 
+								</el-table-column>
+								<el-table-column label="平均停留时间(秒)" 
+									prop="6"
+									align="center"
+									:show-overflow-tooltip="true"> 
+								</el-table-column>
+							</el-table>
+						</div>
+					</div>
+					<div class="clearfix">
+						<div class="bwl--half">
+							<div class="block clearfix" style="height: 430px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">进入页面分析</span>
+								</div>
+								<div class="table-wrapper">
+								
+									<el-table :data="pageAnalysisData" stripe>
+										<el-table-column 
+											label="页面URL" 
+											prop="1" 
+											align="center"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column 
+											label="测试量(PV)" 
+											prop="2"
+											align="center"
+											:show-overflow-tooltip="true">
+										</el-table-column>
+										<el-table-column label="访客量(UV)" 
+											prop="3"
+											align="center"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+					
+									</el-table>
+								</div>
+							</div>
+						
+						</div>
+						<div class="bwr--half" >
+							<div class="block clearfix" style="height: 430px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">浏览路径分析</span>
+								</div>
+								
+							</div>
+						
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" data-name="tab4">
+					<div class="clearfix">
+						<div class="bwl--half">
+							<div class="block clearfix" style="height: 346px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">O2O导入分析</span>
+								</div>
+								<div class="chart chart--line3" style="height: 300px;"></div>
+							</div>
+						
+						</div>
+						<div class="bwr--half" >
+							<div class="block clearfix" style="height: 346px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">性格偏好分析</span>
+								</div>
+								<div class="cards clearfix">
+									<div class="card card--purple">
+										<div class="card__title">
+											<div>70后</div>
+											<div>稳定的中坚力量</div>
+										</div>
+										<div class="card__avator"></div>
+										<div class="card__personality"></div>
+									</div>
+									<div class="card card--blue">
+										<div class="card__title">
+											<div>80后</div>
+											<div>摇摆的承上启下</div>
+										</div>
+										<div class="card__avator"></div>
+										<div class="card__personality"></div>
+									</div>
+									<div class="card card--green">
+										<div class="card__title">
+											<div>90后</div>
+											<div>多元的价值选择</div>
+										</div>
+										<div class="card__avator"></div>
+										<div class="card__personality"></div>
+									</div>
+								</div>
+							</div>
+						
+						</div>
+					</div>
+
+					<div class="clearfix">
+						<div class="bwl--half">
+							<div class="block clearfix" style="height: 346px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">价格区间分析</span>
+								</div>
+								<div class="chart chart--pie1"></div>
+							</div>
+						
+						</div>
+						<div class="bwr--half" >
+							<div class="block clearfix" style="height: 346px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">品牌偏好分析</span>
+								</div>
+								<div class="chart chart--bar-h1"></div>
+							</div>
+						
+						</div>
+					</div>
+					<div class="block clearfix" style="height: 430px;">
+						<div class="bwl--e">
+							<div class="section clearfix" style="margin-bottom: 10px;">
+								<span class="title-prefix-md">年龄差异分析</span>
+							</div>
+							<div class="chart chart--radar1"></div>
+						</div>
+						<div class="bwr--e">
+							<div class="title--reason">不同代次购车驱动因素</div>
+							<div class="cards clearfix cards--reason">
+								<div class="card card--purple">
+									<div class="card__title">
+										<div>70后</div>
+										<div>稳定的中坚力量</div>
+									</div>
+									<div class="card__avator"></div>
+									<div class="card__reason">
+										<p class="reason__main">主要为升级换代需求</p>
+										<ul class="reason__ul">
+											<li>111</li>
+											<li>111</li>
+											<li>111</li>
+										</ul>
+									</div>
+								</div>
+								<div class="card card--blue">
+									<div class="card__title">
+										<div>80后</div>
+										<div>摇摆的承上启下</div>
+									</div>
+									<div class="card__avator"></div>
+									<div class="card__reason">
+										<p class="reason__main">主要为升级换代需求</p>
+										<ul class="reason__ul">
+											<li>111</li>
+											<li>111</li>
+										</ul>
+									</div>
+								</div>
+								<div class="card card--green">
+									<div class="card__title">
+										<div>90后</div>
+										<div>多元的价值选择</div>
+									</div>
+									<div class="card__avator"></div>
+									<div class="card__reason">
+										<p class="reason__main">主要为升级换代需求</p>
+										<ul class="reason__ul">
+											<li>111</li>
+											<li>111</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tab-pane" data-name="tab3">
+					<div class="block clearfix" style="height: 440px;">
+						<div class="bwl--f">
+							<div class="section clearfix" style="margin-bottom: 10px;">
+								<span class="title-prefix-md">购买浏览人数分析</span>
+							</div>
+							<div class="table-wrapper" style="margin-top: 12px;margin-right: 5px;">
+								<el-table :data="buyerAmountData" stripe>
+									<el-table-column 
+										label="日期" 
+										prop="1" 
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="订单金额" 
+										prop="2"
+										align="center"
+										:show-overflow-tooltip="true">
+									</el-table-column>
+									<el-table-column label="购买人数" 
+										prop="3"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column label="浏览人数" 
+										prop="4"
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+								</el-table>
+							</div>
+						</div>
+						<div class="bwr--f">
+							<div class="chart chart--line4" style="height: 380px;margin-top: 20px;"></div>
+						</div>
+						
+					</div>
+					
+					<div class="block clearfix" style="height: 636px;">
+						<div class="section clearfix" style="margin-bottom: 10px;">
+							<span class="title-prefix-md">购买金额分布 —— 地域维度</span>
+						</div>
+						<hr class="line" />
+						<div class="clearfix row">
+							<div class="row__left fl">
+								<span>地域分布</span>
+								<span class="export blue-text">导出</span>
+							</div>
+							<div class="row__right fr">
+								<span class="blue-text">时间筛选</span>
+								<el-select placeholder="自然月"></el-select>
+								<el-select placeholder="日期"></el-select>
+							</div>
+						</div>
+						<hr class="line" />
+						<div class="clearfix" style="padding-top: 16px">
+							<div class="bwl--d">
+								<div class="table-wrapper" style="margin-top: 10px;">
+									<el-table :data="expensePlaceData" stripe>
+										<el-table-column 
+											label="Top10省份" 
+											prop="1" 
+											align="center"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column 
+											label="付款金额(元)" 
+											prop="2"
+											align="center"
+											:show-overflow-tooltip="true">
+										</el-table-column>
+										<el-table-column label="购买人数" 
+											prop="3"
+											align="center"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column label="访客数" 
+											prop="4"
+											align="center"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column label="付款转化率" 
+											prop="5"
+											align="center"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+									</el-table>
+								</div>
+								
+							</div>
+							<div class="bwr--d">
+								<div class="chart chart--map1" style="height: 462px;"></div>
+							</div>
+						</div>
+					</div>
+					<div class="block clearfix" style="height: 523px;">
+						<div class="section clearfix" style="margin-bottom: 39px;">
+							<span class="title-prefix-md">购买次数分布 —— 时间维度</span>
+						</div>
+						<div class="bwl--b">
+							
+							<div class="table-wrapper" style="margin-top: 0px;margin-right: 20px;">
+								<el-table :data="buyTimesData" stripe>
+									<el-table-column 
+										label="月份" 
+										prop="1" 
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="购买人次(万)" 
+										prop="2"
+										align="center"
+										:show-overflow-tooltip="true">
+									</el-table-column>
+								</el-table>
+							</div>
+						</div>
+						<div class="bwr--b">
+							<div class="chart chart--line5" style="height: 408px;"></div>
+						</div>
+						
+					</div>
+					<div class="block clearfix" style="height: 526px;">
+						<div class="section clearfix" style="margin-bottom: 10px;">
+							<span class="title-prefix-md">客单价分析</span>
+							<div class="search-wrapper fr mr10">
+								<input type="text" placeholder="Search" class="input--lg input--search"> 
+								<div class="icon-search"></div>
+							</div>
+						</div>
+						<hr class="line" />
+						<div class="table-wrapper" style="margin-top: 10px;margin-right: 10px;">
+							<el-table :data="pricesData" stripe>
+								<el-table-column 
+									label="序号" 
+									prop="1" 
+									align="center"
+									:show-overflow-tooltip="true"> 
+								</el-table-column>
+								<el-table-column 
+									label="客单价区间" 
+									prop="2"
+									align="center"
+									:show-overflow-tooltip="true">
+								</el-table-column>
+								<el-table-column 
+									label="人数" 
+									prop="3" 
+									align="center"
+									:show-overflow-tooltip="true"> 
+								</el-table-column>
+								<el-table-column 
+									label="人数占比" 
+									prop="4"
+									align="center"
+									:show-overflow-tooltip="true">
+								</el-table-column>
+								<el-table-column 
+									label="男" 
+									prop="5" 
+									align="center"
+									:show-overflow-tooltip="true"> 
+								</el-table-column>
+								<el-table-column 
+									label="女" 
+									prop="6"
+									align="center"
+									:show-overflow-tooltip="true">
+								</el-table-column>
+							</el-table>
+						</div>
+
+						
+					</div>
+					<div class="block clearfix" style="height: 526px;">
+						<div class="section clearfix" style="margin-bottom: 10px;">
+							<span class="title-prefix-md">经营概况</span>
+							<button class="button--lg">自助取数</button>
+						</div>
+						<hr class="line" />
+						<div class="tabs--card clearfix">
+							<div class="tab--card"></div>
+							<div class="tab--card"></div>
+							<div class="tab--card"></div>
+							<div class="tab--card"></div>
+							<div class="tab--card"></div>
+							<div class="tab--card"></div>
+							<div class="tab--card"></div>
+						</div>
+					</div>
+					
+				</div>
+				<div class="tab-pane" data-name="tab2">
+					<div class="bwl--a">
+						<div class="block clearfix" style="height: 346px;">
+							<div class="section clearfix">
+								<span class="title-prefix-md">产品基本属性</span>
+							</div>
+							<div class="clearfix products">
+								<div class="bwl--c">
+									<div class="product-brand">品牌:
+										<span class="brand-name">Apple</span>
+										<el-button size="small">+关注</el-button>
+									</div>
+									<div class="product-params">
+										<div class="param--product">分辨率:<span class="param__value">1334*750(iphone6s)</span></div>
+									</div>
+									<hr class="line--product"/>
+									<div class="product-params">
+										<div class="param--product">后置摄像头:<span class="param__value">其他</span></div>
+										<div class="param--product">前置摄像头:<span class="param__value">其他</span></div>
+									</div>
+									<hr class="line--product">
+									<div class="product-params">
+										<div class="param--product">核数:<span class="param__value">其他</span></div>
+										<div class="param--product">频率:<span class="param__value">其他</span></div>
+									</div>
+								</div>
+								<div class="bwr--c">
+									<div class="params--right">
+										<div class="param--product">核数:<span class="param__value">其他</span></div>
+										<div class="param--product">核数:<span class="param__value">其他</span></div>
+										<div class="param--product">核数:<span class="param__value">其他</span></div>
+										<div class="param--product">核数:<span class="param__value">其他</span></div>
+										<div class="param--product">核数:<span class="param__value">其他</span></div>
+										<div class="param--product">核数:<span class="param__value">其他</span></div>
+										<div class="param--product">核数:<span class="param__value">其他</span></div>
+									</div>
+								</div>
+							</div>
+						</div>		
+						<div class="block clearfix" style="height: 346px;">
+							<div class="section clearfix">
+								<span class="title-prefix-md">热点关键字</span>
+							</div>
+							
+						</div>
+						
+					</div>
+					<div class="bwr--a">
+						<div class="block clearfix" style="height: 346px;">
+							<div class="section clearfix">
+								<span class="title-prefix-md">基础标签分析</span>
+							</div>
+							<div class="bwl--d">
+								<div class="chart chart--bar-h1"></div>
+							</div>
+							<div class="bwr--d">
+								<div class="chart chart--bar-h2"></div>
+							</div>
+									
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" data-name="tab1">
+					<div class="block clearfix" style="height: 360px;">
+						<div class="section clearfix" style="margin-bottom: 0;">
+							<span class="title-prefix-md">标注总览</span>
+						</div>
+						<div class="bwl--e" style="height: 300px;">
+							<table class="overview">
+								<tr>
+									<td class="left-top">
+										<div class="overview__text">商品总销量</div>
+										<div class="overview__value">68952</div>
+									</td>
+									<td>
+										<div class="overview__text">同类销售比例</div>
+										<div class="overview__value">25</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="overview__text">商品点评数</div>
+										<div class="overview__value">898952</div>
+									</td>
+									<td class="right-bottom">
+										<div class="overview__text">人气数</div>
+										<div class="overview__value">48989</div>
+									</td>
+								</tr>
+							</table>
+							
+						</div>
+						<div class="bwr--e" style="height: 300px;">
+							<div class="bwl--f">
+								<div class="chart chart--bar-h3"></div>
+							</div>
+							<div class="bwr--f">
+								<div class="chart chart--bar-h4"></div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix">
+						<div class="bwl--a">
+							<div class="block clearfix" style="height: 346px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">商品评论热点</span>
+								</div>
+							</div>
+							<div class="block clearfix" style="height: 346px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">销售热点</span>
+								</div>
+								<div class="chart chart--radar1"></div>
+							</div>
+						</div>
+						<div class="bwr--a">
+							<div class="block clearfix" style="height: 346px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">好评度</span>
+								</div>
+								<div class="chart chart--line3"></div>
+										
+							</div>
+						</div>
+					</div>
+					
+					
+
+				</div>
+				
+			</div>
+			
+			
+		</div>
+		<script src="lib/jquery/jquery-3.2.1.js"></script>
+		<script src="lib/selectify/jquery.selectify.js" type="text/javascript" charset="utf-8"></script>
+		<!--先引入vue-->
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<!-- 引入组件库 -->
+		<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+		<script src="lib/echarts/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="js/user_analysis.js" type="text/javascript" charset="utf-8"></script>
+		<script src="lib/echarts/china.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/line.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/pie.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/map.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bar_h.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/radar.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/frame.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

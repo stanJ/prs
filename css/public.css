@@ -13,6 +13,9 @@
 	float: right;
 	box-sizing: border-box;
 }
+table{
+	border-collapse: collapse;
+}
 a:link{
 	color: #004494;
 	text-decoration: none;
@@ -261,10 +264,30 @@ a:visited{
     outline: none;
     padding: 3px 10px;
     transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-    width: 255px;
+    width: 237px;
+    font-size: 14px;
 }
-.button--md{
-    display: inline-block;
+.input--search{
+	padding-left: 46px;
+}
+.search-wrapper{
+	position: relative;
+}
+.icon-search{
+	content: '';
+	width: 18px;
+	height: 18px;
+	background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(../img/icon_search.png);
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+	
+}
+[class='button'],[class*='button--']{
+	display: inline-block;
     line-height: 1;
     white-space: nowrap;
     cursor: pointer;
@@ -283,7 +306,15 @@ a:visited{
     font-size: 12px;
     border-radius: 4px;
     height: 40px;
+}
+.button--md{
     width: 140px;
+}
+.button--lg{
+    width: 150px;
+}
+.button--sm{
+	width: 122px;
 }
 .letter-spacing{
 	letter-spacing: -4px;
@@ -358,13 +389,14 @@ a:visited{
     color: #004494;
 }*/
 .tabs__nav{
-	background: #fff;
-	margin-bottom: 10px;
-	height: 52px;
-	font-size: 14px;
-	padding-left: 40px;
-	border-radius: 5px;
+    background: #fff;
+    margin-bottom: 10px;
+    /* height: 52px; */
+    font-size: 14px;
+    /* padding-left: 40px; */
+    border-radius: 5px;
 }
+
 .tab-title{
     line-height: 52px;
     margin-right: 94px;
@@ -372,10 +404,31 @@ a:visited{
     box-sizing: border-box;
     height: 52px;
     padding: 0 6px;
+    position: relative;
+}
+.nav--tab{
+	padding-left: 40px;
+    border: 1px solid #ebebeb;
+}
+.nav--tab>.tab-title{
+	margin-right: 34px;
+}
+.nav__title{
+	padding: 10px;
 }
 .tab-title.is-active{
-	border-bottom: 4px solid #004494;
 	color: #004094;
+}
+.tab-title.is-active:after{
+	content: '';
+	width: 70px;
+	height: 4px;
+	background: #004494;
+	border-radius: 3px;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
 }
 .el-select{
 	width: 130px;
@@ -390,4 +443,10 @@ a:visited{
 }
 .block{
 	box-sizing: border-box;
+}
+.bwl--half{
+	width: 49.6%;
+}
+.bwr--half{
+	width: 49.6%;
 }
