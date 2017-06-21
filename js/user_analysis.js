@@ -7,6 +7,10 @@ var app = new Vue({
 		expensePlaceData: [],
 		buyTimesData: [],
 		pricesData: [],
+		agesData: [],
+		educationData: [],
+		incomeData: [],
+		sexData: [],
 		score:null,
 	},
 	created: function () {
@@ -20,6 +24,11 @@ var app = new Vue({
 			this.loadExpensePlaceList();
 			this.loadBuyTimesList();
 			this.loadPricesList();
+			this.loadAgesList();
+			this.loadEducationList();
+			this.loadIncomeList();
+			this.loadSexList();
+			
 		},
 		loadPageStayList: function(){
 			this.pageStayData = [{
@@ -133,6 +142,54 @@ var app = new Vue({
 				'4': 'xxx',
 				'5': 'xxx',
 				'6': 'xxx',
+			},]
+		},
+		loadAgesList: function(){
+			this.agesData = [{
+				'1': 'xxx',
+				'2': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+			},]
+		},
+		loadEducationList: function(){
+			this.educationData = [{
+				'1': 'xxx',
+				'2': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+			},]
+		},
+		loadIncomeList: function(){
+			this.incomeData = [{
+				'1': 'xxx',
+				'2': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+			},]
+		},
+		loadSexList: function(){
+			this.sexData = [{
+				'1': 'xxx',
+				'2': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
 			},]
 		},
 	}

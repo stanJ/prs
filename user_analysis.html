@@ -236,7 +236,8 @@
 				color: #0c4d90;
 			}
 			.tabs--card{
-				height: 100px;
+				height: 120px;
+				padding: 0 10px;
 			}
 			.tab--card{
 			    height: 100%;
@@ -251,7 +252,65 @@
 				margin-left: 0.3%;
 				border-left: 1px solid #d8d8d8;
 			}
-					
+			.tc__main{
+				text-align: center;
+			    margin: 12px 0;
+			    font-size: 15px;
+			}
+			.tc__percent{
+				margin: 0 25px;
+			}
+			.tab--card.is-active{
+				border-top:2px solid #0C4D90;
+				background: #fff;
+			}
+			.visitor-wrapper{
+				border: 1px solid #ebebeb;
+				margin: 10px;
+			}
+			.visitor__bottom{
+				margin-top: 10px;
+			}
+			.vt__left{
+				font-size: 14px;
+			    font-weight: bold;
+			    margin: 26px 0 0 12px;
+			}
+			.vt__right{
+				margin: 10px 10px 0 0;
+			}
+			.vtr__box{
+				border: 1px solid #ebebeb;
+			    padding: 13px 12px;
+			    font-size: 14px;
+			    margin-right: 10px;
+			    float: left;
+			}
+			.bt__sm{
+				font-size: 12px;
+			}
+			.vtrb__bottom{
+			    font-size: 13px;
+			}
+			.bt__text{
+				font-weight: bold;
+			}
+			.bt__value{
+				margin-left: 5px;
+    			font-weight: bold;
+			}
+			.bb__value{
+				color: #de4d5f;
+    			font-weight: bold;
+			}
+			.cw__left{
+				width: 27.7%;
+				box-sizing: border-box;
+			}
+			.cw__right{
+				width: 72.3%;
+				box-sizing: border-box;
+			}
 		</style>
 	</head>
 	<body>
@@ -260,8 +319,8 @@
 			<div class="tabs__nav">
 				<div class="nav--tab">
 					<div class="tab-title" data-name="tab1">用户标签维护</div>
-					<div class="tab-title" data-name="tab2">消费人群属性分析</div>
-					<div class="tab-title is-active" data-name="tab3">用户购买转换分析</div>
+					<div class="tab-title is-active" data-name="tab2">消费人群属性分析</div>
+					<div class="tab-title" data-name="tab3">用户购买转换分析</div>
 					<div class="tab-title" data-name="tab4">用户购买特征分析</div>
 					<div class="tab-title" data-name="tab5">用户网络行为分析</div>
 				</div>
@@ -512,6 +571,7 @@
 					</div>
 					
 				</div>
+				
 				<div class="tab-pane" data-name="tab3">
 					<div class="block clearfix" style="height: 440px;">
 						<div class="bwl--f">
@@ -688,86 +748,293 @@
 
 						
 					</div>
-					<div class="block clearfix" style="height: 526px;">
+					<div class="block clearfix" style="height: 546px;">
 						<div class="section clearfix" style="margin-bottom: 10px;">
 							<span class="title-prefix-md">经营概况</span>
-							<button class="button--lg">自助取数</button>
+							<button class="button--lg fr">自助取数</button>
 						</div>
 						<hr class="line" />
 						<div class="tabs--card clearfix">
-							<div class="tab--card"></div>
-							<div class="tab--card"></div>
-							<div class="tab--card"></div>
-							<div class="tab--card"></div>
-							<div class="tab--card"></div>
-							<div class="tab--card"></div>
-							<div class="tab--card"></div>
+							<div class="tab--card is-active">
+								<div class="tc__main">
+									<div>访客数</div>
+									<div class="blue-text">8</div>
+								</div>
+								<div class="tc__percent clearfix">
+									<div class="fl">
+										<div class="percent__text">较前一日</div>
+										<div class="percent__text">较上周周期</div>
+										<div class="percent__text">无线占比</div>
+									</div>
+									<div class="fr">
+										<div class="percent__value">30%</div>
+										<div class="percent__value">20%</div>
+										<div class="percent__value">10%</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab--card"><div class="tc__main">
+									<div>访客数</div>
+									<div class="blue-text">8</div>
+								</div>
+								<div class="tc__percent clearfix">
+									<div class="fl">
+										<div class="percent__text">较前一日</div>
+										<div class="percent__text">较上周周期</div>
+										<div class="percent__text">无线占比</div>
+									</div>
+									<div class="fr">
+										<div class="percent__value">30%</div>
+										<div class="percent__value">20%</div>
+										<div class="percent__value">10%</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab--card">
+								<div class="tc__main">
+									<div>访客数</div>
+									<div class="blue-text">8</div>
+								</div>
+								<div class="tc__percent clearfix">
+									<div class="fl">
+										<div class="percent__text">较前一日</div>
+										<div class="percent__text">较上周周期</div>
+										<div class="percent__text">无线占比</div>
+									</div>
+									<div class="fr">
+										<div class="percent__value">30%</div>
+										<div class="percent__value">20%</div>
+										<div class="percent__value">10%</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab--card">
+								<div class="tc__main">
+									<div>访客数</div>
+									<div class="blue-text">8</div>
+								</div>
+								<div class="tc__percent clearfix">
+									<div class="fl">
+										<div class="percent__text">较前一日</div>
+										<div class="percent__text">较上周周期</div>
+										<div class="percent__text">无线占比</div>
+									</div>
+									<div class="fr">
+										<div class="percent__value">30%</div>
+										<div class="percent__value">20%</div>
+										<div class="percent__value">10%</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab--card">
+								<div class="tc__main">
+									<div>访客数</div>
+									<div class="blue-text">8</div>
+								</div>
+								<div class="tc__percent clearfix">
+									<div class="fl">
+										<div class="percent__text">较前一日</div>
+										<div class="percent__text">较上周周期</div>
+										<div class="percent__text">无线占比</div>
+									</div>
+									<div class="fr">
+										<div class="percent__value">30%</div>
+										<div class="percent__value">20%</div>
+										<div class="percent__value">10%</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab--card">
+								<div class="tc__main">
+									<div>访客数</div>
+									<div class="blue-text">8</div>
+								</div>
+								<div class="tc__percent clearfix">
+									<div class="fl">
+										<div class="percent__text">较前一日</div>
+										<div class="percent__text">较上周周期</div>
+										<div class="percent__text">无线占比</div>
+									</div>
+									<div class="fr">
+										<div class="percent__value">30%</div>
+										<div class="percent__value">20%</div>
+										<div class="percent__value">10%</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab--card">
+								<div class="tc__main">
+									<div>访客数</div>
+									<div class="blue-text">8</div>
+								</div>
+								<div class="tc__percent clearfix">
+									<div class="fl">
+										<div class="percent__text">较前一日</div>
+										<div class="percent__text">较上周周期</div>
+										<div class="percent__text">无线占比</div>
+									</div>
+									<div class="fr">
+										<div class="percent__value">30%</div>
+										<div class="percent__value">20%</div>
+										<div class="percent__value">10%</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="visitor-wrapper">
+							<div class="visitor__top clearfix">
+								<div class="vt__left fl">
+									<span>最近30天日均访客数:</span>
+									<span class="vtl__value blue-text">8</span>
+								</div>
+								<div class="vt__right fr">
+									<div class="vtr__box">
+										<div class="vtrb__top clearfix">
+											<span class="bt__text fl">同行同层平均</span>
+											<span class="bt__value blue-text fl">4</span>
+											<span class="bt__sm fr">较前一日
+												<span class="btsm__value">0%</span>
+											</span>
+										</div>
+										<hr class="line--sm"/>
+										<div class="vtrb__bottom">
+											<span>本店增幅</span>
+											<span class="bb__value">大于</span>
+											<span>同行同层平均增幅</span>
+										</div>
+									</div>
+									<div class="vtr__box">
+										<div class="vtrb__top clearfix">
+											<span class="bt__text fl">同行同层平均</span>
+											<span class="bt__value blue-text fl">4</span>
+											<span class="bt__sm fr">较前一日
+												<span class="btsm__value">0%</span>
+											</span>
+										</div>
+										<hr class="line--sm"/>
+										<div class="vtrb__bottom">
+											<span>本店增幅</span>
+											<span class="bb__value">大于</span>
+											<span>同行同层平均增幅</span>
+										</div>
+									</div>
+								
+								</div>
+							</div>
+							<div class="chart visitor__bottom chart--area1" style="height: 240px;"></div>
 						</div>
 					</div>
 					
 				</div>
+				
 				<div class="tab-pane" data-name="tab2">
-					<div class="bwl--a">
-						<div class="block clearfix" style="height: 346px;">
-							<div class="section clearfix">
-								<span class="title-prefix-md">产品基本属性</span>
-							</div>
-							<div class="clearfix products">
-								<div class="bwl--c">
-									<div class="product-brand">品牌:
-										<span class="brand-name">Apple</span>
-										<el-button size="small">+关注</el-button>
-									</div>
-									<div class="product-params">
-										<div class="param--product">分辨率:<span class="param__value">1334*750(iphone6s)</span></div>
-									</div>
-									<hr class="line--product"/>
-									<div class="product-params">
-										<div class="param--product">后置摄像头:<span class="param__value">其他</span></div>
-										<div class="param--product">前置摄像头:<span class="param__value">其他</span></div>
-									</div>
-									<hr class="line--product">
-									<div class="product-params">
-										<div class="param--product">核数:<span class="param__value">其他</span></div>
-										<div class="param--product">频率:<span class="param__value">其他</span></div>
-									</div>
+					<div class="clearfix">
+						<div class="bwl--half">
+							<div class="block clearfix" style="height: 346px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">年龄分布</span>
 								</div>
-								<div class="bwr--c">
-									<div class="params--right">
-										<div class="param--product">核数:<span class="param__value">其他</span></div>
-										<div class="param--product">核数:<span class="param__value">其他</span></div>
-										<div class="param--product">核数:<span class="param__value">其他</span></div>
-										<div class="param--product">核数:<span class="param__value">其他</span></div>
-										<div class="param--product">核数:<span class="param__value">其他</span></div>
-										<div class="param--product">核数:<span class="param__value">其他</span></div>
-										<div class="param--product">核数:<span class="param__value">其他</span></div>
-									</div>
-								</div>
-							</div>
-						</div>		
-						<div class="block clearfix" style="height: 346px;">
-							<div class="section clearfix">
-								<span class="title-prefix-md">热点关键字</span>
-							</div>
-							
-						</div>
+								<div class="chart-wrapper">
+									<div class="cw__left fl">
+										<el-table :data="agesData" stripe>
+											<el-table-column 
+												label="年龄" 
+												prop="1" 
+												align="center"
+												:show-overflow-tooltip="true"> 
+											</el-table-column>
+											<el-table-column 
+												label="占百分比" 
+												prop="2"
+												align="center"
+												:show-overflow-tooltip="true">
+											</el-table-column>
 						
-					</div>
-					<div class="bwr--a">
-						<div class="block clearfix" style="height: 346px;">
-							<div class="section clearfix">
-								<span class="title-prefix-md">基础标签分析</span>
+										</el-table>
+									</div>
+									<div class="cw__right fr"></div>
+								</div>
 							</div>
-							<div class="bwl--d">
+						
+						</div>
+						<div class="bwr--half" >
+							<div class="block clearfix" style="height: 346px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">学历分布</span>
+								</div>
+								<div class="cards clearfix">
+									<div class="card card--purple">
+										<div class="card__title">
+											<div>70后</div>
+											<div>稳定的中坚力量</div>
+										</div>
+										<div class="card__avator"></div>
+										<div class="card__personality"></div>
+									</div>
+									<div class="card card--blue">
+										<div class="card__title">
+											<div>80后</div>
+											<div>摇摆的承上启下</div>
+										</div>
+										<div class="card__avator"></div>
+										<div class="card__personality"></div>
+									</div>
+									<div class="card card--green">
+										<div class="card__title">
+											<div>90后</div>
+											<div>多元的价值选择</div>
+										</div>
+										<div class="card__avator"></div>
+										<div class="card__personality"></div>
+									</div>
+								</div>
+							</div>
+						
+						</div>
+					</div>
+
+					<div class="clearfix">
+						<div class="bwl--half">
+							<div class="block clearfix" style="height: 346px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">收入分布</span>
+								</div>
+								<div class="chart chart--pie1"></div>
+							</div>
+						
+						</div>
+						<div class="bwr--half" >
+							<div class="block clearfix" style="height: 346px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">职业分布</span>
+								</div>
 								<div class="chart chart--bar-h1"></div>
 							</div>
-							<div class="bwr--d">
-								<div class="chart chart--bar-h2"></div>
+						
+						</div>
+					</div>
+					<div class="clearfix">
+						<div class="bwl--half">
+							<div class="block clearfix" style="height: 346px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">性别分布</span>
+								</div>
+								<div class="chart chart--pie1"></div>
 							</div>
-									
+						
+						</div>
+						<div class="bwr--half" >
+							<div class="block clearfix" style="height: 346px;">
+								<div class="section clearfix">
+									<span class="title-prefix-md">地域分布</span>
+								</div>
+								<div class="chart chart--bar-h1"></div>
+							</div>
+						
 						</div>
 					</div>
 				</div>
+				
 				<div class="tab-pane" data-name="tab1">
 					<div class="block clearfix" style="height: 360px;">
 						<div class="section clearfix" style="margin-bottom: 0;">
@@ -855,6 +1122,7 @@
 		<script src="js/map.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bar_h.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/radar.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/area.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/frame.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 </html>
