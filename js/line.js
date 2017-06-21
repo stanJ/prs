@@ -4,6 +4,7 @@ $(function(){
 	var line3 = echarts.init($(".chart--line3")[0]);
 	var line4 = echarts.init($(".chart--line4")[0]);
 	var line5 = echarts.init($(".chart--line5")[0]);
+	var line_income = echarts.init($(".chart--line--income")[0]);
 	var option = {
         title: {
             text: 'LINE CHART 2'
@@ -51,4 +52,5 @@ $(function(){
     line3.setOption(option)
     line4.setOption(option)
     line5.setOption(option)
+    line_income.setOption(option)
 })

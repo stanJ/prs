@@ -1,5 +1,8 @@
 $(function(){
 	var pie1 = echarts.init($(".chart--pie1")[0]);
+	var pie_age = echarts.init($(".chart--pie--age")[0]);
+	var pie_sex = echarts.init($(".chart--pie--sex")[0]);
+	var pie_place = echarts.init($(".chart--pie--place")[0]);
     var option = {
 	    title : {
 	        text: '某站点用户访问来源',
@@ -39,4 +42,7 @@ $(function(){
 	    ]
 	};
 	pie1.setOption(option)
+	pie_age.setOption(option)
+	pie_sex.setOption(option)
+	pie_place.setOption(option)
 })
