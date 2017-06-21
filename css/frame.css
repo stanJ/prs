@@ -1,9 +1,29 @@
 /*框架部分*/
+@font-face {
+	font-family:pingfang_regular;
+	src: url("../lib/fonts/PingFang_Regular.ttf");
+}
+@font-face {
+	font-family:pingfang_medium;
+	src: url("../lib/fonts/PingFang_Medium.ttf");
+}
+@font-face {
+	font-family:pingfang_bold;
+	src: url("../lib/fonts/PingFang_Bold.ttf");
+}
+@font-face {
+	font-family:pingfang_heavy;
+	src: url("../lib/fonts/PingFang_Heavy.ttf");
+}
 body{
 	margin: 0;
 	background: #b3b3b3;
 	min-width: 1200px;
 	font-size: 12px;
+	font-family: pingfang_bold ,tahoma, arial,"Hiragino Sans GB", "Microsoft Yahei", \5b8b\4f53, sans-serif;
+}
+input{
+	font-family: pingfang_regular ,tahoma, arial,"Hiragino Sans GB", "Microsoft Yahei", \5b8b\4f53, sans-serif;
 }
 .left-menu{
 	position: fixed;
@@ -73,6 +93,7 @@ header{
 .nav-left{
 	margin-left: 32px;
 	float: left;
+	font-family: "微软雅黑";
 }
 .nav-left>a{
 	

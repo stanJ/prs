@@ -10,14 +10,6 @@
 		<link rel="stylesheet" type="text/css" href="css/public.css"/>
 		<link rel="stylesheet" type="text/css" href="lib/selectify/silver.default.css"/>
 		<style type="text/css">
-			.bwl--a{
-				width: 49.5%;
-				
-			}
-			.bwr--a{
-				width: 49.6%;
-				
-			}
 			.bwl--b{
 			    width: 50%;
 			    border-right: 1px solid #ddd;
@@ -184,10 +176,6 @@
 				border-left: 1px solid #d8d8d8;
 				border-top: 1px solid #d8d8d8;
 			}
-			/*.bwl--a>.block{
-				height: 346px;
-				box-sizing: border-box;
-			}*/
 			
 		</style>
 	</head>
@@ -200,13 +188,14 @@
 				<div class="tab-title " data-name="tab3">销售分析</div>
 				<div class="tab-title" data-name="tab4">点评分析</div>
 				<div class="tab-title" data-name="tab5">竞品分析</div>
+				<div class="tab-title" data-name="tab6">产品分类</div>
 			</div>
 			<div class="tabs__content clearfix">
 				<div class="tab-pane" data-name="tab6">
-					<div class="bwl--a">
+					<div class="bwl--half">
 						<div class="block clearfix">
 							<div class="section clearfix">
-								<span class="title-prefix-md">渠道基础数据</span>
+								<span class="title-prefix-md">产品分类</span>
 							</div>
 							<div class="table-wrapper">
 								<el-table :data="categoryData" stripe >
@@ -215,6 +204,7 @@
 										label="型号" 
 										prop="1" 
 										align="center"
+										width="150"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column 
@@ -226,6 +216,7 @@
 									<el-table-column label="价格" 
 										prop="3"
 										align="center"
+										width="120"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 								</el-table>
@@ -235,39 +226,64 @@
 					</div>
 				</div>
 				<div class="tab-pane" data-name="tab5">
-					<div class="bwl--a">
+					<div class="bwl--half">
 						<div class="block clearfix">
 							<div class="section clearfix">
 								<span class="title-prefix-md">产品亮点分析</span>
 								<el-select placeholder="人群筛选"></el-select>
 								<el-select placeholder="产品筛选"></el-select>
 							</div>
-							<div class="table-wrapper">
+							<div class="table-wrapper" style="margin-bottom: 30px;">
 								
-								<el-table :data="highlightData" stripe>
+								<el-table :data="highlightData" stripe class="table--border">
 									<el-table-column 
 										label="" 
-										width="100"
+										width="64"
 										prop="0" 
 										align="left"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column 
-										label="苹果" 
+										label="Apple/苹果" 
 										prop="1" 
 										align="center"
 										:show-overflow-tooltip="true"> 
+										<template scope="scope">
+									        <div class="icon--tick" v-if="scope.row[1]=='true'"></div>
+									    </template>
 									</el-table-column>
 									<el-table-column 
-										label="小米" 
+										label="MIUI/小米" 
 										prop="2"
 										align="center"
 										:show-overflow-tooltip="true">
+										<template scope="scope">
+									        <div class="icon--tick" v-if="scope.row[2]=='true'"></div>
+									    </template>
 									</el-table-column>
-									<el-table-column label="华为" 
+									<el-table-column label="Huawei/华为" 
 										prop="3"
 										align="center"
 										:show-overflow-tooltip="true"> 
+										<template scope="scope">
+									        <div class="icon--tick" v-if="scope.row[3]=='true'"></div>
+									    </template>
+									</el-table-column>
+									<el-table-column label="Samsung/三星" 
+										prop="4"
+										align="center"
+										:show-overflow-tooltip="true"> 
+										<template scope="scope">
+									        <div class="icon--tick" v-if="scope.row[4]=='true'"></div>
+									    </template>
+									</el-table-column>
+									<el-table-column label="VIVO" 
+										prop="5"
+										align="center"
+										:show-overflow-tooltip="true"> 
+										<template scope="scope">
+									        <div class="icon--tick" v-if="scope.row[5]=='true'"></div>
+									    </template>
 									</el-table-column>
 								</el-table>
 							</div>
@@ -275,14 +291,14 @@
 						</div>
 					
 					</div>
-					<div class="bwr--a">
+					<div class="bwr--half">
 						<div class="block clearfix">
 							<div class="section clearfix">
 								<span class="title-prefix-md">品牌销量分析</span>
 								<el-select placeholder="最近一个月"></el-select>
 								<el-select placeholder="人群筛选"></el-select>
 							</div>
-							<div class="table-wrapper">
+							<div class="table-wrapper" style="margin-bottom: 36px;">
 								
 								<el-table :data="salesData" stripe>
 									<el-table-column 
@@ -296,6 +312,9 @@
 										prop="2"
 										align="center"
 										:show-overflow-tooltip="true">
+										<template scope="scope">
+									        <div class="icon--trend" v-if="scope.row[2]=='true'"></div>
+									    </template>
 									</el-table-column>
 									<el-table-column label="网店均价" 
 										prop="3"
@@ -320,7 +339,7 @@
 					</div>
 				</div>
 				<div class="tab-pane" data-name="tab4">
-					<div class="bwl--a">
+					<div class="bwl--half">
 						<div class="block clearfix" style="height: 346px;">
 							<div class="section clearfix">
 								<span class="title-prefix-md">产品评论活跃度</span>
@@ -418,12 +437,14 @@
 						</div>
 						
 					</div>
-					<div class="bwr--a">
+					<div class="bwr--half">
 						<div class="block clearfix" style="height: 346px;">
 							<div class="section clearfix">
 								<span class="title-prefix-md">渠道用户停留时间</span>
 							</div>
-							<div class="chart chart--line1"></div>
+							<div class="chart chart--line--stay" style="height: 280px;margin-right: 30px;">
+								
+							</div>
 									
 						</div>
 						<div class="block clearfix" style="height: 360px;">
@@ -487,7 +508,7 @@
 				
 				<div class="tab-pane" data-name="tab3">
 					<div class="clearfix">
-						<div class="bwl--a">
+						<div class="bwl--half">
 							<div class="block clearfix" style="height: 346px;">
 								<div class="section clearfix">
 									<span class="title-prefix-md">产品销售数量</span>
@@ -539,7 +560,7 @@
 							</div>
 							
 						</div>
-						<div class="bwr--a">
+						<div class="bwr--half">
 							<div class="block clearfix" style="height: 346px;">
 								<div class="section clearfix">
 									<span class="title-prefix-md">产品价格走势</span>
@@ -610,7 +631,7 @@
 				</div>
 				
 				<div class="tab-pane" data-name="tab2">
-					<div class="bwl--a">
+					<div class="bwl--half">
 						<div class="block clearfix" style="height: 346px;">
 							<div class="section clearfix">
 								<span class="title-prefix-md">产品基本属性</span>
@@ -656,7 +677,7 @@
 						</div>
 						
 					</div>
-					<div class="bwr--a">
+					<div class="bwr--half">
 						<div class="block clearfix" style="height: 346px;">
 							<div class="section clearfix">
 								<span class="title-prefix-md">基础标签分析</span>
@@ -711,7 +732,7 @@
 						</div>
 					</div>
 					<div class="clearfix">
-						<div class="bwl--a">
+						<div class="bwl--half">
 							<div class="block clearfix" style="height: 346px;">
 								<div class="section clearfix">
 									<span class="title-prefix-md">商品评论热点</span>
@@ -726,7 +747,7 @@
 								<div class="chart chart--radar1"></div>
 							</div>
 						</div>
-						<div class="bwr--a">
+						<div class="bwr--half">
 							<div class="block clearfix" style="height: 346px;">
 								<div class="section clearfix">
 									<span class="title-prefix-md">好评度</span>
