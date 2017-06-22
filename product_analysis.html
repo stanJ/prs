@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<title>框架</title>
 		<!-- 引入样式 -->
-		<link rel="stylesheet" type="text/css" href="lib/element/index.css"/>
+		<link rel="stylesheet" type="text/css" href="lib/element/theme-default/index.css"/>
 		<link rel="stylesheet" type="text/css" href="lib/jqcloud/jqcloud.css"/>
 		<link rel="stylesheet" type="text/css" href="css/frame.css"/>
 		<link rel="stylesheet" type="text/css" href="css/public.css"/>
@@ -176,7 +176,25 @@
 				border-left: 1px solid #d8d8d8;
 				border-top: 1px solid #d8d8d8;
 			}
-			
+			.table--emotion-trend .el-table__body-wrapper tr:nth-of-type(2){
+				color: #63a0e6;
+			}
+			.table--emotion-trend .el-table__body-wrapper tr:nth-of-type(2) td:first-of-type{
+				color: initial;
+			}
+			.emotion-wrapper{
+				height: 12px;
+			}
+			.emotion--positive{
+				height: 12px;
+				float: left;
+				background: #51a5de;
+			}
+			.emotion--negative{
+				height: 12px;
+				float: left;
+				background: #f77787;
+			}
 		</style>
 	</head>
 	<body>
@@ -353,32 +371,38 @@
 										label="网站" 
 										prop="1" 
 										align="center"
+										min-width="54"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column 
 										label="好评" 
 										prop="2"
 										align="center"
+										min-width="54"
 										:show-overflow-tooltip="true">
 									</el-table-column>
 									<el-table-column label="中评" 
 										prop="3"
 										align="center"
+										min-width="54"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column label="差评" 
 										prop="4"
 										align="center"
+										min-width="54"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column label="追评" 
 										prop="5"
 										align="center"
+										min-width="54"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column label="晒图" 
 										prop="6"
 										align="center"
+										min-width="54"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column label="无情感" 
@@ -402,26 +426,38 @@
 							</div>
 							<div class="table-wrapper">
 								
-								<el-table :data="commentActiveData" stripe>
+								<el-table :data="emotionAnalysisData" stripe>
 									<el-table-column 
 										label="项目" 
 										prop="1" 
 										align="center"
+										min-width="134"
 										:show-overflow-tooltip="true"> 
+										
 									</el-table-column>
 									<el-table-column 
 										label="用户情感" 
 										prop="2"
 										align="center"
+										min-width="205"
+										:render-header="renderHeader"
 										:show-overflow-tooltip="true">
+										<template scope="scope">
+									        <div class="emotion-wrapper">
+									        	<div class="emotion--positive" style="width: 90%;" :data-aa="JSON.parse(scope.row[2])[0]"></div>
+									        	<div class="emotion--negative" style="width: 10%;"></div>
+									        </div>
+									    </template>
 									</el-table-column>
 									<el-table-column label="有效评价数网站" 
 										prop="3"
 										align="center"
+										min-width="158"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 								</el-table>
-								<div class="score-wrapper">
+								<hr class="line--normal"/>
+								<div class="score-wrapper" style="margin-top: 20px;">
 									<span class="score__text">情感综合评分</span>
 									<span class="score__text"><span class="score__value">85</span>分</span>
 									 <el-rate v-model="score"></el-rate>
@@ -442,9 +478,9 @@
 					<div class="bwr--half">
 						<div class="block clearfix" style="height: 346px;">
 							<div class="section clearfix">
-								<span class="title-prefix-md">渠道用户停留时间</span>
+								<span class="title-prefix-md">产品好评指数</span>
 							</div>
-							<div class="chart chart--line--stay" style="height: 270px;margin-right: 30px;margin-left: 18px">
+							<div class="chart chart--line--goodcomment" style="height: 270px;margin-right: 30px;margin-left: 18px">
 								
 							</div>
 									
@@ -452,50 +488,72 @@
 						<div class="block clearfix" style="height: 360px;">
 							<div class="section clearfix">
 								<span class="title-prefix-md">情感指数趋势</span>
-								<el-select placeholder="全部网站"></el-select>
+								<el-select placeholder="全部网站">
+									option
+								</el-select>
 								<el-select placeholder="最近一周"></el-select>
 							</div>
 							<div class="table-wrapper">
 								
-								<el-table :data="commentActiveData" stripe>
+								<el-table :data="emotionTrendData" stripe class="table--emotion-trend">
 									<el-table-column 
-										label="网站" 
+										min-width="60"
+										prop="0" 
+										align="center"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										min-width="50"
+										label="04-01" 
 										prop="1" 
 										align="center"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column 
-										label="好评" 
+										min-width="50"
+										label="04-02" 
 										prop="2"
 										align="center"
 										:show-overflow-tooltip="true">
 									</el-table-column>
-									<el-table-column label="中评" 
+									<el-table-column
+										min-width="50"
+										label="04-03" 
 										prop="3"
 										align="center"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
-									<el-table-column label="差评" 
+									<el-table-column 
+										min-width="50"
+										label="04-04" 
 										prop="4"
 										align="center"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
-									<el-table-column label="追评" 
+									<el-table-column 
+										min-width="50"
+										label="04-05" 
 										prop="5"
 										align="center"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
-									<el-table-column label="晒图" 
+									<el-table-column 
+										min-width="50"
+										label="04-06" 
 										prop="6"
 										align="center"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
-									<el-table-column label="无情感" 
+									<el-table-column 
+										min-width="50"
+										label="04-07"  
 										prop="7"
 										align="center"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
-									<el-table-column label="活跃指数" 
+									<el-table-column 
+										min-width="50"
+										label="04-08" 
 										prop="8"
 										align="center"
 										:show-overflow-tooltip="true"> 

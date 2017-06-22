@@ -5,6 +5,8 @@ var app = new Vue({
 		highlightData: [],
 		salesData: [],
 		commentActiveData: [],
+		emotionAnalysisData: [],
+		emotionTrendData: [],
 		score:null,
 	},
 	created: function () {
@@ -16,7 +18,21 @@ var app = new Vue({
 			this.loadHighlightList();
 			this.loadSalesList();
 			this.loadCommentActiveList();
+			this.loadEmotionAnalysisList();
+			this.loadEmotionTrendList();
 		},
+		renderHeader: function(createElement, { column}) {
+	        return createElement(
+	          'div',
+	          [
+	            createElement('a', ['==' + column.label + '=='], {
+	              attrs: {
+	                href: '#test'
+	              }
+	            })
+	          ]
+	        );
+	     },
 		loadCategoryList: function(){
 			this.categoryData = [{
 				'1': 'Apple iPhone 6s Plus',
@@ -190,42 +206,144 @@ var app = new Vue({
 		},
 		loadCommentActiveList: function(){
 			this.commentActiveData = [{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-				'5': 'xxx',
-				'6': 'xxx',
-				'7': 'xxx',
-				'8': 'xxx',
+				'1': '京东',
+				'2': '2W+',
+				'3': '600+',
+				'4': '100+',
+				'5': '100+',
+				'6': '50',
+				'7': '8',
+				'8': '1.5W',
 			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-				'5': 'xxx',
-				'6': 'xxx',
-				'7': 'xxx',
-				'8': 'xxx',
+				'1': '淘宝',
+				'2': '2W+',
+				'3': '500+',
+				'4': '100+',
+				'5': '130+',
+				'6': '55',
+				'7': '8',
+				'8': '3.5W',
 			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-				'5': 'xxx',
-				'6': 'xxx',
-				'7': 'xxx',
-				'8': 'xxx',
+				'1': '天猫',
+				'2': '0.9W+',
+				'3': '300+',
+				'4': '100+',
+				'5': '100+',
+				'6': '60',
+				'7': '8',
+				'8': '2.5W',
+			},{
+				'1': '唯品会',
+				'2': '1.7W+',
+				'3': '200+',
+				'4': '100+',
+				'5': '110+',
+				'6': '70',
+				'7': '8',
+				'8': '2.3W',
 			},]
+		},
+		loadEmotionAnalysisList: function(){
+			this.emotionAnalysisData = [
+			{
+				'1': '外观及功能',
+				'2': '[95,5]',
+				'3': '2000',
+
+			},
+			{
+				'1': '价格',
+				'2': '[90,10]',
+				'3': '1000',
+
+			},
+			{
+				'1': '售后服务',
+				'2': '[80,20]',
+				'3': '1500',
+
+			},
+			{
+				'1': '消费体验',
+				'2': '[70,30]',
+				'3': '1200',
+
+			},
+			]
+		},
+		loadEmotionTrendList: function(){
+			this.emotionTrendData = [
+			{
+				'0': '点评数',
+				'1': '9',
+				'2': '4',
+				'3': '4',
+				'4': '23',
+				'5': '10',
+				'6': '15',
+				'7': '8',
+				'8': '6',
+			},{
+				'0': '好评率',
+				'1': '88%',
+				'2': '86%',
+				'3': '84%',
+				'4': '82%',
+				'5': '80%',
+				'6': '90%',
+				'7': '100%',
+				'8': '70%',
+			},{
+				'0': '好评数',
+				'1': '1',
+				'2': '0',
+				'3': '0',
+				'4': '0',
+				'5': '0',
+				'6': '0',
+				'7': '0',
+				'8': '1',
+			},{
+				'0': '中评数',
+				'1': '0',
+				'2': '0',
+				'3': '0',
+				'4': '0',
+				'5': '0',
+				'6': '1',
+				'7': '0',
+				'8': '0',
+			},{
+				'0': '差评数',
+				'1': '0',
+				'2': '0',
+				'3': '0',
+				'4': '1',
+				'5': '0',
+				'6': '0',
+				'7': '0',
+				'8': '0',
+			},{
+				'0': '无情感',
+				'1': '0',
+				'2': '0',
+				'3': '0',
+				'4': '0',
+				'5': '0',
+				'6': '0',
+				'7': '0',
+				'8': '0',
+			},
+			]
 		},
 	}
 })
 $(function(){
-	lineStay();
+	lineGoodComment();
 	commentCloud();
 })
-function lineStay(){
-	var line_stay = echarts.init($(".chart--line--stay")[0]);
+function lineGoodComment(){
+	var lineGoodComment = echarts.init($(".chart--line--goodcomment")[0]);
 	var option = {
 		grid: {
 			left: '35',
@@ -261,6 +379,7 @@ function lineStay(){
 	            	color: '#000'
 	            },
 	        },
+	        
         },
         yAxis: {
         	axisLine: {
@@ -303,7 +422,7 @@ function lineStay(){
             ]
         }]
     };
-    line_stay.setOption(option)
+    lineGoodComment.setOption(option)
 }
 function commentCloud(){
 	var word_list = [
@@ -322,5 +441,8 @@ function commentCloud(){
 	    {text: "礼物", weight: 3},
 	    {text: "防水", weight: 3},
 	];
-    $(".cloud--comment1").jQCloud(word_list);
+    $(".cloud--comment1").jQCloud(word_list,{
+//  	width: 300,
+//  	height: 200,
+    });
 }

@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<title>框架</title>
 		<!-- 引入样式 -->
-		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+		<link rel="stylesheet" type="text/css" href="lib/element/theme-default/index.css"/>
 		<link rel="stylesheet" type="text/css" href="css/frame.css"/>
 		<link rel="stylesheet" type="text/css" href="css/public.css"/>
 		<link rel="stylesheet" type="text/css" href="lib/selectify/silver.default.css"/>
@@ -44,21 +44,40 @@
 			.chart--bar1{
 				height: 324px;
 			}
-			
+			.channel-query{
+				margin-top: 60px;
+				text-align: right;
+				border-bottom: 1px solid #0c4d90;
+				width: 100%;
+			}
+			.channel-query__text{
+				font-size: 14px;
+    			margin-right: 6px;
+			}
+			.line--basic-wrapper{
+				box-shadow: 0 0 5px 1px #dbdbdb;
+			}
 		</style>
 	</head>
 	<body>
 		
 		<div class="content" id="app">
 			<div class="block clearfix">
-				<select class="select select--date">
+				<!--<select class="select select--date">
 					<option value="">2017-04-16</option>
 				</select>
 				<select class="select select--project">
 					<option value="">筛选</option>
 					<option value="">筛选项目1</option>
 					<option value="">筛选项目2</option>
-				</select>
+				</select>-->
+				<el-date-picker
+			      v-model="dateRange"
+			      type="daterange"
+			      placeholder="选择日期范围" 
+			      class="fl blue-bg mr10">
+			    </el-date-picker>
+			    <el-select placeholder="筛选" v-model="queryProject" class="fl blue-bg" style="margin-right: 10px;"></el-select>
 				<div class="triangle--lg fl"></div>
 				<div class="block__text">
 					<span class="bt--lg">筛选条件</span>
@@ -67,7 +86,7 @@
 				</div>
 			</div>
 			<div class="block clearfix">
-				<div class="clearfix">
+				<div class="clearfix" style="margin-bottom: 22px;">
 					<div class="bwl--b clearfix">
 						<div class="section clearfix">
 							<span class="title-prefix-md">渠道基础数据</span>
@@ -85,62 +104,95 @@
 								label="渠道名称" 
 								prop="1" 
 								align="center"
+								min-width="67"
 								:show-overflow-tooltip="true"> 
 							</el-table-column>
 							<el-table-column 
 								label="今日启动次数" 
 								prop="2"
 								align="center"
+								min-width="94"
 								:show-overflow-tooltip="true">
 							</el-table-column>
 							<el-table-column label="今日活跃次数" 
 								prop="3"
 								align="center"
+								min-width="94"
 								:show-overflow-tooltip="true"> 
 							</el-table-column>
 							<el-table-column label="昨日活跃用户(%)" 
 								prop="4"
 								align="center"
+								min-width="113"
 								:show-overflow-tooltip="true"> 
 							</el-table-column>
 							<el-table-column label="回访用户(%)" 
 								prop="5"
 								align="center"
+								min-width="90"
 								:show-overflow-tooltip="true"> 
 							</el-table-column>
 							<el-table-column label="一次性用户(%)" 
 								prop="6"
 								align="center"
+								min-width="113"
 								:show-overflow-tooltip="true"> 
 							</el-table-column>
 							<el-table-column 
 								label="操作"
-								width="150"
+								min-width="85"
 								align="center">
 								<template scope="scope">
-									<el-button 
-										@click="check(scope.$index,scope.row)" 
-										type="text" 
-										class="bs-default">
-										趋势
-									</el-button>
-									<el-button 
-										@click="modify(scope.$index,scope.row)" 
-										type="text">
-										明细
-									</el-button>
+									<span class="op1">趋势</span>
+									<span class="op2">明细</span>
 								</template>
 							</el-table-column>
 						</el-table>
 	
 					</div>
 					<div class="bwr--b clearfix">
-						asdfadfa
+						<div class="channel-query">
+							<span class="channel-query__text">渠道健康</span>
+							<el-select placeholder="筛选" class="blue-bg" style="margin-right: 0;"></el-select>
+						</div>
+						<div class="sml--half">
+							<el-table :data="channelHealthData1" stripe  height="160" 
+								:show-header="false">
+								<el-table-column 
+									prop="1" 
+									align="center"
+									:show-overflow-tooltip="true"> 
+								</el-table-column>
+								<el-table-column 
+									prop="2"
+									align="center"
+									:show-overflow-tooltip="true">
+								</el-table-column>
+							</el-table>
+						</div>
+						<div class="smr--half">
+							<el-table :data="channelHealthData1" stripe  height="160" 
+								:show-header="false">
+								<el-table-column 
+									prop="1" 
+									align="center"
+									:show-overflow-tooltip="true"> 
+								</el-table-column>
+								<el-table-column 
+									prop="2"
+									align="center"
+									:show-overflow-tooltip="true">
+								</el-table-column>
+							</el-table>
+						</div>
+						
+						
+	
 					</div>
 				</div>
 
 				<hr class="line"/>
-				<div>
+				<div class="clearfix" style="margin-top: 21px;">
 					<span class="title--normal mr20">渠道基础数据</span>
 					<div class="tabs">
 						<div class="tab-item is-active">新增用户</div>
@@ -151,7 +203,10 @@
 						<div class="tab-item">成交店铺</div>
 					</div>
 				</div>
-				<div class="chart chart--line1"></div>
+				<div class="line--basic-wrapper">
+					<div class="chart chart--line--basic" style="height: 300px;"></div>
+				</div>
+				
 			</div>
 			<div class="bwl--a">
 				<div class="block clearfix">
@@ -281,163 +336,12 @@
 		<script src="lib/jquery/jquery-3.2.1.js"></script>
 		<script src="lib/selectify/jquery.selectify.js" type="text/javascript" charset="utf-8"></script>
 		<!--先引入vue-->
-		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<script src="lib/vue/vue.js" type="text/javascript" charset="utf-8"></script>
 		<!-- 引入组件库 -->
-		<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+		<script src="lib/element/index.js"></script>
 		<script src="lib/echarts/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/frame.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			var app = new Vue({
-				el: '#app',
-				data: {
-					qualityData: [],
-					focusData: [],
-					maturityData: [],
-				},
-				created: function () {
-					this.fetchData();
-				},
-				methods: {
-					fetchData: function(){
-						this.loadQualityList();
-						this.loadFocusList();
-						this.loadMaturityList();
-					},
-					loadQualityList: function(){
-						this.qualityData = [{
-							'1': 'xxx',
-							'2': 'xxx',
-							'3': 'xxx',
-							'4': 'xxx',
-							'5': 'xxx',
-							'6': 'xxx',
-						},{
-							'1': 'xxx',
-							'2': 'xxx',
-							'3': 'xxx',
-							'4': 'xxx',
-							'5': 'xxx',
-							'6': 'xxx',
-						},{
-							'1': 'xxx',
-							'2': 'xxx',
-							'3': 'xxx',
-							'4': 'xxx',
-							'5': 'xxx',
-							'6': 'xxx',
-						},{
-							'1': 'xxx',
-							'2': 'xxx',
-							'3': 'xxx',
-							'4': 'xxx',
-							'5': 'xxx',
-							'6': 'xxx',
-						},]
-					},
-					loadFocusList: function(){
-						this.focusData = [{
-							'1': 'xxx',
-							'2': 'xxx',
-							'3': 'xxx',
-							'4': 'xxx',
-							'5': 'xxx',
-							'6': 'xxx',
-						},{
-							'1': 'xxx',
-							'2': 'xxx',
-							'3': 'xxx',
-							'4': 'xxx',
-							'5': 'xxx',
-							'6': 'xxx',
-						},{
-							'1': 'xxx',
-							'2': 'xxx',
-							'3': 'xxx',
-							'4': 'xxx',
-							'5': 'xxx',
-							'6': 'xxx',
-						},{
-							'1': 'xxx',
-							'2': 'xxx',
-							'3': 'xxx',
-							'4': 'xxx',
-							'5': 'xxx',
-							'6': 'xxx',
-						},]
-					},
-					loadMaturityList: function(){
-						this.maturityData = [{
-							'1': 'xxx',
-							'2': 'xxx',
-							'3': 'xxx',
-							'4': 'xxx',
-						},{
-							'1': 'xxx',
-							'2': 'xxx',
-							'3': 'xxx',
-							'4': 'xxx',
-						},{
-							'1': 'xxx',
-							'2': 'xxx',
-							'3': 'xxx',
-							'4': 'xxx',
-						},{
-							'1': 'xxx',
-							'2': 'xxx',
-							'3': 'xxx',
-							'4': 'xxx',
-						},]
-					}
-				}
-			})
-			
-		</script>
-		<script type="text/javascript">
-			var line1 = echarts.init($(".chart--line1")[0]);
-			var option = {
-	            title: {
-	                text: 'LINE CHART 2'
-	            },
-	            tooltip: {},
-	            legend: {
-	                data:['PARTNER 1']
-	            },
-	            xAxis: {
-	                type: 'time',
-	                splitLine: {
-	                	show: false
-	                }
-	            },
-	            yAxis: {},
-	            series: [{
-	                name: '新增客户',
-	                type: 'line',
-	                lineStyle: {
-	                	normal: {
-	                		color: '#51a5de'
-	                	}
-	                	
-	                },
-	                itemStyle: {
-	                	normal: {
-	                		color: '#51a5de'
-	                	}
-	                	
-	                },
-	                'symbol': 'emptyCircle',
-	                symbolSize: 10,
-	                data: [
-	                	['2017-04-26', 100],
-	                	['2017-04-27', 200],
-	                	['2017-04-28', 500],
-	                	['2017-04-29', 300],
-	                	['2017-04-30', 400],
-	                	['2017-05-01', 700],
-	                ]
-	            }]
-	        };
-	        line1.setOption(option)
-		</script>
+		<script src="js/channel_draw.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			var bar1 = echarts.init($(".chart--bar1")[0]);
 			var option = {

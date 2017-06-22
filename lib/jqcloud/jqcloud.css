@@ -1,9 +1,10 @@
 /* fonts */
 
 div.jqcloud {
-  font-family: "Helvetica", "Arial", sans-serif;
+  /*font-family: "Helvetica", "Arial", sans-serif;*/
   font-size: 10px;
   line-height: normal;
+  font-family: pingfang_bold ,tahoma, arial,"Hiragino Sans GB", "Microsoft Yahei", \5b8b\4f53, sans-serif;
 }
 
 div.jqcloud a {

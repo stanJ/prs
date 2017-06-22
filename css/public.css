@@ -286,7 +286,7 @@ a:visited{
     position: absolute;
 	
 }
-[class='button'],[class*='button--']{
+[class='button'],[class^='button--']{
 	display: inline-block;
     line-height: 1;
     white-space: nowrap;
@@ -375,6 +375,10 @@ a:visited{
     border: 0;
     border-bottom: 1px solid #ebebeb;
 }
+.line--normal{
+    border: 0;
+    border-bottom: 1px solid #dbdbdb;
+}
 .title--normal{
 	font-size: 15px;
     line-height: 22px;
@@ -458,6 +462,18 @@ a:visited{
 	width: 50%;
 	padding-left: 5px;
 }
+.sml--half{
+	width: 50%;
+	padding-right: 2.5px;
+	float: left;
+	box-sizing: border-box;
+}
+.smr--half{
+	width: 50%;
+	padding-left: 2.5px;
+	float: right;
+	box-sizing: border-box;
+}
 .el-table .cell, .el-table th>div{
 	padding-left: 5px;
     padding-right: 5px;
@@ -501,4 +517,59 @@ a:visited{
 .table--border .el-table__body-wrapper tr>td:first-of-type,
 .table--border .el-table__body-wrapper tr>td:last-of-type{
 	border-right: 0;
+}
+.el-table::after{
+	width: 0;
+}
+.el-table::before {
+    height: 0;
+}
+.pagination{
+	color: #adb0b5;
+	padding-left: 10px;
+	font-family: pingfang_medium;
+}
+.select--mini{
+	width: 40px;
+}
+.el-select.select--mini .el-input .el-input__icon{
+	width: 14px;
+}
+.el-select.select--mini .el-input__icon+.el-input__inner{
+	padding-right: 9px;
+}
+.visit-path{
+	height: 340px;
+	background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(../img/bg1.png);
+}
+.op1{
+	
+}
+.op2{
+	color: #5c9be5;
+}
+.el-date-editor.blue-bg input{
+	background: #0c4d90;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 0;
+}
+
+.el-select.blue-bg input{
+	background: #0c4d90;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 0;
+    border: 0;
+}
+.el-select.blue-bg .el-icon-caret-top {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(../img/icon_triangle_1.png);
+}
+.el-select.blue-bg .el-input .el-input__icon {
+    transform: translateY(-50%);
+    width: 34px;
 }

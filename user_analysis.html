@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<title>框架</title>
 		<!-- 引入样式 -->
-		<link rel="stylesheet" type="text/css" href="lib/element/index.css"/>
+		<link rel="stylesheet" type="text/css" href="lib/element/theme-default/index.css"/>
 		<link rel="stylesheet" type="text/css" href="css/frame.css"/>
 		<link rel="stylesheet" type="text/css" href="css/public.css"/>
 		<link rel="stylesheet" type="text/css" href="lib/selectify/silver.default.css"/>
@@ -311,6 +311,10 @@
 				width: 72.3%;
 				box-sizing: border-box;
 			}
+			.table--page-analysis .el-table__body-wrapper tr>td:first-of-type{
+				color: #346aa1;
+			}
+			
 		</style>
 	</head>
 	<body>
@@ -318,11 +322,11 @@
 		<div class="content" id="app">
 			<div class="tabs__nav">
 				<div class="nav--tab">
-					<div class="tab-title is-active" data-name="tab1">用户标签维护</div>
+					<div class="tab-title" data-name="tab1">用户标签维护</div>
 					<div class="tab-title" data-name="tab2">消费人群属性分析</div>
 					<div class="tab-title" data-name="tab3">用户购买转换分析</div>
 					<div class="tab-title" data-name="tab4">用户购买特征分析</div>
-					<div class="tab-title" data-name="tab5">用户网络行为分析</div>
+					<div class="tab-title is-active" data-name="tab5">用户网络行为分析</div>
 				</div>
 				<div class="nav__title clearfix">
 					<span class="title-prefix-md">用户网络行为分析</span>
@@ -340,7 +344,7 @@
 								<div class="section clearfix">
 									<span class="title-prefix-md">浏览时长</span>
 								</div>
-								<div class="chart chart--line1" style="height: 350px;"></div>
+								<div class="chart chart--line--visit-time" style="height: 320px;"></div>
 							</div>
 						
 						</div>
@@ -349,7 +353,7 @@
 								<div class="section clearfix">
 									<span class="title-prefix-md">页面浏览量</span>
 								</div>
-								<div class="chart chart--line2" style="height: 350px;"></div>
+								<div class="chart chart--line--visit-amount" style="height: 320px;"></div>
 							</div>
 						
 						</div>
@@ -400,6 +404,15 @@
 									:show-overflow-tooltip="true"> 
 								</el-table-column>
 							</el-table>
+							<div class="pagination">
+								<span>每页显示</span>
+								<el-select size="mini" class="select--mini" style="margin-right: 2px;">
+									<el-option label="10" value="10"></el-option>
+									<el-option label="9" value="9"></el-option>
+								</el-select>
+								<span>条,</span>
+								<span>1-9/9条</span>
+							</div>
 						</div>
 					</div>
 					<div class="clearfix">
@@ -410,22 +423,25 @@
 								</div>
 								<div class="table-wrapper">
 								
-									<el-table :data="pageAnalysisData" stripe>
+									<el-table :data="pageAnalysisData" stripe class="table--page-analysis">
 										<el-table-column 
 											label="页面URL" 
 											prop="1" 
 											align="center"
+											min-width="240"
 											:show-overflow-tooltip="true"> 
 										</el-table-column>
 										<el-table-column 
 											label="测试量(PV)" 
 											prop="2"
 											align="center"
+											min-width="117"
 											:show-overflow-tooltip="true">
 										</el-table-column>
 										<el-table-column label="访客量(UV)" 
 											prop="3"
 											align="center"
+											min-width="117"
 											:show-overflow-tooltip="true"> 
 										</el-table-column>
 					
@@ -439,7 +455,7 @@
 								<div class="section clearfix">
 									<span class="title-prefix-md">浏览路径分析</span>
 								</div>
-								
+								<div class="visit-path"></div>
 							</div>
 						
 						</div>
