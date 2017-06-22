@@ -322,8 +322,5 @@ function commentCloud(){
 	    {text: "礼物", weight: 3},
 	    {text: "防水", weight: 3},
 	];
-    $(".cloud--comment1").jQCloud(word_list,{
-    	width: '100%',
-    	height: '280px'
-    });
+    $(".cloud--comment1").jQCloud(word_list);
 }
