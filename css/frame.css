@@ -20,10 +20,10 @@ body{
 	background: #b3b3b3;
 	min-width: 1200px;
 	font-size: 12px;
-	font-family: pingfang_bold ,tahoma, arial,"Hiragino Sans GB", "Microsoft Yahei", \5b8b\4f53, sans-serif;
+	/*font-family: pingfang_bold ,tahoma, arial,"Hiragino Sans GB", "Microsoft Yahei", \5b8b\4f53, sans-serif;*/
 }
 input{
-	font-family: pingfang_regular ,tahoma, arial,"Hiragino Sans GB", "Microsoft Yahei", \5b8b\4f53, sans-serif;
+	/*font-family: pingfang_regular ,tahoma, arial,"Hiragino Sans GB", "Microsoft Yahei", \5b8b\4f53, sans-serif;*/
 }
 .left-menu{
 	position: fixed;

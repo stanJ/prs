@@ -222,6 +222,7 @@ var app = new Vue({
 })
 $(function(){
 	lineStay();
+	commentCloud();
 })
 function lineStay(){
 	var line_stay = echarts.init($(".chart--line--stay")[0]);
@@ -240,6 +241,7 @@ function lineStay(){
             }],
             right: '0',
             top: '0',
+            itemHeight: '9'
         },
         xAxis: {
             type: 'category',
@@ -253,7 +255,12 @@ function lineStay(){
 	        },
 	        axisTick: {
 	        	show: false,
-	        }
+	        },
+	        axisLabel: {
+	            textStyle: {
+	            	color: '#000'
+	            },
+	        },
         },
         yAxis: {
         	axisLine: {
@@ -297,4 +304,26 @@ function lineStay(){
         }]
     };
     line_stay.setOption(option)
+}
+function commentCloud(){
+	var word_list = [
+	    {text: "售后服务", weight: 9, link: "https://github.com/DukeLeNoir/jQCloud"},
+	    {text: "以旧换新", weight: 9, html: {title: "My Title", "class": "custom-class"}, link: {href: "http://jquery.com/", target: "_blank"}},
+	    {text: "送货速度", weight: 8},
+	    {text: "包装精美", weight: 9},
+	    {text: "潮流", weight: 8},
+	    {text: "时尚", weight: 6.2},
+	    {text: "耐用", weight: 5},
+	    {text: "喜爱", weight: 5},
+	    {text: "个性", weight: 5},
+	    {text: "送人", weight: 4},
+	    {text: "顺手", weight: 4},
+	    {text: "实用", weight: 4},
+	    {text: "礼物", weight: 3},
+	    {text: "防水", weight: 3},
+	];
+    $(".cloud--comment1").jQCloud(word_list,{
+    	width: '100%',
+    	height: '280px'
+    });
 }
