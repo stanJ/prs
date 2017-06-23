@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="css/frame.css"/>
 		<link rel="stylesheet" type="text/css" href="css/public.css"/>
 		<link rel="stylesheet" type="text/css" href="lib/selectify/silver.default.css"/>
+		<link rel="stylesheet" type="text/css" href="lib/jqcloud/jqcloud.css"/>
 		<style type="text/css">
 			.bwl--b{
 			    width: 22.6%;
@@ -325,13 +326,17 @@
 					<div class="tab-title" data-name="tab1">用户标签维护</div>
 					<div class="tab-title" data-name="tab2">消费人群属性分析</div>
 					<div class="tab-title" data-name="tab3">用户购买转换分析</div>
-					<div class="tab-title" data-name="tab4">用户购买特征分析</div>
-					<div class="tab-title is-active" data-name="tab5">用户网络行为分析</div>
+					<div class="tab-title is-active" data-name="tab4">用户购买特征分析</div>
+					<div class="tab-title " data-name="tab5">用户网络行为分析</div>
 				</div>
 				<div class="nav__title clearfix">
 					<span class="title-prefix-md">用户网络行为分析</span>
 					<div class="query-control">
-						<el-select placeholder="人群筛选" style="margin-right: 6px;"></el-select>
+						<el-select placeholder="人群筛选" style="margin-right: 6px;"
+							v-model="people">
+							<el-option :value="1">学生</el-option>
+							<el-option :value="2">白领</el-option>
+						</el-select>
 						<button class="button--lg">开始分析</button>
 					</div>
 				</div>
@@ -370,7 +375,7 @@
 						<hr class="line"/>
 						<div class="table-wrapper" style="margin-top: 12px;margin-right: 5px;">
 								
-							<el-table :data="pageStayData" stripe>
+							<el-table :data="pageStayData" stripe width="100%">
 								<el-table-column 
 									label="浏览次数" 
 									prop="1" 
@@ -406,9 +411,11 @@
 							</el-table>
 							<div class="pagination">
 								<span>每页显示</span>
-								<el-select size="mini" class="select--mini" style="margin-right: 2px;">
-									<el-option label="10" value="10"></el-option>
-									<el-option label="9" value="9"></el-option>
+								<el-select size="mini" class="select--mini" style="margin-right: 2px;" 
+									placeholder="" 
+									v-model="pageNum">
+									<el-option :label="10" :value="10"></el-option>
+									<el-option :label="9" :value="9"></el-option>
 								</el-select>
 								<span>条,</span>
 								<span>1-9/9条</span>
@@ -465,10 +472,10 @@
 					<div class="clearfix">
 						<div class="bwl--half">
 							<div class="block clearfix" style="height: 346px;">
-								<div class="section clearfix">
+								<div class="section clearfix" style="margin-bottom: 10px;">
 									<span class="title-prefix-md">O2O导入分析</span>
 								</div>
-								<div class="chart chart--line3" style="height: 300px;"></div>
+								<div class="chart chart--line--o2o" style="height: 290px;"></div>
 							</div>
 						
 						</div>
@@ -484,7 +491,7 @@
 											<div>稳定的中坚力量</div>
 										</div>
 										<div class="card__avator"></div>
-										<div class="card__personality"></div>
+										<div class="card__personality personality-70g"></div>
 									</div>
 									<div class="card card--blue">
 										<div class="card__title">
@@ -492,7 +499,7 @@
 											<div>摇摆的承上启下</div>
 										</div>
 										<div class="card__avator"></div>
-										<div class="card__personality"></div>
+										<div class="card__personality personality-80g"></div>
 									</div>
 									<div class="card card--green">
 										<div class="card__title">
@@ -500,7 +507,7 @@
 											<div>多元的价值选择</div>
 										</div>
 										<div class="card__avator"></div>
-										<div class="card__personality"></div>
+										<div class="card__personality personality-90g"></div>
 									</div>
 								</div>
 							</div>
@@ -522,8 +529,9 @@
 							<div class="block clearfix" style="height: 346px;">
 								<div class="section clearfix">
 									<span class="title-prefix-md">品牌偏好分析</span>
+									<div class="brand-title fr">偏好度Top10手机型号</div>
 								</div>
-								<div class="chart chart--bar-h1"></div>
+								<div class="chart chart--bar-brand-prefer" style="height: 280px;"></div>
 							</div>
 						
 						</div>
@@ -533,7 +541,7 @@
 							<div class="section clearfix" style="margin-bottom: 10px;">
 								<span class="title-prefix-md">年龄差异分析</span>
 							</div>
-							<div class="chart chart--radar1"></div>
+							<div class="chart chart--radar-age-diff" style="height: 300px;margin-top: 36px;"></div>
 						</div>
 						<div class="bwr--e">
 							<div class="title--reason">不同代次购车驱动因素</div>
@@ -1166,6 +1174,7 @@
 			
 		</div>
 		<script src="lib/jquery/jquery-3.2.1.js"></script>
+		<script src="lib/jqcloud/jqcloud-1.0.4.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="lib/selectify/jquery.selectify.js" type="text/javascript" charset="utf-8"></script>
 		<!--先引入vue-->
 		<script src="lib/vue/vue.js" type="text/javascript" charset="utf-8"></script>

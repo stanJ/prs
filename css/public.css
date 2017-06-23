@@ -325,9 +325,13 @@ a:visited{
 .mr10{
 	margin-right: 10px;
 }
-.tabs{
+.tabs .tabs__header{
 	letter-spacing: -4px;
 	display: inline-block;
+	width: 100%;
+}
+.tabs--sm .tab-item{
+	width: 80px;
 }
 .tab-item{
 	display: inline-block;
@@ -528,6 +532,7 @@ a:visited{
 	color: #adb0b5;
 	padding-left: 10px;
 	font-family: pingfang_medium;
+	margin-top: 15px;
 }
 .select--mini{
 	width: 40px;
@@ -572,4 +577,22 @@ a:visited{
 .el-select.blue-bg .el-input .el-input__icon {
     transform: translateY(-50%);
     width: 34px;
+}
+.tab-content{
+	/*display: none;*/
+}
+/*.el-table--enable-row-hover .el-table__body tr:hover>td {
+    background-color: initial;
+    background-clip: padding-box;
+}
+.el-table--enable-row-hover .el-table__body tr:hover {
+    border-top: 1px solid #51a5de;
+    border-bottom: 1px solid #51a5de;
+    border-left: 1px solid #51a5de;
+    
+}*/
+.brand-title{
+	font-size: 18px;
+    margin-top: 10px;
+    margin-right: 11px;
 }

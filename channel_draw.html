@@ -38,12 +38,6 @@
 				width: 41.5%;
 				padding-left: 10px;
 			}
-			.chart--line1{
-				height: 340px;
-			}
-			.chart--bar1{
-				height: 324px;
-			}
 			.channel-query{
 				margin-top: 60px;
 				text-align: right;
@@ -56,6 +50,13 @@
 			}
 			.line--basic-wrapper{
 				box-shadow: 0 0 5px 1px #dbdbdb;
+				padding-top: 22px;
+			}
+			.bar-staytime-wrapper{
+				box-shadow: 0 0 5px 1px #dbdbdb;
+				margin-left: 10px;
+				margin-right: 10px;
+				padding-top: 22px;
 			}
 		</style>
 	</head>
@@ -96,58 +97,118 @@
 							</div>
 						</div>
 						<div class="tabs">
-							<div class="tab-item">数量分析</div>
-							<div class="tab-item is-active">质量分析</div>
+							<div class="tabs__header">
+								<div class="tab-item">数量分析</div>
+								<div class="tab-item is-active">质量分析</div>
+							</div>
+							<div class="tabs__content">
+								<div class="tab-content">
+									<el-table :data="numAnalysisData" stripe  height="160">
+										<el-table-column 
+											label="渠道名称" 
+											prop="1" 
+											align="center"
+											min-width="67"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column 
+											label="今日新增" 
+											prop="2"
+											align="center"
+											min-width="67"
+											:show-overflow-tooltip="true">
+										</el-table-column>
+										<el-table-column label="昨日新增" 
+											prop="3"
+											align="center"
+											min-width="67"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column label="日期段内新增(%)" 
+											prop="4"
+											align="center"
+											min-width="113"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column label="日期段内活跃(%)" 
+											prop="5"
+											align="center"
+											min-width="90"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column label="累计用户(%)" 
+											prop="6"
+											align="center"
+											min-width="90"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column 
+											label="操作"
+											min-width="85"
+											align="center">
+											<template scope="scope">
+												<span class="op1">趋势</span>
+												<span class="op2">明细</span>
+											</template>
+										</el-table-column>
+									</el-table>
+								</div>
+							
+								<div class="tab-content">
+									<el-table :data="qualityData" stripe  height="160">
+										<el-table-column 
+											label="渠道名称" 
+											prop="1" 
+											align="center"
+											min-width="67"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column 
+											label="今日启动次数" 
+											prop="2"
+											align="center"
+											min-width="94"
+											:show-overflow-tooltip="true">
+										</el-table-column>
+										<el-table-column label="今日活跃次数" 
+											prop="3"
+											align="center"
+											min-width="94"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column label="昨日活跃用户(%)" 
+											prop="4"
+											align="center"
+											min-width="113"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column label="回访用户(%)" 
+											prop="5"
+											align="center"
+											min-width="90"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column label="一次性用户(%)" 
+											prop="6"
+											align="center"
+											min-width="113"
+											:show-overflow-tooltip="true"> 
+										</el-table-column>
+										<el-table-column 
+											label="操作"
+											min-width="85"
+											align="center">
+											<template scope="scope">
+												<span class="op1">趋势</span>
+												<span class="op2">明细</span>
+											</template>
+										</el-table-column>
+									</el-table>
+								</div>
+							
+							</div>
 						</div>
-						<el-table :data="qualityData" stripe  height="160">
-							<el-table-column 
-								label="渠道名称" 
-								prop="1" 
-								align="center"
-								min-width="67"
-								:show-overflow-tooltip="true"> 
-							</el-table-column>
-							<el-table-column 
-								label="今日启动次数" 
-								prop="2"
-								align="center"
-								min-width="94"
-								:show-overflow-tooltip="true">
-							</el-table-column>
-							<el-table-column label="今日活跃次数" 
-								prop="3"
-								align="center"
-								min-width="94"
-								:show-overflow-tooltip="true"> 
-							</el-table-column>
-							<el-table-column label="昨日活跃用户(%)" 
-								prop="4"
-								align="center"
-								min-width="113"
-								:show-overflow-tooltip="true"> 
-							</el-table-column>
-							<el-table-column label="回访用户(%)" 
-								prop="5"
-								align="center"
-								min-width="90"
-								:show-overflow-tooltip="true"> 
-							</el-table-column>
-							<el-table-column label="一次性用户(%)" 
-								prop="6"
-								align="center"
-								min-width="113"
-								:show-overflow-tooltip="true"> 
-							</el-table-column>
-							<el-table-column 
-								label="操作"
-								min-width="85"
-								align="center">
-								<template scope="scope">
-									<span class="op1">趋势</span>
-									<span class="op2">明细</span>
-								</template>
-							</el-table-column>
-						</el-table>
+						
 	
 					</div>
 					<div class="bwr--b clearfix">
@@ -195,12 +256,15 @@
 				<div class="clearfix" style="margin-top: 21px;">
 					<span class="title--normal mr20">渠道基础数据</span>
 					<div class="tabs">
-						<div class="tab-item is-active">新增用户</div>
-						<div class="tab-item">活跃用户</div>
-						<div class="tab-item">启动次数</div>
-						<div class="tab-item">销量</div>
-						<div class="tab-item">成交金额</div>
-						<div class="tab-item">成交店铺</div>
+						<div class="tabs__header">
+							<div class="tab-item is-active">新增用户</div>
+							<div class="tab-item">活跃用户</div>
+							<div class="tab-item">启动次数</div>
+							<div class="tab-item">销量</div>
+							<div class="tab-item">成交金额</div>
+							<div class="tab-item">成交店铺</div>
+						</div>
+						
 					</div>
 				</div>
 				<div class="line--basic-wrapper">
@@ -251,17 +315,8 @@
 							width="150"
 							align="center">
 							<template scope="scope">
-								<el-button 
-									@click="check(scope.$index,scope.row)" 
-									type="text" 
-									class="bs-default">
-									趋势
-								</el-button>
-								<el-button 
-									@click="modify(scope.$index,scope.row)" 
-									type="text">
-									明细
-								</el-button>
+								<span class="op1">趋势</span>
+								<span class="op2">明细</span>
 							</template>
 						</el-table-column>
 					</el-table>
@@ -270,56 +325,210 @@
 					<div class="section clearfix">
 						<span class="title-prefix-md">渠道成熟度分析</span>
 					</div>
-					<div class="tabs">
-						<div class="tab-item">成交额</div>
-						<div class="tab-item">成交商品数</div>
-						<div class="tab-item">成交人数</div>
-						<div class="tab-item">活跃店铺</div>
-						<div class="tab-item is-active">成交店铺</div>
-						<div class="tab-item">质量分析</div>
+					<div class="tabs tabs--sm">
+						<div class="tabs__header">
+							<div class="tab-item">成交额</div>
+							<div class="tab-item">成交商品数</div>
+							<div class="tab-item">成交人数</div>
+							<div class="tab-item">活跃店铺</div>
+							<div class="tab-item is-active">成交店铺</div>
+							<div class="tab-item">质量分析</div>
+						</div>
+						<div class="tabs__content">
+							<div class="tab-content">
+								<el-table :data="dealAmountData" stripe  height="160">
+									<el-table-column 
+										label="渠道名称" 
+										prop="1" 
+										align="center"
+										min-width="90"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="今日成交金额" 
+										prop="2"
+										align="center"
+										min-width="110"
+										:show-overflow-tooltip="true">
+									</el-table-column>
+									<el-table-column label="昨日成交金额" 
+										prop="3"
+										align="center"
+										min-width="110"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column label="成交额增长率" 
+										prop="4"
+										align="center"
+										min-width="100"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="操作" 
+										align="center">
+										<template scope="scope">
+											<span class="op1">趋势</span>
+											<span class="op2">明细</span>
+										</template>
+									</el-table-column>
+								</el-table>
+							</div>
+							<div class="tab-content">
+								<el-table :data="dealGoodsData" stripe  height="160">
+									<el-table-column 
+										label="渠道名称" 
+										prop="1" 
+										align="center"
+										min-width="90"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="今日商品销量" 
+										prop="2"
+										align="center"
+										min-width="110"
+										:show-overflow-tooltip="true">
+									</el-table-column>
+									<el-table-column label="昨日成交销量" 
+										prop="3"
+										align="center"
+										min-width="110"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column label="销量额增长率" 
+										prop="4"
+										align="center"
+										min-width="100"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="操作" 
+										align="center">
+										<template scope="scope">
+											<span class="op1">趋势</span>
+											<span class="op2">明细</span>
+										</template>
+									</el-table-column>
+								</el-table>
+							</div>
+							<div class="tab-content">
+								<el-table :data="dealPeopleData" stripe  height="160">
+									<el-table-column 
+										label="渠道名称" 
+										prop="1" 
+										align="center"
+										min-width="90"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="今日客户" 
+										prop="2"
+										align="center"
+										min-width="110"
+										:show-overflow-tooltip="true">
+									</el-table-column>
+									<el-table-column label="昨日客户" 
+										prop="3"
+										align="center"
+										min-width="110"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column label="客户额增长率" 
+										prop="4"
+										align="center"
+										min-width="100"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="操作" 
+										align="center">
+										<template scope="scope">
+											<span class="op1">趋势</span>
+											<span class="op2">明细</span>
+										</template>
+									</el-table-column>
+								</el-table>
+							</div>
+							<div class="tab-content">
+								<el-table :data="activeStoreData" stripe  height="160">
+									<el-table-column 
+										label="渠道名称" 
+										prop="1" 
+										align="center"
+										min-width="90"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="今日活跃店铺" 
+										prop="2"
+										align="center"
+										min-width="110"
+										:show-overflow-tooltip="true">
+									</el-table-column>
+									<el-table-column label="昨日活跃店铺" 
+										prop="3"
+										align="center"
+										min-width="110"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column label="店铺增长率" 
+										prop="4"
+										align="center"
+										min-width="100"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="操作" 
+										align="center">
+										<template scope="scope">
+											<span class="op1">趋势</span>
+											<span class="op2">明细</span>
+										</template>
+									</el-table-column>
+								</el-table>
+							</div>
+							<div class="tab-content">
+								<el-table :data="dealStoreData" stripe  height="160">
+									<el-table-column 
+										label="渠道名称" 
+										prop="1" 
+										align="center"
+										min-width="90"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="今日成交店铺" 
+										prop="2"
+										align="center"
+										min-width="110"
+										:show-overflow-tooltip="true">
+									</el-table-column>
+									<el-table-column label="昨日成交店铺" 
+										prop="3"
+										align="center"
+										min-width="110"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column label="店铺增长率" 
+										prop="4"
+										align="center"
+										min-width="100"
+										:show-overflow-tooltip="true"> 
+									</el-table-column>
+									<el-table-column 
+										label="操作" 
+										align="center">
+										<template scope="scope">
+											<span class="op1">趋势</span>
+											<span class="op2">明细</span>
+										</template>
+									</el-table-column>
+								</el-table>
+							</div>
+							<div class="tab-content"></div>
+						</div>
 					</div>
-					<el-table :data="maturityData" stripe  height="160">
-						<el-table-column 
-							label="渠道名称" 
-							prop="1" 
-							align="center"
-							:show-overflow-tooltip="true"> 
-						</el-table-column>
-						<el-table-column 
-							label="今日成交店铺" 
-							prop="2"
-							align="center"
-							:show-overflow-tooltip="true">
-						</el-table-column>
-						<el-table-column label="昨日成交店铺" 
-							prop="3"
-							align="center"
-							:show-overflow-tooltip="true"> 
-						</el-table-column>
-						<el-table-column label="店铺增长率" 
-							prop="4"
-							align="center"
-							:show-overflow-tooltip="true"> 
-						</el-table-column>
-						<el-table-column 
-							label="操作" 
-							width="150"
-							align="center">
-							<template scope="scope">
-								<el-button 
-									@click="check(scope.$index,scope.row)" 
-									type="text" 
-									class="bs-default">
-									趋势
-								</el-button>
-								<el-button 
-									@click="modify(scope.$index,scope.row)" 
-									type="text">
-									明细
-								</el-button>
-							</template>
-						</el-table-column>
-					</el-table>
+					
 				</div>
 			</div>
 			<div class="bwr--a">
@@ -327,7 +536,10 @@
 					<div class="section clearfix">
 						<span class="title-prefix-md">渠道用户停留时间</span>
 					</div>
-					<div class="chart chart--bar1"></div>
+					<div class="bar-staytime-wrapper">
+						<div class="chart chart--bar--staytime" style="height: 300px;"></div>
+					</div>
+					
 				</div>
 			</div>
 			
@@ -342,46 +554,5 @@
 		<script src="lib/echarts/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/frame.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/channel_draw.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			var bar1 = echarts.init($(".chart--bar1")[0]);
-			var option = {
-			    color: ['#3398DB'],
-			    tooltip : {
-			        trigger: 'axis',
-			        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-			            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-			        }
-			    },
-			    grid: {
-			        left: '3%',
-			        right: '4%',
-			        bottom: '3%',
-			        containLabel: true
-			    },
-			    xAxis : [
-			        {
-			            type : 'category',
-			            data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-			            axisTick: {
-			                alignWithLabel: true
-			            }
-			        }
-			    ],
-			    yAxis : [
-			        {
-			            type : 'value'
-			        }
-			    ],
-			    series : [
-			        {
-			            name:'直接访问',
-			            type:'bar',
-			            barWidth: '60%',
-			            data:[10, 52, 200, 334, 390, 330, 220]
-			        }
-			    ]
-			};
-	        bar1.setOption(option)
-		</script>
 	</body>
 </html>

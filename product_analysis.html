@@ -201,10 +201,10 @@
 		
 		<div class="content" id="app">
 			<div class="tabs__nav">
-				<div class="tab-title" data-name="tab1" style="margin-left: 40px;">标注总览</div>
-				<div class="tab-title" data-name="tab2">属性分析</div>
+				<div class="tab-title is-active" data-name="tab1" style="margin-left: 40px;">标注总览</div>
+				<div class="tab-title " data-name="tab2">属性分析</div>
 				<div class="tab-title " data-name="tab3">销售分析</div>
-				<div class="tab-title is-active" data-name="tab4">点评分析</div>
+				<div class="tab-title " data-name="tab4">点评分析</div>
 				<div class="tab-title" data-name="tab5">竞品分析</div>
 				<div class="tab-title" data-name="tab6">产品分类</div>
 			</div>
@@ -469,7 +469,7 @@
 							<div class="section clearfix">
 								<span class="title-prefix-md">用户评论热点</span>
 							</div>
-							<div class="cloud--comment1" style="height: 280px;">
+							<div class="cloud--user-comment" style="height: 280px;">
 								
 							</div>
 						</div>
@@ -576,7 +576,7 @@
 								</div>
 								<div class="table-wrapper">
 									
-									<el-table :data="commentActiveData" stripe>
+									<el-table :data="productSalesData" stripe>
 										<el-table-column 
 											label="季度" 
 											prop="1" 
@@ -622,11 +622,11 @@
 						</div>
 						<div class="bwr--half">
 							<div class="block clearfix" style="height: 346px;">
-								<div class="section clearfix">
+								<div class="section clearfix" style="margin-bottom: 5px;">
 									<span class="title-prefix-md">产品价格走势</span>
 									<el-select placeholder="按年份"></el-select>
 								</div>
-								<div class="chart chart--line2"></div>
+								<div class="chart chart--line--product-price-trend" style="height: 280px;"></div>
 										
 							</div>
 						</div>
@@ -637,7 +637,7 @@
 							<div class="section clearfix">
 								<span class="title-prefix-md">销售价格市场分布</span>
 							</div>
-							<div class="chart chart--pie1"></div>	
+							<div class="chart chart--pie--price-spread" style="height: 325px;"></div>	
 						</div>
 						<div class="bwr--b" style="height: 360px;">
 							<div class="chart chart--map1"></div>
@@ -718,13 +718,13 @@
 								</div>
 								<div class="bwr--c">
 									<div class="params--right">
-										<div class="param--product">核数:<span class="param__value">其他</span></div>
-										<div class="param--product">核数:<span class="param__value">其他</span></div>
-										<div class="param--product">核数:<span class="param__value">其他</span></div>
-										<div class="param--product">核数:<span class="param__value">其他</span></div>
-										<div class="param--product">核数:<span class="param__value">其他</span></div>
-										<div class="param--product">核数:<span class="param__value">其他</span></div>
-										<div class="param--product">核数:<span class="param__value">其他</span></div>
+										<div class="param--product">商品名称:<span class="param__value">AppleIPhone 6S</span></div>
+										<div class="param--product">热点:<span class="param__value">指纹识别，金属机身，拍照......</span></div>
+										<div class="param--product">系统:<span class="param__value">苹果（IOS）</span></div>
+										<div class="param--product">商品编号:<span class="param__value">4586850</span></div>
+										<div class="param--product">前置摄像头像素:<span class="param__value">其他</span></div>
+										<div class="param--product">商品毛重:<span class="param__value">390.00g</span></div>
+										<div class="param--product">后置摄像头像素:<span class="param__value">500万——1199万</span></div>
 									</div>
 								</div>
 							</div>
@@ -733,7 +733,7 @@
 							<div class="section clearfix">
 								<span class="title-prefix-md">热点关键字</span>
 							</div>
-							
+							<div class="cloud--hot-key" style="height: 280px;"></div>
 						</div>
 						
 					</div>
@@ -743,10 +743,10 @@
 								<span class="title-prefix-md">基础标签分析</span>
 							</div>
 							<div class="bwl--d">
-								<div class="chart chart--bar-h1"></div>
+								<div class="chart chart--bar--basic-label1" style="height: 260px;"></div>
 							</div>
 							<div class="bwr--d">
-								<div class="chart chart--bar-h2"></div>
+								<div class="chart chart--bar--basic-label2" style="height: 260px;"></div>
 							</div>
 									
 						</div>
@@ -784,10 +784,10 @@
 						</div>
 						<div class="bwr--e" style="height: 300px;">
 							<div class="bwl--f">
-								<div class="chart chart--bar-h3"></div>
+								<div class="chart chart--bar-h1" style="height: 260px;margin-top: 20px;"></div>
 							</div>
 							<div class="bwr--f">
-								<div class="chart chart--bar-h4"></div>
+								<div class="chart chart--bar-h2" style="height: 260px;margin-top: 20px;"></div>
 							</div>
 						</div>
 					</div>
@@ -797,22 +797,22 @@
 								<div class="section clearfix">
 									<span class="title-prefix-md">商品评论热点</span>
 								</div>
-								<div class="cloud--comment" style="height: 300px;">
+								<div class="cloud--goods-comment" style="height: 280px;">
 								</div>
 							</div>
 							<div class="block clearfix" style="height: 346px;">
-								<div class="section clearfix">
+								<div class="section clearfix" style="margin-bottom: 10px;">
 									<span class="title-prefix-md">销售热点</span>
 								</div>
-								<div class="chart chart--radar1"></div>
+								<div class="chart chart--radar--hot-sales-spot" style="height: 280px;"></div>
 							</div>
 						</div>
 						<div class="bwr--half">
 							<div class="block clearfix" style="height: 346px;">
-								<div class="section clearfix">
+								<div class="section clearfix" style="margin-bottom: 10px;">
 									<span class="title-prefix-md">好评度</span>
 								</div>
-								<div class="chart chart--line3"></div>
+								<div class="chart chart--line--good-reputation" style="height: 285px;"></div>
 										
 							</div>
 						</div>
@@ -827,21 +827,21 @@
 			
 		</div>
 		<script src="lib/jquery/jquery-3.2.1.js"></script>
+		<script src="lib/jqcloud/jqcloud-1.0.4.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="lib/selectify/jquery.selectify.js" type="text/javascript" charset="utf-8"></script>
 		<!--先引入vue-->
 		<script src="lib/vue/vue.js" type="text/javascript" charset="utf-8"></script>
 		<!-- 引入组件库 -->
 		<script src="lib/element/index.js"></script>
 		<script src="lib/echarts/echarts.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/product_analysis.js" type="text/javascript" charset="utf-8"></script>
 		<script src="lib/echarts/china.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/product_analysis.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/line.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/pie.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/map.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bar_h.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/radar.js" type="text/javascript" charset="utf-8"></script>
-		<script src="lib/jqcloud/jqcloud-1.0.4.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/cloud.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="js/cloud.js" type="text/javascript" charset="utf-8"></script>-->
 		<script src="js/frame.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 </html>

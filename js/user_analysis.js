@@ -12,6 +12,8 @@ var app = new Vue({
 		incomeData: [],
 		sexData: [],
 		score:null,
+		pageNum: '',
+		people: '',
 	},
 	created: function () {
 		this.fetchData();
@@ -273,8 +275,183 @@ var app = new Vue({
 $(function(){
 	lineVisitTime();
 	lineVisitAmount();
-	commentCloud();
+//	commentCloud();
+	lineO2O();
+	personalityCloud();
+	barBrandPrefer();
+	radarAgeDiff();
 })
+function radarAgeDiff(){
+	var radar1 = echarts.init($(".chart--radar-age-diff")[0]);
+	var option = {
+//		color: ['#a0b6e3','#63d0f4'],
+//	    title: {
+//	        text: '销售渠道',
+//	        left: 10,
+//	        top: 10,
+//	        textStyle: {
+//	        	fontSize: 17,
+//	        }
+//	    },
+	    tooltip: {},
+//	    legend: {
+//          data:[{
+//          	name: '电商',
+//          	icon: 'circle',
+//          },{
+//          	name: '实体店',
+//          	icon: 'circle',
+//          },],
+//          left: '10',
+//          top: '45',
+//          itemHeight: '9'
+//      },
+	    radar: {
+	        indicator: [
+	           { name: '生活需要', max: 100},
+	           { name: '多买一辆', max: 100},
+	           { name: '洗车吸引', max: 100},
+	           { name: '工作需要', max: 100},
+	           { name: '情感需要', max: 100},
+	           { name: '收入增加', max: 100}
+	        ],
+	        center: ['50%','50%'],
+	        name: {
+                textStyle: {
+                    color: '#000'
+                }
+           },
+            splitLine: {
+                lineStyle: {
+                    color: ['#bcd9ed','#d0e0ea']
+                },
+//              show: false,
+            },
+            splitArea: {
+                areaStyle: {
+                    color: '#ecf0f3'
+                }
+            },
+	    },
+	    series: [{
+//	        name: '预算 vs 开销（Budget vs spending）',
+	        type: 'radar',
+	        symbol: 'none',
+	        data : [
+	            {
+	                value : [90, 55, 60, 60, 88, 90],
+	                name : '电商',
+	                areaStyle: {
+                        normal: {
+                            opacity: 0.6,
+                            color: '#d2ddee'
+                        }
+                   },
+                   lineStyle: {
+                   		normal: {
+                   			color: '#a5bae3'
+                   		}
+                   }
+	            },
+	            {
+	                value : [40, 45, 45, 60, 40, 90],
+	                name : '实体店',
+	                areaStyle: {
+                        normal: {
+                            opacity: 0.6,
+                            color: '#b0d0f1'
+                        }
+                   },
+                   lineStyle: {
+                   		normal: {
+                   			color: '#6fd2f1'
+                   		}
+                   }
+	            },
+	            {
+	                value : [40, 25, 80, 50, 30, 70],
+	                name : '国外',
+	                areaStyle: {
+                        normal: {
+                            opacity: 0.6,
+                            color: '#c1d3c6'
+                        }
+                   },
+                   lineStyle: {
+                   		normal: {
+                   			color: '#88bdb1'
+                   		}
+                   }
+	            },
+	        ]
+	    }]
+	};
+	radar1.setOption(option);
+}
+
+function barBrandPrefer(){
+	var b1 = echarts.init($(".chart--bar-brand-prefer")[0]);
+	var option1 = {
+		color: ['#66b4e7'],
+	    grid: {
+	        left: '20',
+	        right: '20',
+	        bottom: '0',
+	        top: '0',
+	        containLabel: true
+	    },
+	    xAxis: {
+	    	show: false,
+	        type: 'value',
+	        max: 8,
+	    },
+	    yAxis: {
+			inverse: true,
+	        type: 'category',
+	        data: ['IPone 6S PLUS','OPPO R9','OPPO R3','三星 GALAXY J7','三星 GALAXY J5','三星 GALAXY J2','OPPO R9 PLUS','三星 GALAXY GRAND','三星 GALAXY NEO','OPPP R7S'],
+	        axisLine: {
+	            show: false,
+	        },
+	        axisTick: {
+	            show: false,
+	        },
+	        splitLine: {
+	            show: false
+	        },
+	        axisLabel: {
+	            textStyle: {
+	                fontSize: '14',
+	            },
+	            margin: 18
+	        }
+	    },
+	    series: [
+	        {
+	            name: '',
+	            type: 'bar',
+	            data: [1.7, 1.0, 0.9, 0.8, 0.7, 0.6,0.6,0.5,0.5,0.4],
+	            barCategoryGap: '50%',
+	            label: {
+	            	normal: {
+	            		show: true,
+	            		position: 'right',
+	            		offset: [5,-1],
+	            		textStyle: {
+	            			fontSize: 13,
+	            			color: '#000'
+	            		},
+	            		formatter: '{c}%'
+	            	},
+	            	
+	            	
+	            }
+	        },
+	    ]
+	};
+
+	b1.setOption(option1);
+}
+
 function lineVisitTime(){
 	var lineVisitTime = echarts.init($(".chart--line--visit-time")[0]);
 	var option = {
@@ -320,24 +497,46 @@ function lineVisitTime(){
 	            interval: 0,
 	        },
         },
-        yAxis: {
-        	axisLine: {
-	            show: false,
+        yAxis: [
+        	{
+	        	axisLine: {
+		            show: false,
+		        },
+		        splitLine: {
+		        	lineStyle: {
+		        		color: '#f7f9fa',
+		        	}
+		        },
+		        axisTick: {
+		        	show: false,
+		        },
+		        max: 350,
+		        interval: 50,
 	        },
-	        splitLine: {
-	        	lineStyle: {
-	        		color: '#f7f9fa',
-	        	}
+        	{	
+        		show: false,
+		        max: 100,
+		        min: 0,
+	            name: '增长率',
 	        },
-	        axisTick: {
-	        	show: false,
-	        },
-	        max: 100,
-        },
+        ],
         series: [
+         {
+            name:'用户规模浏览时间(分钟)',
+            type:'bar',
+            barWidth: '40%',
+            itemStyle: {
+            	normal: {
+            		color: '#83b5ea'
+            	}
+            	
+            },
+            data:[200,300,180,60,100]
+        },
         {
             name: '增长率',
             type: 'line',
+            yAxisIndex: 1,
             lineStyle: {
             	normal: {
             		color: '#1ce7ba'
@@ -355,8 +554,85 @@ function lineVisitTime(){
             hoverAnimation: false,
             data: [24.7,33.1,18.8,10.4,12.9]
         },
-        {
-            name:'用户规模浏览时间(分钟)',
+       
+        ]
+    };
+    lineVisitTime.setOption(option)
+}	
+
+function lineO2O(){
+	var lineO2O = echarts.init($(".chart--line--o2o")[0]);
+	var option = {
+		grid: {
+			left: '10',
+			right: '10',
+			top: '30',
+			bottom: '10',
+			containLabel: true,
+		},
+        tooltip: {},
+        legend: {
+            data:[
+            {
+            	name: '移动网络游戏用户规模(百万人)',
+            	icon: 'circle',
+            },
+            {
+            	name: '增长率',
+            	icon: 'circle',
+            },
+            ],
+            right: '0',
+            top: '0',
+            itemHeight: '9'
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: true,
+            data:['2015年4月','2015年5月','2015年6月','2015年7月','2015年8月','2015年9月','2015年10月','2015年11月','2015年12月',
+            '2016年1月','2016年2月','2016年3月','2016年4月','2016年5月','2016年6月',],
+            axisLine: {
+	            lineStyle: {
+	        		color: '#d7d7d7',
+	        		width: 2,
+	        	}
+	        },
+	        axisTick: {
+	        	show: false,
+	        },
+	        axisLabel: {
+	            textStyle: {
+	            	color: '#000'
+	            },
+	            interval: 2,
+	        },
+        },
+        yAxis: [
+        	{
+	        	axisLine: {
+		            show: false,
+		        },
+		        splitLine: {
+		        	lineStyle: {
+		        		color: '#f7f9fa',
+		        	}
+		        },
+		        axisTick: {
+		        	show: false,
+		        },
+		        max: 350,
+		        interval: 50,
+	        },
+        	{	
+        		show: false,
+		        max: 100,
+		        min: 0,
+	            name: '增长率',
+	        },
+        ],
+        series: [
+         {
+            name:'移动网络游戏用户规模(百万人)',
             type:'bar',
             barWidth: '40%',
             itemStyle: {
@@ -365,12 +641,42 @@ function lineVisitTime(){
             	}
             	
             },
-            data:[24.7,33.1,18.8,10.4,12.9]
+            data:[
+            360,320,280,240,200,
+            160,140,120,100,80,
+            70,60,50,40,30,]
         },
+        {
+            name: '增长率',
+            type: 'line',
+            yAxisIndex: 1,
+            lineStyle: {
+            	normal: {
+            		color: '#1ce7ba'
+            	}
+            	
+            },
+            itemStyle: {
+            	normal: {
+            		color: '#1ce7ba'
+            	}
+            	
+            },
+            'symbol': 'circle',
+            symbolSize: 8,
+            hoverAnimation: false,
+            data: [
+            24.7,33.1,18.8,10.4,12.9,
+            24.7,33.1,18.8,10.4,12.9,
+            24.7,33.1,18.8,10.4,12.9,
+            ]
+        },
+       
         ]
     };
-    lineVisitTime.setOption(option)
+    lineO2O.setOption(option)
 }	
+
 function lineVisitAmount(){
 	var lineVisitAmount = echarts.init($(".chart--line--visit-amount")[0]);
 	var option = {
@@ -428,7 +734,7 @@ function lineVisitAmount(){
 	        axisTick: {
 	        	show: false,
 	        },
-	        max: 20000,
+	        max: 15000,
         },
         series: [
         {
@@ -449,7 +755,7 @@ function lineVisitAmount(){
             'symbol': 'emptyCircle',
             symbolSize: 10,
             hoverAnimation: false,
-            data: [5000,3000,2000,4000,1000,2600,10000,15000,2000,4000,1000,2600]
+            data: [5000,4000,4500,8000,4100,5000,3800,4000,9000,10000,4700,9000]
         },
         {
             name:'页面浏览量',
@@ -469,9 +775,42 @@ function lineVisitAmount(){
             'symbol': 'emptyCircle',
             symbolSize: 10,
             hoverAnimation: false,
-            data: [4000,2000,1000,3000,1000,1600,9000,14000,1000,3000,1000,1600]
+           data: [4000,3000,4000,4100,3100,4000,2800,3000,5000,8000,4200,4900]
         },
         ]
     };
     lineVisitAmount.setOption(option)
 }	
+function personalityCloud(){
+	var word_list1 = [
+	    {text: "理财", weight: 9},
+	    {text: "房产", weight: 8},
+	    {text: "健身", weight: 8},
+	    {text: "旅行", weight: 6},
+	    {text: "奢侈品", weight: 5},
+	    {text: "教育", weight: 3},
+	    {text: "亲子", weight: 3},
+	];
+	var word_list2 = [
+	    {text: "时尚", weight: 9},
+	    {text: "健身", weight: 8},
+	    {text: "游戏", weight: 8},
+	    {text: "婚恋", weight: 6},
+	    {text: "购物", weight: 5},
+	    {text: "创业", weight: 3},
+	    {text: "母婴", weight: 3},
+	    {text: "网购", weight: 2},
+	];
+	var word_list3 = [
+	    {text: "多元", weight: 9},
+	    {text: "个性", weight: 8},
+	    {text: "健身", weight: 8},
+	    {text: "网购", weight: 6},
+	    {text: "创新", weight: 5},
+	    {text: "追星", weight: 3},
+	    {text: "网游", weight: 3},
+	];
+    $(".personality-70g").jQCloud(word_list1);
+    $(".personality-80g").jQCloud(word_list2);
+    $(".personality-90g").jQCloud(word_list3);
+}

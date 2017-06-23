@@ -2,8 +2,13 @@ var app = new Vue({
 	el: '#app',
 	data: {
 		qualityData: [],
+		numAnalysisData: [],
 		focusData: [],
-		maturityData: [],
+		dealStoreData: [],
+		dealPeopleData: [],
+		activeStoreData: [],
+		dealAmountData: [],
+		dealGoodsData: [],
 		channelHealthData1: [],
 		channelHealthData2: [],
 		dateRange: '',
@@ -21,6 +26,35 @@ var app = new Vue({
 		},
 		loadQualityList: function(){
 			this.qualityData = [{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+				'5': 'xxx',
+				'6': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+				'5': 'xxx',
+				'6': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+				'5': 'xxx',
+				'6': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+				'5': 'xxx',
+				'6': 'xxx',
+			},]
+			this.numAnalysisData = [{
 				'1': 'xxx',
 				'2': 'xxx',
 				'3': 'xxx',
@@ -82,7 +116,91 @@ var app = new Vue({
 			},]
 		},
 		loadMaturityList: function(){
-			this.maturityData = [{
+			this.dealStoreData = [{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+			},]
+			this.dealPeopleData = [{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+			},]
+			this.activeStoreData = [{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+			},]
+			this.dealAmountData = [{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+			},{
+				'1': 'xxx',
+				'2': 'xxx',
+				'3': 'xxx',
+				'4': 'xxx',
+			},]
+			this.dealGoodsData = [{
 				'1': 'xxx',
 				'2': 'xxx',
 				'3': 'xxx',
@@ -146,6 +264,7 @@ var app = new Vue({
 })
 $(function(){
 	lineBasic();
+	barStayTime();
 })
 function lineBasic(){
 	var lineBasic = echarts.init($(".chart--line--basic")[0]);
@@ -159,7 +278,7 @@ function lineBasic(){
 		title: {
 			text: 'LINE CHART 2',
 			textStyle: {
-				fontSize: '14'
+				fontSize: '13'
 			}
 		},
         tooltip: {
@@ -182,7 +301,6 @@ function lineBasic(){
         xAxis: {
             type: 'time',
             boundaryGap: true,
-//          data:['1月','2月','3月','4月','5月',],
             axisLine: {
 	            lineStyle: {
 	        		color: '#d7d7d7',
@@ -260,4 +378,87 @@ function lineBasic(){
         }]
     };
     lineBasic.setOption(option)
+}
+function barStayTime(){
+	var barStayTime = echarts.init($(".chart--bar--staytime")[0]);
+	var option = {
+//	    color: ['#3398DB'],
+	    title: {
+	    	text: '用户数',
+	    	textStyle: {
+				fontSize: '14',
+				fontWeight: 'normal'
+			},
+			left: '8',
+	    },
+	    tooltip : {
+	        trigger: 'axis',
+	        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+	            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+	        }
+	    },
+	    grid: {
+	        left: '3%',
+	        right: '4%',
+	        bottom: '3%',
+	        containLabel: true
+	    },
+	    xAxis : [
+	        {
+	            type : 'category',
+	            data : ['1分钟','5分钟', '10分钟', '15分钟','20分钟','25分钟', '30分钟','35分钟', '40分钟', ],
+	            axisLine: {
+		            lineStyle: {
+		        		color: '#d7d7d7',
+		        		width: 2,
+		        	}
+		        },
+		        axisTick: {
+		        	show: true,
+		        	inside: false,
+		        	
+		        },
+		        axisLabel: {
+		            textStyle: {
+		            	color: '#000'
+		            },
+					interval: 0,
+		        },
+		        splitLine: {
+		        	show: false,
+		        }
+	        }
+	    ],
+	    yAxis : [
+	        {
+	            type : 'value',
+	            max: 2500,
+	            axisLine: {
+		            show: false,
+		        },
+		        splitLine: {
+		        	lineStyle: {
+		        		color: '#f7f9fa',
+		        	}
+		        },
+		        axisTick: {
+		        	show: false,
+		        },
+	        }
+	    ],
+	    series : [
+	        {
+	            name:'用户数量',
+	            type:'bar',
+	            barWidth: '50%',
+	            itemStyle: {
+	            	normal: {
+	            		color: '#6cbceb'
+	            	}
+	            },
+	            data:[1000, 200, 300, 500, 50,1000, 200, 300, 500,]
+	        }
+	    ]
+	};
+    barStayTime.setOption(option)
 }

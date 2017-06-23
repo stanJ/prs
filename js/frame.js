@@ -14,6 +14,12 @@ var frameObj = {
 			$(this).addClass('is-active')
 			_this.loadTabs();
 		})
+		$(".tab-item").click(function(){
+			var items = $(this).parents('.tabs:first').find('.tab-item');
+			items.removeClass('is-active');
+			$(this).addClass('is-active')
+			_this.loadTabs();
+		})
 	},
 	loadTabs: function(){
 		var tab = $(".tab-title.is-active")
@@ -22,7 +28,14 @@ var frameObj = {
 			var name = tab.data('name');
 			$(".tab-pane[data-name='"+name+"']").show();
 		}
-	}
+		var tabAry = $(".tabs .tabs__header .tab-item.is-active");
+		$(".tab-content").hide();
+		tabAry.each(function(i){
+			var index = $(this).index();
+			var tabContent = $(this).parents(".tabs:first").children(".tabs__content").children(".tab-content").eq(index);
+			tabContent.show();
+		})
+	},
 }
 function loadFrame(){
 	var h1 = `<header>

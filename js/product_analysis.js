@@ -7,6 +7,7 @@ var app = new Vue({
 		commentActiveData: [],
 		emotionAnalysisData: [],
 		emotionTrendData: [],
+		productSalesData: [],
 		score:null,
 	},
 	created: function () {
@@ -20,6 +21,7 @@ var app = new Vue({
 			this.loadCommentActiveList();
 			this.loadEmotionAnalysisList();
 			this.loadEmotionTrendList();
+			this.loadProductSalesList();
 		},
 		renderHeader: function(createElement, { column}) {
 	        return createElement(
@@ -336,12 +338,102 @@ var app = new Vue({
 			},
 			]
 		},
+		loadProductSalesList: function(){
+			this.productSalesData = [
+			{
+				'1': '季度1',
+				'2': '4356',
+				'3': '3000',
+				'4': '1356',
+				'5': '4500',
+				'6': '1%',
+				'7': '1%',
+			},
+			{
+				'1': '季度2',
+				'2': '4356',
+				'3': '3200',
+				'4': '1356',
+				'5': '4500',
+				'6': '1%',
+				'7': '3%',
+			},
+			{
+				'1': '季度3',
+				'2': '4356',
+				'3': '3010',
+				'4': '1356',
+				'5': '4500',
+				'6': '2%',
+				'7': '1%',
+			},
+			{
+				'1': '季度4',
+				'2': '4356',
+				'3': '4000',
+				'4': '1356',
+				'5': '4520',
+				'6': '1%',
+				'7': '1%',
+			},
+			]
+		},
 	}
 })
 $(function(){
 	lineGoodComment();
-	commentCloud();
+	userCommentCloud();
+	goodsCommentCloud();
+	basicLabel();
+	barLabelOverView();
+	hotKeyCloud();
+	linePriceTrend();
+	piePriceSpread();
+	lineGoodReputation();
+	radarHotSalesSpot();
 })
+function piePriceSpread(){
+	var pie1 = echarts.init($(".chart--pie--price-spread")[0]);
+    var option = {
+	    title : {
+	        text: '某站点用户访问来源',
+	        subtext: '纯属虚构',
+	        x:'center'
+	    },
+	    tooltip : {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	    },
+	    legend: {
+	        orient: 'vertical',
+	        left: 'left',
+	        data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+	    },
+	    series : [
+	        {
+	            name: '访问来源',
+	            type: 'pie',
+	            radius : '55%',
+	            center: ['50%', '60%'],
+	            data:[
+	                {value:335, name:'直接访问'},
+	                {value:310, name:'邮件营销'},
+	                {value:234, name:'联盟广告'},
+	                {value:135, name:'视频广告'},
+	                {value:1548, name:'搜索引擎'}
+	            ],
+	            itemStyle: {
+	                emphasis: {
+	                    shadowBlur: 10,
+	                    shadowOffsetX: 0,
+	                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+	                }
+	            }
+	        }
+	    ]
+	};
+	pie1.setOption(option)
+}
 function lineGoodComment(){
 	var lineGoodComment = echarts.init($(".chart--line--goodcomment")[0]);
 	var option = {
@@ -424,7 +516,171 @@ function lineGoodComment(){
     };
     lineGoodComment.setOption(option)
 }
-function commentCloud(){
+function linePriceTrend(){
+	var linePriceTrend = echarts.init($(".chart--line--product-price-trend")[0]);
+	var option = {
+		grid: {
+			left: '10',
+			right: '40',
+			top: '40',
+			bottom: '10',
+			containLabel: true,
+		},
+        tooltip: {},
+        legend: {
+            data:[{
+            	name: '价格',
+            	icon: 'circle',
+            }],
+            right: '40',
+            top: '0',
+            itemHeight: '9'
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: true,
+            data:['1月','2月','3月','4月','5月',],
+            axisLine: {
+	            lineStyle: {
+	        		color: '#d7d7d7',
+	        		width: 2,
+	        	}
+	        },
+	        axisTick: {
+	        	show: false,
+	        },
+	        axisLabel: {
+	            textStyle: {
+	            	color: '#000'
+	            },
+	        },
+	        
+        },
+        yAxis: {
+        	axisLine: {
+	            show: false,
+	        },
+	        splitLine: {
+	        	lineStyle: {
+	        		color: '#f7f9fa',
+	        	}
+	        },
+	        axisTick: {
+	        	show: false,
+	        },
+	        max: 3500,
+	        interval: 500,
+        },
+        series: [{
+            name: '价格',
+            type: 'line',
+            lineStyle: {
+            	normal: {
+            		color: '#51a5de'
+            	}
+            	
+            },
+            itemStyle: {
+            	normal: {
+            		color: '#51a5de'
+            	}
+            	
+            },
+            'symbol': 'emptyCircle',
+            symbolSize: 8,
+            hoverAnimation: false,
+            data: [
+            	['1月', 500],
+            	['2月', 1500],
+            	['3月', 2000],
+            	['4月', 1000],
+            	['5月', 2200],
+            ]
+        }]
+    };
+    linePriceTrend.setOption(option)
+}
+
+function lineGoodReputation(){
+	var lineGoodReputation = echarts.init($(".chart--line--good-reputation")[0]);
+	var option = {
+		grid: {
+			left: '10',
+			right: '40',
+			top: '40',
+			bottom: '10',
+			containLabel: true,
+		},
+        tooltip: {},
+        legend: {
+            data:[{
+            	name: '好评指数',
+            	icon: 'circle',
+            }],
+            right: '40',
+            top: '0',
+            itemHeight: '9'
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: true,
+            data:['1月','2月','3月','4月','5月','6月'],
+            axisLine: {
+	            lineStyle: {
+	        		color: '#d7d7d7',
+	        		width: 2,
+	        	}
+	        },
+	        axisTick: {
+	        	show: false,
+	        },
+	        axisLabel: {
+	            textStyle: {
+	            	color: '#000'
+	            },
+	        },
+	        
+        },
+        yAxis: {
+        	axisLine: {
+	            show: false,
+	        },
+	        splitLine: {
+	        	lineStyle: {
+	        		color: '#f7f9fa',
+	        	}
+	        },
+	        axisTick: {
+	        	show: false,
+	        },
+	        max: 70,
+	        interval: 10,
+        },
+        series: [{
+            name: '好评指数',
+            type: 'line',
+            lineStyle: {
+            	normal: {
+            		color: '#51a5de'
+            	}
+            	
+            },
+            itemStyle: {
+            	normal: {
+            		color: '#51a5de'
+            	}
+            	
+            },
+            'symbol': 'emptyCircle',
+            symbolSize: 8,
+            hoverAnimation: false,
+            data: [10,25,30,20,32,11]
+        }]
+    };
+    lineGoodReputation.setOption(option)
+}
+
+function userCommentCloud(){
 	var word_list = [
 	    {text: "售后服务", weight: 9, link: "https://github.com/DukeLeNoir/jQCloud"},
 	    {text: "以旧换新", weight: 9, html: {title: "My Title", "class": "custom-class"}, link: {href: "http://jquery.com/", target: "_blank"}},
@@ -441,8 +697,371 @@ function commentCloud(){
 	    {text: "礼物", weight: 3},
 	    {text: "防水", weight: 3},
 	];
-    $(".cloud--comment1").jQCloud(word_list,{
+    $(".cloud--user-comment").jQCloud(word_list);
+}
+function goodsCommentCloud(){
+	var word_list = [
+	    {text: "售后服务", weight: 9, link: "https://github.com/DukeLeNoir/jQCloud"},
+	    {text: "以旧换新", weight: 9, html: {title: "My Title", "class": "custom-class"}, link: {href: "http://jquery.com/", target: "_blank"}},
+	    {text: "送货速度", weight: 8},
+	    {text: "包装精美", weight: 9},
+	    {text: "潮流", weight: 8},
+	    {text: "时尚", weight: 6.2},
+	    {text: "耐用", weight: 5},
+	    {text: "喜爱", weight: 5},
+	    {text: "个性", weight: 5},
+	    {text: "送人", weight: 4},
+	    {text: "顺手", weight: 4},
+	    {text: "实用", weight: 4},
+	    {text: "礼物", weight: 3},
+	    {text: "防水", weight: 3},
+	];
+    $(".cloud--goods-comment").jQCloud(word_list);
+}
+function hotKeyCloud(){
+	var word_list = [
+	    {text: "售后服务", weight: 9, link: "https://github.com/DukeLeNoir/jQCloud"},
+	    {text: "以旧换新", weight: 9, html: {title: "My Title", "class": "custom-class"}, link: {href: "http://jquery.com/", target: "_blank"}},
+	    {text: "送货速度", weight: 8},
+	    {text: "包装精美", weight: 9},
+	    {text: "潮流", weight: 8},
+	    {text: "时尚", weight: 6.2},
+	    {text: "耐用", weight: 5},
+	    {text: "喜爱", weight: 5},
+	    {text: "个性", weight: 5},
+	    {text: "送人", weight: 4},
+	    {text: "顺手", weight: 4},
+	    {text: "实用", weight: 4},
+	    {text: "礼物", weight: 3},
+	    {text: "防水", weight: 3},
+	];
+    $(".cloud--hot-key").jQCloud(word_list,{
 //  	width: 300,
 //  	height: 200,
     });
+}
+function basicLabel(){
+	var b1 = echarts.init($(".chart--bar--basic-label1")[0]);
+	var b2 = echarts.init($(".chart--bar--basic-label2")[0]);
+	var option1 = {
+		color: ['#66b4e7'],
+	    grid: {
+	        left: '20',
+	        right: '20',
+	        bottom: '0',
+	        top: '0',
+	        containLabel: true
+	    },
+	    xAxis: {
+	    	show: false,
+	        type: 'value',
+	    },
+	    yAxis: {
+			inverse: true,
+	        type: 'category',
+	        data: ['系统流畅','外观漂亮','反应快','屏幕大','功能齐全','照相不错','分辨率高','指纹识别','通话质量好','性价比高'],
+	        axisLine: {
+	            show: false,
+	        },
+	        axisTick: {
+	            show: false,
+	        },
+	        splitLine: {
+	            show: false
+	        },
+	        axisLabel: {
+	            textStyle: {
+	                fontSize: '14',
+	            },
+	            margin: 18
+	        }
+	    },
+	    series: [
+	        {
+	            name: '',
+	            type: 'bar',
+	            data: [508, 477, 433, 429, 420, 364,323,321,313,309],
+	            barCategoryGap: '50%',
+	            label: {
+	            	normal: {
+	            		show: true,
+	            		position: 'right',
+	            		offset: [5,0],
+	            		textStyle: {
+	            			fontSize: 13
+	            		}
+	            	},
+	            	
+	            	
+	            }
+	        },
+	    ]
+	};
+	var option2 = {
+		color: ['#3fc2d7'],
+	    grid: {
+	        left: '20',
+	        right: '20',
+	        bottom: '0',
+	        top: '0',
+	        containLabel: true
+	    },
+	    xAxis: {
+	    	show: false,
+	        type: 'value',
+	        max: 100
+	    },
+	    yAxis: {
+			inverse: true,
+	        type: 'category',
+	        data: ['高品质量和安全','是否正品','返修退货不方便','等待时间太长','操作流程繁琐','语言',],
+	        axisLine: {
+	            show: false,
+	        },
+	        axisTick: {
+	            show: false,
+	        },
+	        splitLine: {
+	            show: false
+	        },
+	        axisLabel: {
+	            textStyle: {
+	                fontSize: '14',
+	            },
+	            margin: 18
+	        }
+	    },
+	    series: [
+	        {
+	            name: '',
+	            type: 'bar',
+	            data: [60, 51.0, 35.3, 34, 28.8, 13.7,],
+	            barCategoryGap: '50%',
+	            label: {
+	            	normal: {
+	            		show: true,
+	            		position: 'right',
+	            		offset: [5,0],
+	            		textStyle: {
+	            			fontSize: 13
+	            		},
+	            		formatter: '{c}%'
+	            	},
+	            	
+	            	
+	            }
+	        },
+	    ]
+	};
+	b1.setOption(option1);
+	b2.setOption(option2);
+}
+
+function barLabelOverView(){
+	var b1 = echarts.init($(".chart--bar-h1")[0]);
+	var b2 = echarts.init($(".chart--bar-h2")[0]);
+	var option1 = {
+		color: ['#66b4e7'],
+	    grid: {
+	        left: '20',
+	        right: '20',
+	        bottom: '0',
+	        top: '0',
+	        containLabel: true
+	    },
+	    xAxis: {
+	    	show: false,
+	        type: 'value',
+	    },
+	    yAxis: {
+			inverse: true,
+	        type: 'category',
+	        data: ['系统流畅','外观漂亮','反应快','屏幕大','功能齐全','照相不错','分辨率高','指纹识别','通话质量好','性价比高'],
+	        axisLine: {
+	            show: false,
+	        },
+	        axisTick: {
+	            show: false,
+	        },
+	        splitLine: {
+	            show: false
+	        },
+	        axisLabel: {
+	            textStyle: {
+	                fontSize: '14',
+	            },
+	            margin: 18
+	        }
+	    },
+	    series: [
+	        {
+	            name: '',
+	            type: 'bar',
+	            data: [508, 477, 433, 429, 420, 364,323,321,313,309],
+	            barCategoryGap: '50%',
+	            label: {
+	            	normal: {
+	            		show: true,
+	            		position: 'right',
+	            		offset: [5,0],
+	            		textStyle: {
+	            			fontSize: 13
+	            		}
+	            	},
+	            	
+	            	
+	            }
+	        },
+	    ]
+	};
+	var option2 = {
+		color: ['#3fc2d7'],
+	    grid: {
+	        left: '20',
+	        right: '20',
+	        bottom: '0',
+	        top: '0',
+	        containLabel: true
+	    },
+	    xAxis: {
+	    	show: false,
+	        type: 'value',
+	        max: 100
+	    },
+	    yAxis: {
+			inverse: true,
+	        type: 'category',
+	        data: ['高品质量和安全','是否正品','返修退货不方便','等待时间太长','操作流程繁琐','语言',],
+	        axisLine: {
+	            show: false,
+	        },
+	        axisTick: {
+	            show: false,
+	        },
+	        splitLine: {
+	            show: false
+	        },
+	        axisLabel: {
+	            textStyle: {
+	                fontSize: '14',
+	            },
+	            margin: 18
+	        }
+	    },
+	    series: [
+	        {
+	            name: '',
+	            type: 'bar',
+	            data: [60, 51.0, 35.3, 34, 28.8, 13.7,],
+	            barCategoryGap: '50%',
+	            label: {
+	            	normal: {
+	            		show: true,
+	            		position: 'right',
+	            		offset: [5,0],
+	            		textStyle: {
+	            			fontSize: 13
+	            		},
+	            		formatter: '{c}%'
+	            	},
+	            	
+	            	
+	            }
+	        },
+	    ]
+	};
+	b1.setOption(option1);
+	b2.setOption(option2);
+}
+
+function radarHotSalesSpot(){
+	var radar1 = echarts.init($(".chart--radar--hot-sales-spot")[0]);
+	var option = {
+		color: ['#a0b6e3','#63d0f4'],
+	    title: {
+	        text: '销售渠道',
+	        left: 10,
+	        top: 10,
+	        textStyle: {
+	        	fontSize: 17,
+	        }
+	    },
+	    tooltip: {},
+	    legend: {
+            data:[{
+            	name: '电商',
+            	icon: 'circle',
+            },{
+            	name: '实体店',
+            	icon: 'circle',
+            },],
+            left: '10',
+            top: '45',
+            itemHeight: '9'
+        },
+	    radar: {
+	        indicator: [
+	           { name: '春节', max: 100},
+	           { name: '节假日', max: 100},
+	           { name: '情人节', max: 100},
+	           { name: '五一', max: 100},
+	           { name: '国庆', max: 100},
+	           { name: '双十一', max: 100}
+	        ],
+	        center: ['65%','50%'],
+	        name: {
+                textStyle: {
+                    color: '#000'
+                }
+           },
+            splitLine: {
+                lineStyle: {
+                    color: ['#bcd9ed','#d0e0ea']
+                }
+            },
+            splitArea: {
+                areaStyle: {
+                    color: '#ecf0f3'
+                }
+            },
+	    },
+	    series: [{
+//	        name: '预算 vs 开销（Budget vs spending）',
+	        type: 'radar',
+	        symbol: 'none',
+	        data : [
+	            {
+	                value : [90, 55, 60, 60, 88, 90],
+	                name : '电商',
+	                areaStyle: {
+                        normal: {
+                            opacity: 0.6,
+                            color: '#d2ddee'
+                        }
+                   },
+                   lineStyle: {
+                   		normal: {
+                   			color: '#a5bae3'
+                   		}
+                   }
+	            },
+	            {
+	                value : [40, 45, 45, 60, 40, 90],
+	                name : '实体店',
+	                areaStyle: {
+                        normal: {
+                            opacity: 0.6,
+                            color: '#b0d0f1'
+                        }
+                   },
+                   lineStyle: {
+                   		normal: {
+                   			color: '#6fd2f1'
+                   		}
+                   }
+	            }
+	        ]
+	    }]
+	};
+	radar1.setOption(option);
 }
