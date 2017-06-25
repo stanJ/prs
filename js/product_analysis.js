@@ -8,6 +8,7 @@ var app = new Vue({
 		emotionAnalysisData: [],
 		emotionTrendData: [],
 		productSalesData: [],
+		promotionWaysData: [],
 		score:null,
 	},
 	created: function () {
@@ -22,6 +23,7 @@ var app = new Vue({
 			this.loadEmotionAnalysisList();
 			this.loadEmotionTrendList();
 			this.loadProductSalesList();
+			this.loadPromotionWaysList();
 		},
 		renderHeader: function(createElement, { column}) {
 	        return createElement(
@@ -206,6 +208,89 @@ var app = new Vue({
 			},
 			]
 		},
+		
+		loadPromotionWaysList: function(){
+			this.promotionWaysData = [
+			{
+				'1': '团购',
+				'2': '4356',
+				'3': '4500',
+				'4': '1%',
+				'5': '京东',
+			},
+			{
+				'1': '买赠',
+				'2': '4356',
+				'3': '4300',
+				'4': '1%',
+				'5': '天猫',
+			},
+			{
+				'1': '捆绑',
+				'2': '4256',
+				'3': '4500',
+				'4': '1%',
+				'5': '中国电信',
+			},
+			{
+				'1': '搭售',
+				'2': '4356',
+				'3': '4200',
+				'4': '1%',
+				'5': '淘宝',
+			},
+			{
+				'1': '低价',
+				'2': '3356',
+				'3': '4500',
+				'4': '1%',
+				'5': '唯品会',
+			},
+			{
+				'1': '免单',
+				'2': '4356',
+				'3': '3500',
+				'4': '1%',
+				'5': '小红书',
+			},
+			{
+				'1': '秒杀',
+				'2': '2356',
+				'3': '4500',
+				'4': '1%',
+				'5': '亚马逊',
+			},
+			{
+				'1': '积分',
+				'2': '4356',
+				'3': '4500',
+				'4': '1%',
+				'5': '美团',
+			},
+			{
+				'1': '抽奖',
+				'2': '1356',
+				'3': '4500',
+				'4': '1%',
+				'5': '大众点评',
+			},
+			{
+				'1': '打折',
+				'2': '4356',
+				'3': '4500',
+				'4': '1%',
+				'5': '苏宁易购',
+			},
+			{
+				'1': '返券',
+				'2': '4356',
+				'3': '4500',
+				'4': '1%',
+				'5': '国美',
+			},
+			]
+		},
+		
 		loadCommentActiveList: function(){
 			this.commentActiveData = [{
 				'1': '京东',
@@ -394,41 +479,34 @@ $(function(){
 })
 function piePriceSpread(){
 	var pie1 = echarts.init($(".chart--pie--price-spread")[0]);
-    var option = {
-	    title : {
-	        text: '某站点用户访问来源',
-	        subtext: '纯属虚构',
-	        x:'center'
-	    },
-	    tooltip : {
+	var option = {
+		color: ['#0c4d90','#53a8e2','#2c82be','#76ddfb',],
+	    tooltip: {
 	        trigger: 'item',
-	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	        formatter: "{a} <br/>{b}: {c} ({d}%)"
 	    },
-	    legend: {
-	        orient: 'vertical',
-	        left: 'left',
-	        data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
-	    },
-	    series : [
+	    series: [
 	        {
-	            name: '访问来源',
-	            type: 'pie',
-	            radius : '55%',
-	            center: ['50%', '60%'],
-	            data:[
-	                {value:335, name:'直接访问'},
-	                {value:310, name:'邮件营销'},
-	                {value:234, name:'联盟广告'},
-	                {value:135, name:'视频广告'},
-	                {value:1548, name:'搜索引擎'}
-	            ],
-	            itemStyle: {
-	                emphasis: {
-	                    shadowBlur: 10,
-	                    shadowOffsetX: 0,
-	                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+	            name:'用户关注价格区间',
+	            type:'pie',
+	            radius: ['40%', '86%'],
+	            avoidLabelOverlap: false,
+	            label: {
+	                normal: {
+	                    show: false,
+	                },
+	            },
+	            labelLine: {
+	                normal: {
+	                    show: false
 	                }
-	            }
+	            },
+	            data:[
+	                {value:45, name:'淘宝'},
+	                {value:30, name:'天猫'},
+	                {value:20, name:'京东'},
+	                {value:5, name:'唯品会'},
+	            ]
 	        }
 	    ]
 	};

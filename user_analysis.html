@@ -207,20 +207,22 @@
 				margin-right: 40px;
 			}
 			.card__reason{
-				margin-top: 26px;
+				margin-top: 20px;
 			}
 			.reason__main{
 			    font-size: 14px;
 			    padding: 0 4px 0 20px;
+			    margin: 12px 0;
+			    font-family: pingfang_medium;
 			}
 			.card--purple .reason__main{
-				color: #6c8fde;
+				color: #27609c;
 			}
 			.card--blue .reason__main{
-				color: #53a8e2;
+				color: #71b6e5;
 			}
 			.card--green .reason__main{
-				color: #62c7b3;
+				color: #65c8b4;
 			}
 			.reason__ul{
 				font-size: 12px;
@@ -237,8 +239,11 @@
 				color: #0c4d90;
 			}
 			.tabs--card{
-				height: 120px;
-				padding: 0 10px;
+				height: 125px;
+	    		padding: 0 10px; 
+				transform: scale(0.8);
+			    width: 123%;
+			    margin-left: -12.3%;
 			}
 			.tab--card{
 			    height: 100%;
@@ -254,9 +259,9 @@
 				border-left: 1px solid #d8d8d8;
 			}
 			.tc__main{
-				text-align: center;
-			    margin: 12px 0;
-			    font-size: 15px;
+			    text-align: center;
+			    margin: 10px 0;
+			    font-size: 16px;
 			}
 			.tc__percent{
 				margin: 0 25px;
@@ -266,8 +271,8 @@
 				background: #fff;
 			}
 			.visitor-wrapper{
-				border: 1px solid #ebebeb;
-				margin: 10px;
+				margin: 0 10px;
+    			box-shadow: 0 0 5px 1px #dbdbdb;
 			}
 			.visitor__bottom{
 				margin-top: 10px;
@@ -281,17 +286,18 @@
 				margin: 10px 10px 0 0;
 			}
 			.vtr__box{
-				border: 1px solid #ebebeb;
+			    border: 1px solid #ebebeb;
 			    padding: 13px 12px;
 			    font-size: 14px;
-			    margin-right: 10px;
+			    margin-right: -8px;
 			    float: left;
+			    transform: scale(0.9);
 			}
 			.bt__sm{
 				font-size: 12px;
 			}
 			.vtrb__bottom{
-			    font-size: 13px;
+			    font-size: 12px;
 			}
 			.bt__text{
 				font-weight: bold;
@@ -315,6 +321,27 @@
 			.table--page-analysis .el-table__body-wrapper tr>td:first-of-type{
 				color: #346aa1;
 			}
+			.table--expense-place .el-table__body-wrapper tr>td:last-of-type{
+				color: #2c649e;
+			}
+			.table--buy-times .el-table__body-wrapper tr>td:last-of-type{
+				color: #2a639e;
+			}
+			.table--prices .el-table__body-wrapper tr>td:nth-of-type(4){
+				color: #2c649e;
+			}
+			.table--ages .el-table__body-wrapper tr>td:last-of-type{
+				color: #3c6fa5;
+			}
+			.table--education .el-table__body-wrapper tr>td:last-of-type{
+				color: #3c6fa5;
+			}
+			.table--income .el-table__body-wrapper tr>td:last-of-type{
+				color: #3c6fa5;
+			}
+			.table--sex .el-table__body-wrapper tr>td:last-of-type{
+				color: #3c6fa5;
+			}
 			
 		</style>
 	</head>
@@ -324,9 +351,9 @@
 			<div class="tabs__nav">
 				<div class="nav--tab">
 					<div class="tab-title" data-name="tab1">用户标签维护</div>
-					<div class="tab-title" data-name="tab2">消费人群属性分析</div>
-					<div class="tab-title" data-name="tab3">用户购买转换分析</div>
-					<div class="tab-title is-active" data-name="tab4">用户购买特征分析</div>
+					<div class="tab-title is-active" data-name="tab2">消费人群属性分析</div>
+					<div class="tab-title " data-name="tab3">用户购买转换分析</div>
+					<div class="tab-title " data-name="tab4">用户购买特征分析</div>
 					<div class="tab-title " data-name="tab5">用户网络行为分析</div>
 				</div>
 				<div class="nav__title clearfix">
@@ -520,8 +547,44 @@
 							<div class="block clearfix" style="height: 346px;">
 								<div class="section clearfix">
 									<span class="title-prefix-md">价格区间分析</span>
+									<div class="brand-title fr">用户关注价格区间</div>
 								</div>
-								<div class="chart chart--pie1"></div>
+								<div class="chart chart--pie--price-analysis fl" style="height: 270px;width: 270px;margin-left: 34px;"></div>
+								<div class="legends-wrapper fr" style="height: 270px;width: 198px;">
+									<div class="fl clearfix legends">
+										<div class="legend-item clearfix">
+											<div class="legend__icon" style="background: #0c4d90;"></div>
+											<div class="legend__name">1000元以下</div>
+											<div class="legend__value">18.00%</div>
+										</div>
+										<div class="legend-item clearfix">
+											<div class="legend__icon" style="background: #53a8e2;"></div>
+											<div class="legend__name">1000-1499元</div>
+											<div class="legend__value">18.00%</div>
+										</div>
+										<div class="legend-item clearfix">
+											<div class="legend__icon" style="background: #2c82be;"></div>
+											<div class="legend__name">1500-1900元</div>
+											<div class="legend__value">18.00%</div>
+										</div>
+										<div class="legend-item clearfix">
+											<div class="legend__icon" style="background: #b9d5fe;"></div>
+											<div class="legend__name">2000-2499元</div>
+											<div class="legend__value">28.00%</div>
+										</div>
+										<div class="legend-item clearfix">
+											<div class="legend__icon" style="background: #53a8e2;"></div>
+											<div class="legend__name">2500-2999元</div>
+											<div class="legend__value">6.00%</div>
+										</div>
+										<div class="legend-item clearfix">
+											<div class="legend__icon" style="background: #76ddfb;"></div>
+											<div class="legend__name">3000-3499元</div>
+											<div class="legend__value">12.00%</div>
+										</div>
+									</div>
+								</div>
+								
 							</div>
 						
 						</div>
@@ -548,44 +611,44 @@
 							<div class="cards clearfix cards--reason">
 								<div class="card card--purple">
 									<div class="card__title">
-										<div>70后</div>
-										<div>稳定的中坚力量</div>
+										<div>60&70后</div>
+										<div>增换购</div>
 									</div>
 									<div class="card__avator"></div>
 									<div class="card__reason">
-										<p class="reason__main">主要为升级换代需求</p>
+										<p class="reason__main">主要为升级换代需求，同时兼顾商务</p>
 										<ul class="reason__ul">
-											<li>111</li>
-											<li>111</li>
-											<li>111</li>
+											<li>需要换掉原来的车</li>
+											<li>需要多买一辆车</li>
+											<li>工作需要</li>
 										</ul>
 									</div>
 								</div>
 								<div class="card card--blue">
 									<div class="card__title">
 										<div>80后</div>
-										<div>摇摆的承上启下</div>
+										<div>刚需</div>
 									</div>
 									<div class="card__avator"></div>
 									<div class="card__reason">
-										<p class="reason__main">主要为升级换代需求</p>
+										<p class="reason__main">随着80后步入成家立业阶段，刚需成为首要因素</p>
 										<ul class="reason__ul">
-											<li>111</li>
-											<li>111</li>
+											<li>生活需要</li>
+											<li>收入增加</li>
 										</ul>
 									</div>
 								</div>
 								<div class="card card--green">
 									<div class="card__title">
-										<div>90后</div>
-										<div>多元的价值选择</div>
+										<div>情感</div>
+										<div>情感</div>
 									</div>
 									<div class="card__avator"></div>
 									<div class="card__reason">
-										<p class="reason__main">主要为升级换代需求</p>
+										<p class="reason__main">以情感需求，求新心理为核心</p>
 										<ul class="reason__ul">
-											<li>111</li>
-											<li>111</li>
+											<li>情感需求</li>
+											<li>轿车吸引</li>
 										</ul>
 									</div>
 								</div>
@@ -599,7 +662,7 @@
 				<div class="tab-pane" data-name="tab3">
 					<div class="block clearfix" style="height: 440px;">
 						<div class="bwl--f">
-							<div class="section clearfix" style="margin-bottom: 10px;">
+							<div class="section clearfix" style="margin-bottom: 38px;">
 								<span class="title-prefix-md">购买浏览人数分析</span>
 							</div>
 							<div class="table-wrapper" style="margin-top: 12px;margin-right: 5px;">
@@ -630,7 +693,7 @@
 							</div>
 						</div>
 						<div class="bwr--f">
-							<div class="chart chart--line4" style="height: 380px;margin-top: 20px;"></div>
+							<div class="chart chart--line--money-people" style="height: 380px;margin-top: 20px;"></div>
 						</div>
 						
 					</div>
@@ -647,15 +710,15 @@
 							</div>
 							<div class="row__right fr">
 								<span class="blue-text">时间筛选</span>
-								<el-select placeholder="自然月"></el-select>
-								<el-select placeholder="日期"></el-select>
+								<el-select placeholder="自然月" class="blue-bg"></el-select>
+								<el-select placeholder="日期" class="blue-bg"></el-select>
 							</div>
 						</div>
 						<hr class="line" />
 						<div class="clearfix" style="padding-top: 16px">
 							<div class="bwl--d">
 								<div class="table-wrapper" style="margin-top: 10px;">
-									<el-table :data="expensePlaceData" stripe>
+									<el-table :data="expensePlaceData" stripe class="table--expense-place">
 										<el-table-column 
 											label="Top10省份" 
 											prop="1" 
@@ -699,7 +762,7 @@
 						<div class="bwl--b">
 							
 							<div class="table-wrapper" style="margin-top: 0px;margin-right: 20px;">
-								<el-table :data="buyTimesData" stripe>
+								<el-table :data="buyTimesData" stripe class="table--buy-times">
 									<el-table-column 
 										label="月份" 
 										prop="1" 
@@ -716,7 +779,7 @@
 							</div>
 						</div>
 						<div class="bwr--b">
-							<div class="chart chart--line5" style="height: 408px;"></div>
+							<div class="chart chart--line--buy-times" style="height: 408px;margin-left: 30px;"></div>
 						</div>
 						
 					</div>
@@ -730,49 +793,65 @@
 						</div>
 						<hr class="line" />
 						<div class="table-wrapper" style="margin-top: 10px;margin-right: 10px;">
-							<el-table :data="pricesData" stripe>
+							<el-table :data="pricesData" stripe class="table--prices">
 								<el-table-column 
 									label="序号" 
 									prop="1" 
 									align="center"
+									min-width="103"
 									:show-overflow-tooltip="true"> 
 								</el-table-column>
 								<el-table-column 
 									label="客单价区间" 
 									prop="2"
 									align="center"
+									min-width="226"
 									:show-overflow-tooltip="true">
 								</el-table-column>
 								<el-table-column 
 									label="人数" 
 									prop="3" 
 									align="center"
+									min-width="180"
 									:show-overflow-tooltip="true"> 
 								</el-table-column>
 								<el-table-column 
 									label="人数占比" 
 									prop="4"
 									align="center"
+									min-width="206"
 									:show-overflow-tooltip="true">
 								</el-table-column>
 								<el-table-column 
 									label="男" 
 									prop="5" 
 									align="center"
+									min-width="164"
 									:show-overflow-tooltip="true"> 
 								</el-table-column>
 								<el-table-column 
 									label="女" 
 									prop="6"
 									align="center"
+									min-width="164"
 									:show-overflow-tooltip="true">
 								</el-table-column>
 							</el-table>
 						</div>
-
+						<div class="pagination">
+							<span>每页显示</span>
+							<el-select size="mini" class="select--mini" style="margin-right: 2px;" 
+								placeholder="" 
+								v-model="pageNum">
+								<el-option :label="10" :value="10"></el-option>
+								<el-option :label="9" :value="9"></el-option>
+							</el-select>
+							<span>条,</span>
+							<span>1-9/9条</span>
+						</div>
 						
 					</div>
-					<div class="block clearfix" style="height: 546px;">
+					<div class="block clearfix" style="height: 526px;">
 						<div class="section clearfix" style="margin-bottom: 10px;">
 							<span class="title-prefix-md">经营概况</span>
 							<button class="button--lg fr">自助取数</button>
@@ -945,7 +1024,7 @@
 								
 								</div>
 							</div>
-							<div class="chart visitor__bottom chart--area1" style="height: 240px;"></div>
+							<div class="chart visitor__bottom chart--area--visitors" style="height: 180px;"></div>
 						</div>
 					</div>
 					
@@ -960,7 +1039,7 @@
 								</div>
 								<div class="chart-wrapper">
 									<div class="cw__left fl">
-										<el-table :data="agesData" stripe>
+										<el-table :data="agesData" stripe class="table--ages">
 											<el-table-column 
 												label="年龄" 
 												prop="1" 
@@ -977,7 +1056,7 @@
 										</el-table>
 									</div>
 									<div class="cw__right fr">
-										<div class="chart chart--pie--age" style="height: 300px;"></div>
+										<div class="chart chart--pie--age" style="height: 280px;margin-top: -18px;"></div>
 									</div>
 								</div>
 							</div>
@@ -990,7 +1069,7 @@
 								</div>
 								<div class="chart-wrapper">
 									<div class="cw__left fl">
-										<el-table :data="educationData" stripe>
+										<el-table :data="educationData" stripe class="table--education">
 											<el-table-column 
 												label="学历" 
 												prop="1" 
@@ -1023,7 +1102,7 @@
 								</div>
 								<div class="chart-wrapper">
 									<div class="cw__left fl">
-										<el-table :data="incomeData" stripe>
+										<el-table :data="incomeData" stripe class="table--income">
 											<el-table-column 
 												label="收入" 
 												prop="1" 
@@ -1040,7 +1119,7 @@
 										</el-table>
 									</div>
 									<div class="cw__right fr">
-										<div class="chart chart--line--income" style="height: 300px;"></div>
+										<div class="chart chart--line--income" style="height: 250px;margin-left: 40px;"></div>
 									</div>
 								</div>
 							</div>
@@ -1064,9 +1143,9 @@
 								</div>
 								<div class="chart-wrapper">
 									<div class="cw__left fl">
-										<el-table :data="agesData" stripe>
+										<el-table :data="sexData" stripe class="table--sex">
 											<el-table-column 
-												label="年龄" 
+												label="性别" 
 												prop="1" 
 												align="center"
 												:show-overflow-tooltip="true"> 
@@ -1081,7 +1160,7 @@
 										</el-table>
 									</div>
 									<div class="cw__right fr">
-										<div class="chart chart--pie--sex" style="height: 300px;"></div>
+										<div class="chart chart--pie--sex" style="height: 280px;margin-top: -18px;"></div>
 									</div>
 								</div>
 							</div>
@@ -1092,7 +1171,72 @@
 								<div class="section clearfix">
 									<span class="title-prefix-md">地域分布</span>
 								</div>
-								<div class="chart chart--pie--place" style="height: 300px;"></div>
+								<div class="chart chart--pie--place fl" style="height: 280px;width: 280px;margin-top: -18px;margin-left: 34px;"></div>
+								<div class="legends-wrapper fr" style="height: 280px;width: 198px;margin-top: -18px;">
+									
+									<div class="fl clearfix legends legends--place">
+										<div class="legend-item clearfix">
+											<div class="legend__icon" style="background: #0c4d90;"></div>
+											<div class="legend__name">广东</div>
+											<div class="legend__origin-value">156</div>
+											<div class="legend__value">22.19%</div>
+										</div>
+										<div class="legend-item clearfix">
+											<div class="legend__icon" style="background: #76ddfb;"></div>
+											<div class="legend__name">北京</div>
+											<div class="legend__origin-value">156</div>
+											<div class="legend__value">13.94%</div>
+										</div>
+										<div class="legend-item clearfix">
+											<div class="legend__icon" style="background: #53a8e2;"></div>
+											<div class="legend__name">浙江</div>
+											<div class="legend__origin-value">156</div>
+											<div class="legend__value">11.81%</div>
+										</div>
+										<div class="legend-item clearfix">
+											<div class="legend__icon" style="background: #2c82be;"></div>
+											<div class="legend__name">上海</div>
+											<div class="legend__origin-value">156</div>
+											<div class="legend__value">10.53%</div>
+										</div>
+										<div class="legend-item clearfix">
+											<div class="legend__icon" style="background: #8194ab;"></div>
+											<div class="legend__name">江苏</div>
+											<div class="legend__origin-value">156</div>
+											<div class="legend__value">6.26%</div>
+										</div>
+										<div class="legend-item clearfix">
+											<div class="legend__icon" style="background: #38d2dc;"></div>
+											<div class="legend__name">福建</div>
+											<div class="legend__origin-value">156</div>
+											<div class="legend__value">4.41%</div>
+										</div>
+										<div class="legend-item clearfix">
+											<div class="legend__icon" style="background: #62c7b3;"></div>
+											<div class="legend__name">四川</div>
+											<div class="legend__origin-value">156</div>
+											<div class="legend__value">3.98%</div>
+										</div>
+										<div class="legend-item clearfix">
+											<div class="legend__icon" style="background: #2c82be;"></div>
+											<div class="legend__name">河南</div>
+											<div class="legend__origin-value">156</div>
+											<div class="legend__value">2.7%</div>
+										</div>
+										<div class="legend-item clearfix">
+											<div class="legend__icon" style="background: #4a90e2;"></div>
+											<div class="legend__name">湖南</div>
+											<div class="legend__origin-value">156</div>
+											<div class="legend__value">2.56%</div>
+										</div>
+										<div class="legend-item clearfix">
+											<div class="legend__icon" style="background: #53a8e2;"></div>
+											<div class="legend__name">其余地区</div>
+											<div class="legend__origin-value">156</div>
+											<div class="legend__value">21.62%</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						
 						</div>

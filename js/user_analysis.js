@@ -148,139 +148,548 @@ var app = new Vue({
 			]
 		},
 		loadBuyerAmountList: function(){
-			this.buyerAmountData = [{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},]
+			this.buyerAmountData = [
+			{
+				'1': 'Day1',
+				'2': '43243.33',
+				'3': '6455',
+				'4': '269941',
+			},
+			{
+				'1': 'Day2',
+				'2': '243243.33',
+				'3': '5455',
+				'4': '269941',
+			},
+			{
+				'1': 'Day3',
+				'2': '23243.33',
+				'3': '4455',
+				'4': '69941',
+			},
+			{
+				'1': 'Day4',
+				'2': '13243.33',
+				'3': '6455',
+				'4': '369941',
+			},
+			{
+				'1': 'Day5',
+				'2': '3243.33',
+				'3': '6455',
+				'4': '259941',
+			},
+			{
+				'1': 'Day6',
+				'2': '43243.33',
+				'3': '6455',
+				'4': '269941',
+			},
+			{
+				'1': 'Day7',
+				'2': '43243.33',
+				'3': '6455',
+				'4': '269941',
+			},
+			]
 		},
 		loadExpensePlaceList: function(){
-			this.expensePlaceData = [{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-				'5': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-				'5': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-				'5': 'xxx',
-			},]
+			this.expensePlaceData = [
+			{
+				'1': '浙江',
+				'2': '158.87',
+				'3': '64',
+				'4': '1754',
+				'5': '3.14%',
+			},
+			{
+				'1': '吉林',
+				'2': '15.87',
+				'3': '64',
+				'4': '1754',
+				'5': '3.14%',
+			},
+			{
+				'1': '北京',
+				'2': '18.87',
+				'3': '30',
+				'4': '1054',
+				'5': '3.14%',
+			},
+			{
+				'1': '其他',
+				'2': '28.87',
+				'3': '64',
+				'4': '1754',
+				'5': '3.14%',
+			},
+			{
+				'1': '内蒙',
+				'2': '158.87',
+				'3': '20',
+				'4': '1254',
+				'5': '2.14%',
+			},
+			{
+				'1': '江苏',
+				'2': '158.87',
+				'3': '64',
+				'4': '1754',
+				'5': '30.14%',
+			},
+			{
+				'1': '河北',
+				'2': '158.87',
+				'3': '64',
+				'4': '1754',
+				'5': '23.14%',
+			},
+			{
+				'1': '广东',
+				'2': '158.87',
+				'3': '64',
+				'4': '1454',
+				'5': '3.14%',
+			},
+			{
+				'1': '湖北',
+				'2': '158.87',
+				'3': '64',
+				'4': '1754',
+				'5': '3.34%',
+			},
+			{
+				'1': '山东',
+				'2': '158.87',
+				'3': '64',
+				'4': '1754',
+				'5': '3.14%',
+			},
+			]
 		},
 		loadBuyTimesList: function(){
-			this.buyTimesData = [{
-				'1': 'xxx',
-				'2': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-			},]
+			this.buyTimesData = [
+			{
+				'1': '201101月份',
+				'2': '819',
+			},
+			{
+				'1': '201102月份',
+				'2': '719',
+			},
+			{
+				'1': '201103月份',
+				'2': '619',
+			},
+			{
+				'1': '201104月份',
+				'2': '819',
+			},
+			{
+				'1': '201105月份',
+				'2': '519',
+			},
+			{
+				'1': '201106月份',
+				'2': '819',
+			},
+			{
+				'1': '201107月份',
+				'2': '319',
+			},
+			{
+				'1': '201108月份',
+				'2': '1419',
+			},
+			{
+				'1': '201109月份',
+				'2': '2819',
+			},
+			]
 		},
 		loadPricesList: function(){
-			this.pricesData = [{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-				'5': 'xxx',
-				'6': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-				'5': 'xxx',
-				'6': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-				'5': 'xxx',
-				'6': 'xxx',
-			},]
+			this.pricesData = [
+			{
+				'1': '1',
+				'2': '0-50',
+				'3': '1225254',
+				'4': '41.13%',
+				'5': '326784',
+				'6': '985556',
+			},
+			{
+				'1': '2',
+				'2': '50-100',
+				'3': '1225254',
+				'4': '1.13%',
+				'5': '32784',
+				'6': '985556',
+			},
+			{
+				'1': '3',
+				'2': '100-200',
+				'3': '1225254',
+				'4': '41.13%',
+				'5': '326784',
+				'6': '985556',
+			},
+			{
+				'1': '4',
+				'2': '200-500',
+				'3': '1225254',
+				'4': '41.13%',
+				'5': '26784',
+				'6': '985556',
+			},
+			{
+				'1': '5',
+				'2': '500-1000',
+				'3': '1225254',
+				'4': '51.13%',
+				'5': '326784',
+				'6': '9856',
+			},
+			{
+				'1': '6',
+				'2': '1000-2000',
+				'3': '1225254',
+				'4': '41.13%',
+				'5': '326784',
+				'6': '98556',
+			},
+			{
+				'1': '7',
+				'2': '2000-3000',
+				'3': '1225254',
+				'4': '21.13%',
+				'5': '326784',
+				'6': '98556',
+			},
+			{
+				'1': '8',
+				'2': '3000-5000',
+				'3': '1225254',
+				'4': '41.13%',
+				'5': '326784',
+				'6': '85556',
+			},
+			{
+				'1': '9',
+				'2': '5000-10000',
+				'3': '1225254',
+				'4': '41.13%',
+				'5': '326784',
+				'6': '98556',
+			},
+			]
 		},
 		loadAgesList: function(){
-			this.agesData = [{
-				'1': 'xxx',
-				'2': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-			},]
+			this.agesData = [
+			{
+				'1': '12-20',
+				'2': '6%',
+			},
+			{
+				'1': '21-30',
+				'2': '18%',
+			},
+			{
+				'1': '31-40',
+				'2': '36%',
+			},
+			{
+				'1': '41-50',
+				'2': '30%',
+			},
+			{
+				'1': '50以上',
+				'2': '10%',
+			},
+			]
 		},
 		loadEducationList: function(){
-			this.educationData = [{
-				'1': 'xxx',
-				'2': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-			},]
+			this.educationData = [
+			{
+				'1': '小学',
+				'2': '6%',
+			},
+			{
+				'1': '初中',
+				'2': '18%',
+			},
+			{
+				'1': '高中',
+				'2': '36%',
+			},
+			{
+				'1': '大学',
+				'2': '30',
+			},
+			{
+				'1': '硕士',
+				'2': '7%',
+			},
+			{
+				'1': '博士',
+				'2': '3%',
+			},
+			]
 		},
 		loadIncomeList: function(){
-			this.incomeData = [{
-				'1': 'xxx',
-				'2': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-			},]
+			this.incomeData = [
+			{
+				'1': '3000以下',
+				'2': '6%',
+			},
+			{
+				'1': '3000-6000',
+				'2': '18%',
+			},
+			{
+				'1': '6000-10000',
+				'2': '36%',
+			},
+			{
+				'1': '10000-20000',
+				'2': '30%',
+			},
+			{
+				'1': '20000以上',
+				'2': '10%',
+			},
+			]
 		},
 		loadSexList: function(){
-			this.sexData = [{
-				'1': 'xxx',
-				'2': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-			},]
+			this.sexData = [
+			{
+				'1': '男',
+				'2': '56%',
+			},
+			{
+				'1': '女',
+				'2': '44%',
+			},
+			]
 		},
 	}
 })
 $(function(){
 	lineVisitTime();
+	lineMoneyPeople();
+	lineIncome();
 	lineVisitAmount();
 //	commentCloud();
 	lineO2O();
 	personalityCloud();
 	barBrandPrefer();
 	radarAgeDiff();
+	piePriceAnalysis();
+	pieAges();
+	pieSex();
+	piePlace();
+	lineBuyTimes();
+	AreaVisitors();
 })
+function piePriceAnalysis(){
+	var pie1 = echarts.init($(".chart--pie--price-analysis")[0]);
+	var option = {
+		color: ['#0c4d90','#53a8e2','#2c82be','#b9d5fe','#53a8e2','#76ddfb',],
+	    tooltip: {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b}: {c} ({d}%)"
+	    },
+	    series: [
+	        {
+	            name:'用户关注价格区间',
+	            type:'pie',
+	            radius: ['40%', '86%'],
+	            avoidLabelOverlap: false,
+	            label: {
+	                normal: {
+	                    show: false,
+	                },
+	            },
+	            labelLine: {
+	                normal: {
+	                    show: false
+	                }
+	            },
+	            data:[
+	                {value:18, name:'1000元以下'},
+	                {value:18, name:'1000-1499元'},
+	                {value:18, name:'1500-1900元'},
+	                {value:28, name:'2000-2499元'},
+	                {value:6, name:'2500-2999元'},
+	                {value:12, name:'3000-3499元'},
+	            ]
+	        }
+	    ]
+	};
+	pie1.setOption(option)
+}
+
+function piePlace(){
+	var pie1 = echarts.init($(".chart--pie--place")[0]);
+	var option = {
+		color: ['#0c4d90','#76ddfb','#53a8e2','#2c82be','#8194ab','#38d2dc','#62c7b3','#2c82be','#4a90e2','#53a8e2'],
+	    tooltip: {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b}: {c} ({d}%)"
+	    },
+	    series: [
+	        {
+	            name:'地域',
+	            type:'pie',
+	            radius: ['37%', '80%'],
+	            avoidLabelOverlap: false,
+	            label: {
+	                normal: {
+	                    show: false,
+	                },
+	            },
+	            labelLine: {
+	                normal: {
+	                    show: false
+	                }
+	            },
+	            data:[
+	                {value:156, name:'广东'},
+	                {value:98, name:'北京'},
+	                {value:83, name:'浙江'},
+	                {value:74, name:'上海'},
+	                {value:44, name:'江苏'},
+	                {value:31, name:'福建'},
+	                {value:28, name:'四川'},
+	                {value:19, name:'河南'},
+	                {value:18, name:'湖南'},
+	                {value:152, name:'其余地区'},
+	            ]
+	        }
+	    ]
+	};
+	pie1.setOption(option)
+}
+
+function pieAges(){
+	var pie1 = echarts.init($(".chart--pie--age")[0]);
+	var option = {
+		legend: {
+            data:[
+            {
+            	name: '12-20',
+            	icon: 'circle',
+            },
+            {
+            	name: '21-30',
+            	icon: 'circle',
+            },
+            {
+            	name: '31-40',
+            	icon: 'circle',
+            },
+            {
+            	name: '41-50',
+            	icon: 'circle',
+            },
+            {
+            	name: '50以上',
+            	icon: 'circle',
+            },
+            ],
+            right: '10%',
+            bottom: '0',
+            itemHeight: '9'
+        },
+		color: ['#0c4d90','#2c82be','#8194ab','#53a8e2','#76ddfb',],
+	    tooltip: {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b}: {c} ({d}%)"
+	    },
+	    series: [
+	        {
+	            name:'年龄',
+	            type:'pie',
+	            radius: ['37%', '80%'],
+	            center: ['60%','48%'],
+	            avoidLabelOverlap: false,
+	            label: {
+	                normal: {
+	                    show: false,
+	                },
+	            },
+	            labelLine: {
+	                normal: {
+	                    show: false
+	                }
+	            },
+	            data:[
+	                {value:6, name:'12-20'},
+	                {value:18, name:'21-30'},
+	                {value:36, name:'31-40'},
+	                {value:30, name:'41-50'},
+	                {value:10, name:'50以上'},
+	            ]
+	        }
+	    ]
+	};
+	pie1.setOption(option)
+}
+
+function pieSex(){
+	var pie1 = echarts.init($(".chart--pie--sex")[0]);
+	var option = {
+		legend: {
+            data:[
+            {
+            	name: '男性',
+            	icon: 'circle',
+            },
+            {
+            	name: '女性',
+            	icon: 'circle',
+            },
+            {
+            	name: '未知',
+            	icon: 'circle',
+            },
+            ],
+            right: '20%',
+            bottom: '0',
+            itemHeight: '9'
+        },
+		color: ['#2c82be','#76ddfb','#dbecf8'],
+	    tooltip: {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b}: {c} ({d}%)"
+	    },
+	    series: [
+	        {
+	            name:'性别',
+	            type:'pie',
+	            radius: ['37%', '80%'],
+	            center: ['60%','48%'],
+	            avoidLabelOverlap: false,
+	            label: {
+	                normal: {
+	                    show: false,
+	                },
+	            },
+	            labelLine: {
+	                normal: {
+	                    show: false
+	                }
+	            },
+	            data:[
+	                {value:56, name:'男性'},
+	                {value:40, name:'女性'},
+	                {value:4, name:'未知'},
+	            ]
+	        }
+	    ]
+	};
+	pie1.setOption(option)
+}
+
 function radarAgeDiff(){
 	var radar1 = echarts.init($(".chart--radar-age-diff")[0]);
 	var option = {
@@ -781,6 +1190,394 @@ function lineVisitAmount(){
     };
     lineVisitAmount.setOption(option)
 }	
+
+function lineMoneyPeople(){
+	var line1 = echarts.init($(".chart--line--money-people")[0]);
+	var option = {
+		title: {
+			text: '每日预定金额/浏览人数（不重复IP）'
+		},
+		grid: {
+			left: '0',
+			right: '12',
+			top: '40',
+			bottom: '13',
+			containLabel: true,
+		},
+        tooltip: {},
+        legend: {
+            data:[
+            {
+            	name: '预定金额',
+            	icon: 'circle',
+            },
+            {
+            	name: '购买人数',
+            	icon: 'circle',
+            },
+            ],
+            left: '50%',
+            top: '2',
+            itemHeight: '9'
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: true,
+            data:['2017-04-26','2017-04-27','2017-04-28','2017-04-29','2017-04-30','2017-05-01','2017-05-02','2017-05-03',],
+            axisLine: {
+	            lineStyle: {
+	        		color: '#d7d7d7',
+	        		width: 2,
+	        	}
+	        },
+	        axisTick: {
+	        	show: false,
+	        },
+	        axisLabel: {
+	            textStyle: {
+	            	color: '#000'
+	            },
+	            interval: 0,
+	        },
+        },
+        yAxis: {
+        	axisLine: {
+	            show: false,
+	        },
+	        splitLine: {
+	        	lineStyle: {
+	        		color: '#f7f9fa',
+	        	}
+	        },
+	        axisTick: {
+	        	show: false,
+	        },
+	        max: 20000,
+        },
+        series: [
+        {
+            name: '预定金额',
+            type: 'line',
+            lineStyle: {
+            	normal: {
+            		color: '#51a5de'
+            	}
+            	
+            },
+            itemStyle: {
+            	normal: {
+            		color: '#51a5de'
+            	}
+            	
+            },
+            'symbol': 'emptyCircle',
+            symbolSize: 10,
+            hoverAnimation: false,
+            data: [4000,4000,3000,2000,5000,10000,4200,5000,]
+        },
+        {
+            name:'购买人数',
+            type:'line',
+            lineStyle: {
+            	normal: {
+            		color: '#76ddfb'
+            	}
+            	
+            },
+            itemStyle: {
+            	normal: {
+            		color: '#76ddfb'
+            	}
+            	
+            },
+            'symbol': 'emptyCircle',
+            symbolSize: 10,
+            hoverAnimation: false,
+           data: [6000,8000,14000,6100,1000,2200,3900,3700,]
+        },
+        ]
+    };
+    line1.setOption(option)
+}	
+
+function lineIncome(){
+	var line1 = echarts.init($(".chart--line--income")[0]);
+	var option = {
+//		title: {
+//			text: '每日预定金额/浏览人数（不重复IP）'
+//		},
+		grid: {
+			left: '0',
+			right: '12',
+			top: '40',
+			bottom: '13',
+			containLabel: true,
+		},
+        tooltip: {},
+        legend: {
+            data:[
+            {
+            	name: '预定金额',
+            	icon: 'circle',
+            },
+            {
+            	name: '购买人数',
+            	icon: 'circle',
+            },
+            ],
+            left: '50%',
+            top: '2',
+            itemHeight: '9'
+        },
+        xAxis: {
+        	show: false,
+            type: 'category',
+            boundaryGap: true,
+            data:['2017-04-26','2017-04-27','2017-04-28','2017-04-29','2017-04-30','2017-05-01','2017-05-02','2017-05-03',],
+            axisLine: {
+	            lineStyle: {
+	        		color: '#d7d7d7',
+	        		width: 2,
+	        	}
+	        },
+	        axisTick: {
+	        	show: false,
+	        },
+	        axisLabel: {
+	            textStyle: {
+	            	color: '#000'
+	            },
+	            interval: 0,
+	        },
+        },
+        yAxis: {
+        	axisLine: {
+	            show: false,
+	        },
+	        splitLine: {
+	        	lineStyle: {
+	        		color: '#f7f9fa',
+	        	}
+	        },
+	        axisTick: {
+	        	show: false,
+	        },
+	        max: 20000,
+        },
+        series: [
+        {
+            name: '预定金额',
+            type: 'line',
+            lineStyle: {
+            	normal: {
+            		color: '#51a5de'
+            	}
+            	
+            },
+            itemStyle: {
+            	normal: {
+            		color: '#51a5de'
+            	}
+            	
+            },
+            'symbol': 'emptyCircle',
+            symbolSize: 10,
+            hoverAnimation: false,
+            data: [4000,4000,3000,2000,5000,10000,4200,5000,]
+        },
+        {
+            name:'购买人数',
+            type:'line',
+            lineStyle: {
+            	normal: {
+            		color: '#76ddfb'
+            	}
+            	
+            },
+            itemStyle: {
+            	normal: {
+            		color: '#76ddfb'
+            	}
+            	
+            },
+            'symbol': 'emptyCircle',
+            symbolSize: 10,
+            hoverAnimation: false,
+           data: [6000,8000,14000,6100,1000,2200,3900,3700,]
+        },
+        ]
+    };
+    line1.setOption(option)
+}	
+
+function lineBuyTimes(){
+	var line1 = echarts.init($(".chart--line--buy-times")[0]);
+	var option = {
+		title: {
+			text: '2011年前三季度团购购买人次月度统计',
+			left: 0,
+		},
+		grid: {
+			left: '0',
+			right: '12',
+			top: '40',
+			bottom: '13',
+			containLabel: true,
+		},
+        tooltip: {},
+        legend: {
+            data:[
+            {
+            	name: '购买人次（万）',
+            	icon: 'circle',
+            },
+            ],
+            left: '40%',
+            top: '4',
+            itemHeight: '9'
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: true,
+            data:['1月','2月','3月','4月','5月','6月','7月','8月','9月',],
+            axisLine: {
+	            lineStyle: {
+	        		color: '#d7d7d7',
+	        		width: 2,
+	        	}
+	        },
+	        axisTick: {
+	        	show: false,
+	        },
+	        axisLabel: {
+	            textStyle: {
+	            	color: '#000'
+	            },
+	            interval: 0,
+	        },
+        },
+        yAxis: {
+        	axisLine: {
+	            show: false,
+	        },
+	        splitLine: {
+	        	lineStyle: {
+	        		color: '#f7f9fa',
+	        	}
+	        },
+	        axisTick: {
+	        	show: false,
+	        },
+	        max: 4000,
+	        interval: 500,
+        },
+        series: [
+        {
+            name: '购买人次（万）',
+            type: 'line',
+            lineStyle: {
+            	normal: {
+            		color: '#51a5de'
+            	}
+            	
+            },
+            itemStyle: {
+            	normal: {
+            		color: '#51a5de'
+            	}
+            	
+            },
+            'symbol': 'emptyCircle',
+            symbolSize: 10,
+            hoverAnimation: false,
+            data: [900,600,1100,2000,1800,2200,2800,3300,3000]
+        },
+        ]
+    };
+    line1.setOption(option)
+}	
+function AreaVisitors(){
+	var area1 = echarts.init($(".chart--area--visitors")[0]);
+	var option = {
+	    grid: {
+	        left: 10,
+	        right: 10,
+	        bottom: 10,
+	        top: 10,
+	        containLabel: true
+	    },
+	    xAxis : [
+	        {
+	            type : 'value',
+	            boundaryGap : false,
+	            min: 1,
+	            max: 20,
+	            axisLine: {
+		            lineStyle: {
+		        		color: '#e2edf4',
+		        		width: 1,
+		        	}
+		        },
+		        axisTick: {
+		        	show: false,
+		        },
+		        axisLabel: {
+		            textStyle: {
+		            	color: '#000'
+		            },
+		            interval: 0,
+		        },
+		        splitLine: {
+		        	show: false,
+		        }
+	        }
+	    ],
+	    yAxis : [
+	        {
+	            type : 'value',
+		        axisLine: {
+		            show: false,
+		        },
+		        splitLine: {
+		        	lineStyle: {
+		        		color: '#f7f9fa',
+		        	}
+		        },
+		        axisTick: {
+		        	show: false,
+		        },
+		        max: 12,
+		        interval: 3,
+	        }
+	    ],
+	    series : [
+	        {
+	            type:'line',
+	            symbol: 'none',
+//	            label: {
+//	                normal: {
+//	                    show: true,
+//	                    position: 'top'
+//	                }
+//	            },
+	            smooth: true,
+	            areaStyle: {normal: {
+	            	color: '#edf6fc'
+	            }},
+	            lineStyle: {
+	            	normal: {
+	            		color: '#53a8e2'
+	            	}
+	            },
+	            data:[
+	            	[1,3.2],[2,3],[3,4.5],[4,4],[5,5],[6,8],[7,8],[8,6],[9,6.5],[10,2],
+	            	[11,1],[12,9],[13,11],[14,6],[15,1],[16,5],[17,9],[18,3],[19,2],[20,5],
+	            ]
+	        }
+	    ]
+	};
+	area1.setOption(option);
+}
 function personalityCloud(){
 	var word_list1 = [
 	    {text: "理财", weight: 9},

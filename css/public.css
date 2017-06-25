@@ -32,6 +32,11 @@ a:visited{
 	color: #004494;
 	text-decoration: none;
 }
+.circle__content a:link,.circle__content a:hover,.circle__content a:active,.circle__content a:visited{
+	color: #fff;
+	text-decoration: none;
+}
+
 
 .nav-path{
 	background: #4a4a4a;
@@ -595,4 +600,58 @@ a:visited{
 	font-size: 18px;
     margin-top: 10px;
     margin-right: 11px;
+}
+/*legends*/
+.legends-wrapper{
+	position: relative;
+}
+.legends{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.legend-item{
+	font-size: 12px;
+	margin: 6px 0;
+}
+.legend__icon{
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    float: left;
+    margin-top: 3.5px;
+}
+.legend__name{
+    float: left;
+    display: inline-block;
+    width: 125px;
+    margin-left: 9px;
+}
+.legend__value{
+	float: left;
+	
+}
+.legend__origin-value{
+	float: left;
+}
+.legends--place .legend__name{
+	width: 67px;
+}
+.legends--place .legend__origin-value{
+	width: 59px;
+}
+.circle--promotion-ways{
+	width: 366px;
+	height: 366px;
+	margin: 107px auto;
+	background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(../img/circle.png);
+    position: relative;
+}
+.circle__content{
+	position: absolute;
+	color: #fff;
+	font-size: 15px;
+	font-family: pingfang_medium;
 }
