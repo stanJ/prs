@@ -4,7 +4,8 @@
 		<meta charset="UTF-8">
 		<title>框架</title>
 		<!-- 引入样式 -->
-		<link rel="stylesheet" type="text/css" href="lib/element/theme-default/index.css"/>
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+		<!--<link rel="stylesheet" type="text/css" href="lib/element/theme-default/index.css"/>-->
 		<link rel="stylesheet" type="text/css" href="css/frame.css"/>
 		<link rel="stylesheet" type="text/css" href="css/public.css"/>
 		<link rel="stylesheet" type="text/css" href="lib/selectify/silver.default.css"/>
@@ -179,15 +180,8 @@
 				margin: 0 auto;
 				border-radius: 39px;
 				margin-top: 10px;
-			}
-			.card--purple>.card__avator{
-				background: #6c8fde;
-			}
-			.card--blue>.card__avator{
-				background: #53a8e2;
-			}
-			.card--green>.card__avator{
-				background: #62c7b3;
+				background-position: center;
+    			background-repeat: no-repeat;
 			}
 			.card__personality{
 			    height: 115px;
@@ -321,6 +315,12 @@
 			.table--page-analysis .el-table__body-wrapper tr>td:first-of-type{
 				color: #346aa1;
 			}
+			.table--page-analysis .el-table__body-wrapper tr>td:first-of-type .cell{
+				padding-left: 20px;
+			}
+			.table--page-analysis .el-table__header-wrapper tr>th:first-of-type .cell{
+				padding-left: 44px;
+			}
 			.table--expense-place .el-table__body-wrapper tr>td:last-of-type{
 				color: #2c649e;
 			}
@@ -346,14 +346,14 @@
 		</style>
 	</head>
 	<body>
-		
 		<div class="content" id="app">
 			<div class="tabs__nav">
 				<div class="nav--tab">
 					<div class="tab-title" data-name="tab1">用户标签维护</div>
 					<div class="tab-title is-active" data-name="tab2">消费人群属性分析</div>
 					<div class="tab-title " data-name="tab3">用户购买转换分析</div>
-					<div class="tab-title " data-name="tab4">用户购买特征分析</div>
+					<div class="tab-title " data-name="tab4"
+						data-func="loadTab4" data-page="user">用户购买特征分析</div>
 					<div class="tab-title " data-name="tab5">用户网络行为分析</div>
 				</div>
 				<div class="nav__title clearfix">
@@ -361,8 +361,8 @@
 					<div class="query-control">
 						<el-select placeholder="人群筛选" style="margin-right: 6px;"
 							v-model="people">
-							<el-option :value="1">学生</el-option>
-							<el-option :value="2">白领</el-option>
+							<el-option value="1">学生</el-option>
+							<el-option value="2">白领</el-option>
 						</el-select>
 						<button class="button--lg">开始分析</button>
 					</div>
@@ -438,7 +438,7 @@
 							</el-table>
 							<div class="pagination">
 								<span>每页显示</span>
-								<el-select size="mini" class="select--mini" style="margin-right: 2px;" 
+								<el-select size="mini" class="select--mini" style="margin-right: 2px;line-height: 20px;" 
 									placeholder="" 
 									v-model="pageNum">
 									<el-option :label="10" :value="10"></el-option>
@@ -461,7 +461,7 @@
 										<el-table-column 
 											label="页面URL" 
 											prop="1" 
-											align="center"
+											align="left"
 											min-width="240"
 											:show-overflow-tooltip="true"> 
 										</el-table-column>
@@ -550,7 +550,7 @@
 									<div class="brand-title fr">用户关注价格区间</div>
 								</div>
 								<div class="chart chart--pie--price-analysis fl" style="height: 270px;width: 270px;margin-left: 34px;"></div>
-								<div class="legends-wrapper fr" style="height: 270px;width: 198px;">
+								<div class="legends-wrapper fr" style="height: 270px;width: 198px;margin-right: 10%;">
 									<div class="fl clearfix legends">
 										<div class="legend-item clearfix">
 											<div class="legend__icon" style="background: #0c4d90;"></div>
@@ -751,7 +751,7 @@
 								
 							</div>
 							<div class="bwr--d">
-								<div class="chart chart--map1" style="height: 462px;"></div>
+								<div class="chart chart--map--buy-money" style="height: 462px;"></div>
 							</div>
 						</div>
 					</div>
@@ -1037,7 +1037,7 @@
 								<div class="section clearfix">
 									<span class="title-prefix-md">年龄分布</span>
 								</div>
-								<div class="chart-wrapper">
+								<div class="chart-wrapper clearfix">
 									<div class="cw__left fl">
 										<el-table :data="agesData" stripe class="table--ages">
 											<el-table-column 
@@ -1067,7 +1067,7 @@
 								<div class="section clearfix">
 									<span class="title-prefix-md">学历分布</span>
 								</div>
-								<div class="chart-wrapper">
+								<div class="chart-wrapper clearfix">
 									<div class="cw__left fl">
 										<el-table :data="educationData" stripe class="table--education">
 											<el-table-column 
@@ -1086,7 +1086,36 @@
 										</el-table>
 									</div>
 									<div class="cw__right fr">
-										<div class="chart chart--bar--education" style="height: 300px;"></div>
+										<div class="legends-wrapper" style="margin-right: 0px;margin-bottom: 20px;margin-left: 46px;">
+											<div class="clearfix legends legends--education legends--inline">
+												<div class="legend-item clearfix">
+													<div class="legend__icon" style="background: #4a90e2;"></div>
+													<div class="legend__name">小学</div>
+												</div>
+												<div class="legend-item clearfix">
+													<div class="legend__icon" style="background: #76ddfb;"></div>
+													<div class="legend__name">初中</div>
+												</div>
+												<div class="legend-item clearfix">
+													<div class="legend__icon" style="background: #53a8e2;"></div>
+													<div class="legend__name">高中</div>
+												</div>
+												<div class="legend-item clearfix">
+													<div class="legend__icon" style="background: #4a90e2;"></div>
+													<div class="legend__name">大学</div>
+												</div>
+												<div class="legend-item clearfix">
+													<div class="legend__icon" style="background: #4e76a4;"></div>
+													<div class="legend__name">硕士</div>
+												</div>
+												<div class="legend-item clearfix">
+													<div class="legend__icon" style="background: #0c4d90;"></div>
+													<div class="legend__name">博士</div>
+												</div>
+											</div>
+										</div>
+							
+										<div class="chart chart--bar--education" style="height: 240px;"></div>
 									</div>
 								</div>
 							</div>
@@ -1099,8 +1128,9 @@
 							<div class="block clearfix" style="height: 346px;">
 								<div class="section clearfix">
 									<span class="title-prefix-md">收入分布</span>
+									<div class="brand-title fr">Income data</div>
 								</div>
-								<div class="chart-wrapper">
+								<div class="chart-wrapper clearfix">
 									<div class="cw__left fl">
 										<el-table :data="incomeData" stripe class="table--income">
 											<el-table-column 
@@ -1129,8 +1159,9 @@
 							<div class="block clearfix" style="height: 346px;">
 								<div class="section clearfix">
 									<span class="title-prefix-md">职业分布</span>
+									<div class="brand-title fr">Top10职业分布</div>
 								</div>
-								<div class="chart chart--point" style="height: 300px;"></div>
+								<div class="chart chart--point--jobs" style="height: 300px;"></div>
 							</div>
 						
 						</div>
@@ -1141,7 +1172,7 @@
 								<div class="section clearfix">
 									<span class="title-prefix-md">性别分布</span>
 								</div>
-								<div class="chart-wrapper">
+								<div class="chart-wrapper clearfix">
 									<div class="cw__left fl">
 										<el-table :data="sexData" stripe class="table--sex">
 											<el-table-column 
@@ -1237,6 +1268,7 @@
 										</div>
 									</div>
 								</div>
+							
 							</div>
 						
 						</div>
@@ -1244,97 +1276,17 @@
 				</div>
 				
 				<div class="tab-pane" data-name="tab1">
-					<div class="block clearfix" style="height: 360px;">
-						<div class="section clearfix" style="margin-bottom: 0;">
-							<span class="title-prefix-md">标注总览</span>
-						</div>
-						<div class="bwl--e" style="height: 300px;">
-							<table class="overview">
-								<tr>
-									<td class="left-top">
-										<div class="overview__text">商品总销量</div>
-										<div class="overview__value">68952</div>
-									</td>
-									<td>
-										<div class="overview__text">同类销售比例</div>
-										<div class="overview__value">25</div>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="overview__text">商品点评数</div>
-										<div class="overview__value">898952</div>
-									</td>
-									<td class="right-bottom">
-										<div class="overview__text">人气数</div>
-										<div class="overview__value">48989</div>
-									</td>
-								</tr>
-							</table>
-							
-						</div>
-						<div class="bwr--e" style="height: 300px;">
-							<div class="bwl--f">
-								<div class="chart chart--bar-h3"></div>
-							</div>
-							<div class="bwr--f">
-								<div class="chart chart--bar-h4"></div>
-							</div>
-						</div>
-					</div>
-					<div class="clearfix">
-						<div class="bwl--a">
-							<div class="block clearfix" style="height: 346px;">
-								<div class="section clearfix">
-									<span class="title-prefix-md">商品评论热点</span>
-								</div>
-								<div class="cloud--comment" style="height: 346px;">
-								</div>
-							</div>
-							<div class="block clearfix" style="height: 346px;">
-								<div class="section clearfix">
-									<span class="title-prefix-md">销售热点</span>
-								</div>
-								<div class="chart chart--radar1"></div>
-							</div>
-						</div>
-						<div class="bwr--a">
-							<div class="block clearfix" style="height: 346px;">
-								<div class="section clearfix">
-									<span class="title-prefix-md">好评度</span>
-								</div>
-								<div class="chart chart--line3"></div>
-										
-							</div>
-						</div>
-					</div>
-					
-					
-
-				</div>
-				
+				</div>			
 			</div>
-			
-			
 		</div>
 		<script src="lib/jquery/jquery-3.2.1.js"></script>
 		<script src="lib/jqcloud/jqcloud-1.0.4.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="lib/selectify/jquery.selectify.js" type="text/javascript" charset="utf-8"></script>
-		<!--先引入vue-->
 		<script src="lib/vue/vue.js" type="text/javascript" charset="utf-8"></script>
-		<!-- 引入组件库 -->
 		<script src="lib/element/index.js"></script>
 		<script src="lib/echarts/echarts.min.js" type="text/javascript" charset="utf-8"></script>
-		
 		<script src="js/user_analysis.js" type="text/javascript" charset="utf-8"></script>
 		<script src="lib/echarts/china.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/line.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/pie.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/map.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/bar_h.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/radar.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/area.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/bar.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/frame.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 </html>

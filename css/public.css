@@ -655,3 +655,35 @@ a:visited{
 	font-size: 15px;
 	font-family: pingfang_medium;
 }
+
+.card--purple>.card__avator{
+	background-image: url(../img/head_1.png);
+}
+.card--blue>.card__avator{
+	background-image: url(../img/head_2.png);
+}
+.card--green>.card__avator{
+	background-image: url(../img/head_3.png);
+}
+.pagination .el-select{
+	line-height: 20px;
+}
+.legends-wrapper{
+	margin-right: 10%;
+}
+.chart-wrapper{
+	padding-left: 10px;
+}
+.legends--inline .legend-item{
+	display: inline-block;
+}
+.legends--education .legend__name {
+    width: 36px;
+}
+.legends--education{
+	position: initial;
+	transform: none;
+}
+.legend__value{
+	color: #485465;
+}

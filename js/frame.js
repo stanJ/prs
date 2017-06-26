@@ -27,6 +27,20 @@ var frameObj = {
 			$(".tab-pane").hide();
 			var name = tab.data('name');
 			$(".tab-pane[data-name='"+name+"']").show();
+			var func = tab.data('func');
+			var page = tab.data('page');
+			if(page){
+				if(func){
+					if(page == 'product'){
+						productObj[func]();
+					}else if(page == 'user'){
+						userObj[func]();
+					}
+					
+				}
+			}
+			
+			
 		}
 		var tabAry = $(".tabs .tabs__header .tab-item.is-active");
 		$(".tab-content").hide();
@@ -41,9 +55,9 @@ function loadFrame(){
 	var h1 = `<header>
 			<nav class="top-nav clearfix">
 				<div class="nav-left">
-					<a href="javascript:">Dashboard</a>
-					<a href="javascript:">Content</a>
-					<a href="javascript:">Construction</a>
+					<a href="channel_draw.html">渠道画像</a>
+					<a href="user_analysis.html">用户画像</a>
+					<a href="product_analysis.html">产品分析</a>
 					<a href="javascript:">User</a>
 					<a href="javascript:">Module</a>
 					<a href="javascript:">Configuration</a>
