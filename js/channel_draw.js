@@ -295,11 +295,11 @@ function lineBasic(){
             }],
             right: '50',
             top: '10',
-            itemHeight: '20',
+            itemHeight: '9',
             show: true,
         },
         xAxis: {
-            type: 'time',
+            type: 'category',
             boundaryGap: true,
             axisLine: {
 	            lineStyle: {
@@ -307,6 +307,7 @@ function lineBasic(){
 	        		width: 2,
 	        	}
 	        },
+	        data: ['2017-04-26','2017-04-27','2017-04-28','2017-04-29','2017-04-30','2017-05-01','2017-05-02','2017-05-03','2017-05-04','2017-05-05','2017-05-06','2017-05-07','2017-05-08','2017-05-09'],
 	        axisTick: {
 	        	show: false,
 	        	alignWithLabel: true,
@@ -321,7 +322,7 @@ function lineBasic(){
 				    var date = new Date(value);
 				   return [date.getFullYear(),date.getMonth()+1,date.getDate()].join('-')
 				},
-				interval: 1,
+				interval: 0,
 	        },
 	        splitLine: {
 	        	show: false,
@@ -342,7 +343,7 @@ function lineBasic(){
 	        max: 500,
         },
         series: [{
-            name: '好评分数',
+            name: 'PARTNER 1',
             type: 'line',
             lineStyle: {
             	normal: {

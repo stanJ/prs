@@ -195,16 +195,29 @@
 				float: left;
 				background: #f77787;
 			}
+			.table--promotion-ways .el-table__body-wrapper tr>td:nth-of-type(4) {
+			    color: #5f9ce4;
+			}
+			.table--product-sales .el-table__body-wrapper tr>td:nth-of-type(6) {
+			    color: #5f9ce4;
+			}
+			.table--product-sales .el-table__body-wrapper tr>td:nth-of-type(7) {
+			    color: #5f9ce4;
+			}
+			
 		</style>
 	</head>
 	<body>
 		
 		<div class="content" id="app">
 			<div class="tabs__nav">
-				<div class="tab-title is-active" data-name="tab1" style="margin-left: 40px;">标注总览</div>
-				<div class="tab-title " data-name="tab2">属性分析</div>
-				<div class="tab-title " data-name="tab3">销售分析</div>
-				<div class="tab-title " data-name="tab4">点评分析</div>
+				<div class="tab-title " data-name="tab1" style="margin-left: 40px;"
+					data-func="loadTab1" data-page="product">标注总览</div>
+				<div class="tab-title " data-name="tab2" 
+					data-func="loadTab2" data-page="product">属性分析</div>
+				<div class="tab-title is-active" data-name="tab3">销售分析</div>
+				<div class="tab-title " data-name="tab4" 
+					data-func="loadTab4" data-page="product">点评分析</div>
 				<div class="tab-title" data-name="tab5">竞品分析</div>
 				<div class="tab-title" data-name="tab6">产品分类</div>
 			</div>
@@ -460,7 +473,9 @@
 								<div class="score-wrapper" style="margin-top: 20px;">
 									<span class="score__text">情感综合评分</span>
 									<span class="score__text"><span class="score__value">85</span>分</span>
-									 <el-rate v-model="score"></el-rate>
+									 <el-rate v-model="score" disabled :colors="['#4a90e2','#4a90e2','#4a90e2']"
+									 	disabled-void-color="#bcbcbc"
+									 	style="vertical-align: middle;"></el-rate>
 								</div>
 							</div>
 							
@@ -576,7 +591,7 @@
 								</div>
 								<div class="table-wrapper">
 									
-									<el-table :data="productSalesData" stripe>
+									<el-table :data="productSalesData" stripe class="table--product-sales">
 										<el-table-column 
 											label="季度" 
 											prop="1" 
@@ -633,29 +648,56 @@
 					</div>
 					
 					<div class="block clearfix">
-						<div class="bwl--b" style="height: 360px;">
+						<div class="bwl--b" style="height: 400px;">
 							<div class="section clearfix">
 								<span class="title-prefix-md">销售价格市场分布</span>
+								<div class="brand-title fr">销售额市场占比</div>
 							</div>
-							<div class="chart chart--pie--price-spread" style="height: 325px;"></div>	
+							<div class="chart chart--pie--price-spread fl" style="height: 270px;width: 270px;margin-left: 34px;"></div>
+							<div class="legends-wrapper fr" style="height: 270px;width: 198px;">
+								<div class="fl clearfix legends">
+									<div class="legend-item clearfix">
+										<div class="legend__icon" style="background: #0c4d90;"></div>
+										<div class="legend__name">淘宝</div>
+										<div class="legend__value">45.00%</div>
+									</div>
+									<div class="legend-item clearfix">
+										<div class="legend__icon" style="background: #53a8e2;"></div>
+										<div class="legend__name">天猫</div>
+										<div class="legend__value">30.00%</div>
+									</div>
+									<div class="legend-item clearfix">
+										<div class="legend__icon" style="background: #2c82be;"></div>
+										<div class="legend__name">京东</div>
+										<div class="legend__value">20.00%</div>
+									</div>
+									<div class="legend-item clearfix">
+										<div class="legend__icon" style="background: #76ddfb;"></div>
+										<div class="legend__name">唯品会</div>
+										<div class="legend__value">5.00%</div>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="bwr--b" style="height: 360px;">
-							<div class="chart chart--map1"></div>
+						<div class="bwr--b" style="height: 400px;">
+							<div class="chart chart--map--price" style="height: 100%;"></div>
 						</div>
 					</div>
 					<div class="block clearfix">
-						<div class="bwl--b" style="height: 360px;">
+						<div class="bwl--b" style="height: 580px;">
 							<div class="section clearfix">
 								<span class="title-prefix-md">促销方式</span>
 								<el-select placeholder="按季度"></el-select>
 							</div>
 							<div class="tabs">
-								<div class="tab-item is-active">一季度</div>
-								<div class="tab-item ">二季度</div>
-								<div class="tab-item ">三季度</div>
-								<div class="tab-item ">四季度</div>
+								<div class="tabs__header">
+									<div class="tab-item is-active">一季度</div>
+									<div class="tab-item ">二季度</div>
+									<div class="tab-item ">三季度</div>
+									<div class="tab-item ">四季度</div>
+								</div>
 							</div>
-							<el-table :data="commentActiveData" stripe>
+							<el-table :data="promotionWaysData" stripe class="table--promotion-ways">
 								<el-table-column 
 									label="促销方式" 
 									prop="1" 
@@ -685,7 +727,17 @@
 								</el-table-column>
 							</el-table>
 						</div>
-						<div class="bwr--b">
+						<div class="bwr--b" style="height: 580px;">
+							<div class="circle--promotion-ways">
+								<div class="circle__content" style="top: 29px;left: 152px;"><a href="javascript:">微信营销</a></div>
+								<div class="circle__content" style="top: 71px;left: 52px;"><a href="javascript:">平台营销</a></div>
+								<div class="circle__content" style="top: 173px;left: 12px;"><a href="javascript:">LBS营销</a></div>
+								<div class="circle__content" style="top: 277px;left: 51px;"><a href="javascript:">移动展示</a></div>
+								<div class="circle__content" style="top: 317px;left: 152px;"><a href="javascript:">移动兑奖</a></div>
+								<div class="circle__content" style="top: 276px;left: 248px;"><a href="javascript:">二维码营销</a></div>
+								<div class="circle__content" style="top: 173px;left: 297px;"><a href="javascript:">短彩信</a></div>
+								<div class="circle__content" style="top: 71px;left: 257px;"><a href="javascript:">APP营销</a></div>
+							</div>
 						</div>
 					</div>
 				</div>
