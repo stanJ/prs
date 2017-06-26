@@ -29,11 +29,25 @@ var app = new Vue({
 	        return createElement(
 	          'div',
 	          [
-	            createElement('a', ['==' + column.label + '=='], {
-	              attrs: {
-	                href: '#test'
-	              }
-	            })
+	            createElement('span', '用户情感('),
+	            createElement('div', {
+	            	class: {
+	            		'blue-sm': true
+	            	},
+	            	style: {
+	            		background: '#51a5de'
+	            	}
+	            }),
+	            createElement('span', '正面'),
+	            createElement('div', {
+	            	class: {
+	            		'red-sm': true
+	            	},
+	            	style: {
+	            		background: '#f77787'
+	            	}
+	            }),
+	            createElement('span', '负面)'),
 	          ]
 	        );
 	     },

@@ -669,7 +669,7 @@ a:visited{
 	line-height: 20px;
 }
 .legends-wrapper{
-	margin-right: 10%;
+	margin-right: 3.3%;
 }
 .chart-wrapper{
 	padding-left: 10px;
@@ -687,3 +687,9 @@ a:visited{
 .legend__value{
 	color: #485465;
 }
+.blue-sm,.red-sm{
+	display: inline-block;
+    width: 8px;
+    height: 8px;
+}
+

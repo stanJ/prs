@@ -27,6 +27,10 @@ var frameObj = {
 			$(".tab-pane").hide();
 			var name = tab.data('name');
 			$(".tab-pane[data-name='"+name+"']").show();
+			var title = $(".nav__title");
+			if(title){
+				title.find('.title-prefix-md').text(tab.text());
+			}
 			var func = tab.data('func');
 			var page = tab.data('page');
 			if(page){
