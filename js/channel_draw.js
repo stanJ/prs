@@ -18,6 +18,30 @@ var app = new Vue({
 		this.fetchData();
 	},
 	methods: {
+		shopRate: function(row){
+			var value = row.shopCountRate;
+			return utilObj.getRate(value)
+		},
+		yesterdayShop: function(row){
+			var value = row.yesterdayShopCount;
+			return parseInt(value);
+		},
+		numRate: function(row){
+			var value = row.numRate;
+			return utilObj.getRate(value)
+		},
+		yesterdayNum: function(row){
+			var value = row.yesterdayNum;
+			return parseInt(value);
+		},
+		activeShopRate: function(row){
+			var value = row.activeShopCountRate;
+			return utilObj.getRate(value)
+		},
+		yesterdayActiveShop: function(row){
+			var value = row.yesterdayActiveShopCount;
+			return parseInt(value);
+		},
 		fetchData: function(){
 			this.loadQualityList();
 			this.loadFocusList();
@@ -116,27 +140,22 @@ var app = new Vue({
 			},]
 		},
 		loadMaturityList: function(){
-			this.dealStoreData = [{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},]
+			var vm = this;
+			var today = '2017-06-27 00:00:00';
+			var yesterday = '2017-06-26 00:00:00';
+			utilObj.ajax({
+				url: '/m/productStats/statsChannelSaleToday',
+				type: 'POST',
+				data: {
+					today: today,
+					yesterday: yesterday,
+				},
+				success: function(data){
+					vm.dealStoreData = data.object;
+					vm.activeStoreData = data.object;
+					vm.dealGoodsData = data.object;
+				}
+			})
 			this.dealPeopleData = [{
 				'1': 'xxx',
 				'2': 'xxx',
@@ -158,49 +177,7 @@ var app = new Vue({
 				'3': 'xxx',
 				'4': 'xxx',
 			},]
-			this.activeStoreData = [{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},]
 			this.dealAmountData = [{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},]
-			this.dealGoodsData = [{
 				'1': 'xxx',
 				'2': 'xxx',
 				'3': 'xxx',
@@ -263,11 +240,29 @@ var app = new Vue({
 	}
 })
 $(function(){
-	lineBasic();
+	lineCustomers();
 	barStayTime();
 })
-function lineBasic(){
-	var lineBasic = echarts.init($(".chart--line--basic")[0]);
+function getSalesData(){
+	var startDate = '2017-04-04 00:00:00';
+	var endDate = '2017-04-20 23:59:59';
+	utilObj.ajax({
+		url: '/m/productStats/statsChannelSale',
+		type: 'POST',
+		data: {
+			startDate: startDate,
+			endDate: endDate,
+			mode: 3,
+		},
+		success: function(data){
+			
+		}
+		
+	})
+}
+
+function lineCustomers(){
+	var line1 = echarts.init($(".chart--line--new-customers")[0]);
 	var option = {
 		grid: {
 			left: '35',
@@ -378,7 +373,7 @@ function lineBasic(){
             ]
         }]
     };
-    lineBasic.setOption(option)
+    line1.setOption(option)
 }
 function barStayTime(){
 	var barStayTime = echarts.init($(".chart--bar--staytime")[0]);

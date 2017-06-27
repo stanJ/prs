@@ -19,6 +19,9 @@ var app = new Vue({
 		this.fetchData();
 	},
 	methods: {
+		buyTimesMonth: function(row){
+			return row.month + '月份'
+		},
 		fetchData: function(){
 			this.loadPageStayList();
 			this.loadPageAnalysisList();
@@ -268,44 +271,21 @@ var app = new Vue({
 			]
 		},
 		loadBuyTimesList: function(){
-			this.buyTimesData = [
-			{
-				'1': '201101月份',
-				'2': '819',
-			},
-			{
-				'1': '201102月份',
-				'2': '719',
-			},
-			{
-				'1': '201103月份',
-				'2': '619',
-			},
-			{
-				'1': '201104月份',
-				'2': '819',
-			},
-			{
-				'1': '201105月份',
-				'2': '519',
-			},
-			{
-				'1': '201106月份',
-				'2': '819',
-			},
-			{
-				'1': '201107月份',
-				'2': '319',
-			},
-			{
-				'1': '201108月份',
-				'2': '1419',
-			},
-			{
-				'1': '201109月份',
-				'2': '2819',
-			},
-			]
+			var curYear = new Date().getFullYear();
+			var startDate = utilObj.dayStart(curYear + '-01-01');
+			var endDate = utilObj.dayEnd(curYear + '-09-30');
+			var vm = this;
+			utilObj.ajax({
+				url: '/m/productStats/statsUserBuy',
+				type: 'POST',
+				data: {
+					startDate: startDate,
+					endDate: endDate,
+				},
+				success: function(data){
+					vm.buyTimesData = data.object;
+				}
+			})
 		},
 		loadPricesList: function(){
 			this.pricesData = [
@@ -473,30 +453,34 @@ var app = new Vue({
 		},
 	}
 })
-$(function(){
-	lineVisitTime();
-	lineMoneyPeople();
-	lineIncome();
-	lineVisitAmount();
-//	commentCloud();
-	lineO2O();
-	
-	barBrandPrefer();
-	barEducation();
-	radarAgeDiff();
-	piePriceAnalysis();
-	pieAges();
-	pieSex();
-	piePlace();
-	lineBuyTimes();
-	AreaVisitors();
-	pointJobs();
-	mapBuyMoney();
-})
 var userObj = {
+	loadTab1: function(){
+	},
+	loadTab2: function(){
+		pieAges();
+		barEducation();
+		lineIncome();
+		pointJobs();
+		pieSex();
+		piePlace();
+	},
+	loadTab3: function(){
+		lineMoneyPeople();
+		mapBuyMoney();
+		areaVisitors();
+		lineBuyTimes();
+	},
 	loadTab4: function(){
+		lineO2O();
+		piePriceAnalysis();
+		barBrandPrefer();
+		radarAgeDiff();
 		personalityCloud();
-	}
+	},
+	loadTab5: function(){
+		lineVisitTime();
+		lineVisitAmount();
+	},
 }
 function mapBuyMoney(){
 	var map1 = echarts.init($(".chart--map--buy-money")[0]);
@@ -862,105 +846,26 @@ function mapBuyMoney(){
 }
 
 function pointJobs(){
-	var point1 = echarts.init($(".chart--point--jobs")[0]);
-	var data = [
-	    [[28604,77,17096869,'Australia',1990],[31163,77.4,27662440,'Canada',1990],[1516,68,1154605773,'China',1990],[13670,74.7,10582082,'Cuba',1990],[28599,75,4986705,'Finland',1990],[29476,77.1,56943299,'France',1990],[31476,75.4,78958237,'Germany',1990],[28666,78.1,254830,'Iceland',1990],[1777,57.7,870601776,'India',1990],[29550,79.1,122249285,'Japan',1990],[2076,67.9,20194354,'North Korea',1990],[12087,72,42972254,'South Korea',1990],[24021,75.4,3397534,'New Zealand',1990],[43296,76.8,4240375,'Norway',1990],[10088,70.8,38195258,'Poland',1990],[19349,69.6,147568552,'Russia',1990],[10670,67.3,53994605,'Turkey',1990],[26424,75.7,57110117,'United Kingdom',1990],[37062,75.4,252847810,'United States',1990]],
-	    [[44056,81.8,23968973,'Australia',2015],[43294,81.7,35939927,'Canada',2015],[13334,76.9,1376048943,'China',2015],[21291,78.5,11389562,'Cuba',2015],[38923,80.8,5503457,'Finland',2015],[37599,81.9,64395345,'France',2015],[44053,81.1,80688545,'Germany',2015],[42182,82.8,329425,'Iceland',2015],[5903,66.8,1311050527,'India',2015],[36162,83.5,126573481,'Japan',2015],[1390,71.4,25155317,'North Korea',2015],[34644,80.7,50293439,'South Korea',2015],[34186,80.6,4528526,'New Zealand',2015],[64304,81.6,5210967,'Norway',2015],[24787,77.3,38611794,'Poland',2015],[23038,73.13,143456918,'Russia',2015],[19360,76.5,78665830,'Turkey',2015],[38225,81.4,64715810,'United Kingdom',2015],[53354,79.1,321773631,'United States',2015]]
+	var some_words = [
+	  {text: '电子网络', weight: 9, html: {'test': 'just testing'}},
+	  {text: '销售客服', weight: 8, link: '#'},
+	  {text: '媒体艺术', weight: 5, link: '#'},
+	  {text: '教育科研', weight: 3, link: '#'},
+	  {text: '电子网络1', weight: 9, html: {'test': 'just testing'}},
+	  {text: '销售客服1', weight: 8, link: '#'},
+	  {text: '媒体艺术1', weight: 5, link: '#'},
+	  {text: '教育科研1', weight: 3, link: '#'},
+	  {text: '电子网络2', weight: 9, html: {'test': 'just testing'}},
+	  {text: '销售客服2', weight: 8, link: '#'},
+	  {text: '媒体艺术2', weight: 5, link: '#'},
+	  {text: '教育科研2', weight: 3, link: '#'},
+	  {text: '电子网络3', weight: 9, html: {'test': 'just testing'}},
+	  {text: '销售客服3', weight: 8, link: '#'},
+	  {text: '媒体艺术3', weight: 5, link: '#'},
+	  {text: '教育科研3', weight: 3, link: '#'},
 	];
-	
-	var option = {
-//	    backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
-//	        offset: 0,
-//	        color: '#f7f8fa'
-//	    }, {
-//	        offset: 1,
-//	        color: '#cdd0d5'
-//	    }]),
-	    title: {
-	        text: '1990 与 2015 年各国家人均寿命与 GDP'
-	    },
-	    legend: {
-	        right: 10,
-	        data: ['1990', '2015']
-	    },
-	    xAxis: {
-	        splitLine: {
-	            lineStyle: {
-	                type: 'dashed'
-	            }
-	        }
-	    },
-	    yAxis: {
-	        splitLine: {
-	            lineStyle: {
-	                type: 'dashed'
-	            }
-	        },
-	        scale: true
-	    },
-	    series: [{
-	        name: '1990',
-	        data: data[0],
-	        type: 'scatter',
-	        symbolSize: function (data) {
-	            return Math.sqrt(data[2]) / 5e2;
-	        },
-	        label: {
-	            emphasis: {
-	                show: true,
-	                formatter: function (param) {
-	                    return param.data[3];
-	                },
-	                position: 'top'
-	            }
-	        },
-	        itemStyle: {
-	            normal: {
-	                shadowBlur: 10,
-	                shadowColor: 'rgba(120, 36, 50, 0.5)',
-	                shadowOffsetY: 5,
-	                color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-	                    offset: 0,
-	                    color: 'rgb(251, 118, 123)'
-	                }, {
-	                    offset: 1,
-	                    color: 'rgb(204, 46, 72)'
-	                }])
-	            }
-	        }
-	    }, {
-	        name: '2015',
-	        data: data[1],
-	        type: 'scatter',
-	        symbolSize: function (data) {
-	            return Math.sqrt(data[2]) / 5e2;
-	        },
-	        label: {
-	            emphasis: {
-	                show: true,
-	                formatter: function (param) {
-	                    return param.data[3];
-	                },
-	                position: 'top'
-	            }
-	        },
-	        itemStyle: {
-	            normal: {
-	                shadowBlur: 10,
-	                shadowColor: 'rgba(25, 100, 150, 0.5)',
-	                shadowOffsetY: 5,
-	                color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-	                    offset: 0,
-	                    color: 'rgb(129, 227, 238)'
-	                }, {
-	                    offset: 1,
-	                    color: 'rgb(25, 183, 207)'
-	                }])
-	            }
-	        }
-	    }]
-	};
-	point1.setOption(option);
+	$(".chart--point--jobs").html('');
+	$(".chart--point--jobs").jQBubbleCloud(some_words);
 }
 function barEducation(){
 	var bar1 = echarts.init($(".chart--bar--education")[0]);
@@ -1026,6 +931,22 @@ function barEducation(){
 	    }]
 	};
 	bar1.setOption(option);
+}
+function getPriceAnalysisData(){
+	var startDate = utilObj.dayStart('2017-01-01');
+	var endDate = utilObj.dayEnd('2017-12-31');
+	utilObj.ajax({
+		url: '/m/productStats/statsPrice',
+		type: 'POST',
+		data: {
+			productId: productId,
+			startDate: startDate,
+			endDate: endDate,
+		},
+		success: function(data){
+			
+		}
+	})
 }
 function piePriceAnalysis(){
 	var pie1 = echarts.init($(".chart--pie--price-analysis")[0]);
@@ -1313,7 +1234,22 @@ function radarAgeDiff(){
 	};
 	radar1.setOption(option);
 }
-
+function getBrandPreferData(){
+	var startDate = utilObj.dayStart('2017-01-01');
+	var endDate = utilObj.dayEnd('2017-12-31');
+	utilObj.ajax({
+		url: '/m/productStats/statsProductBrand',
+		type: 'POST',
+		data: {
+			productId: 1,
+			startDate: startDate,
+			endDate: endDate,
+		},
+		success: function(data){
+			
+		}
+	})
+}
 function barBrandPrefer(){
 	var b1 = echarts.init($(".chart--bar-brand-prefer")[0]);
 	var option1 = {
@@ -2053,13 +1989,14 @@ function lineBuyTimes(){
             'symbol': 'emptyCircle',
             symbolSize: 10,
             hoverAnimation: false,
-            data: [900,600,1100,2000,1800,2200,2800,3300,3000]
+//          data: [900,600,1100,2000,1800,2200,2800,3300,3000],
+            data: utilObj.getAryByParam(app.buyTimesData,'buyCount'),
         },
         ]
     };
     line1.setOption(option)
 }	
-function AreaVisitors(){
+function areaVisitors(){
 	var area1 = echarts.init($(".chart--area--visitors")[0]);
 	var option = {
 	    grid: {

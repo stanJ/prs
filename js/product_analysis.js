@@ -479,27 +479,24 @@ var app = new Vue({
 		},
 	}
 })
-$(function(){
-	lineGoodComment();
-	
-	
-	basicLabel();
-	barLabelOverView();
-	
-	linePriceTrend();
-	piePriceSpread();
-	lineGoodReputation();
-	radarHotSalesSpot();
-	mapPrice();
-})
 var productObj = {
 	loadTab1: function(){
+		barLabelOverView();
 		goodsCommentCloud();
+		lineGoodReputation();
+		radarHotSalesSpot();
 	},
 	loadTab2: function(){
+		barBasicLabel();
 		hotKeyCloud();
 	},
+	loadTab3: function(){
+		linePriceTrend();
+		piePriceSpread();
+		mapPrice();
+	},
 	loadTab4: function(){
+		lineGoodComment();
 		userCommentCloud();
 	},
 }
@@ -1209,7 +1206,7 @@ function hotKeyCloud(){
 	$(".cloud--hot-key").html('');
     $(".cloud--hot-key").jQCloud(word_list);
 }
-function basicLabel(){
+function barBasicLabel(){
 	var b1 = echarts.init($(".chart--bar--basic-label1")[0]);
 	var b2 = echarts.init($(".chart--bar--basic-label2")[0]);
 	var option1 = {
@@ -1325,7 +1322,6 @@ function basicLabel(){
 	b1.setOption(option1);
 	b2.setOption(option2);
 }
-
 function barLabelOverView(){
 	var b1 = echarts.init($(".chart--bar-h1")[0]);
 	var b2 = echarts.init($(".chart--bar-h2")[0]);
@@ -1441,6 +1437,7 @@ function barLabelOverView(){
 	};
 	b1.setOption(option1);
 	b2.setOption(option2);
+	
 }
 
 function radarHotSalesSpot(){

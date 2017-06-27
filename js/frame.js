@@ -1,3 +1,11 @@
+Vue.filter('rate', function (value) {
+	if(value){
+		value = Math.abs(parseFloat(value))*100;
+		value = value.toFixed(2)+'%';
+	}
+	return value;
+})
+
 $(function(){
 	frameObj.init();
 })
@@ -6,6 +14,7 @@ var frameObj = {
 		loadFrame();
 		this.loadTabs();
 		this.bindEvent();
+//		this.login();
 	},
 	bindEvent: function(){
 		var _this = this;
@@ -19,6 +28,41 @@ var frameObj = {
 			items.removeClass('is-active');
 			$(this).addClass('is-active')
 			_this.loadTabs();
+		})
+	},
+	login: function(){
+		if(sessionStorage.getItem('t')){
+			return;
+		}
+		utilObj.ajax({
+			url:"/j_spring_security_check",
+			type: "POST",
+			async: false,
+			data:{
+				j_username: 'superadmin',
+				j_password: '123456',
+			},
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader("X-Ajax-call", "true");
+			},
+			success: function(data){
+				var response = JSON.parse(data);
+				if(response.authentication.authenticated==false){
+					return;
+				}
+				sessionStorage.setItem('t',response.token);
+				sessionStorage.setItem('userinfo',JSON.stringify(response.user));
+			},
+			fail:function(data){
+				utilObj.alert({
+					body:"服务器出错了"
+				})
+			},
+			error:function (data, status, e){
+				utilObj.alert({
+					body:"服务器出错了"
+				})
+			}
 		})
 	},
 	loadTabs: function(){
@@ -62,11 +106,6 @@ function loadFrame(){
 					<a href="channel_draw.html">渠道画像</a>
 					<a href="user_analysis.html">用户画像</a>
 					<a href="product_analysis.html">产品分析</a>
-					<a href="javascript:">User</a>
-					<a href="javascript:">Module</a>
-					<a href="javascript:">Configuration</a>
-					<a href="javascript:">Report</a>
-					<a href="javascript:">Help</a>
 				</div>
 				<div class="btn-keys">
 					<div class="triangle-down">
@@ -152,13 +191,8 @@ function loadFrame(){
 			}
 		});
 	})
-//	$( ".select" ).selectify({
-//		btnText: '',
-//		classes: {
-//			container: 'select ' ++ ' sl-container'
-//		}
-//	});
 	$( "select" ).on( "change", function ( ) {
 		console.log( "Yes, these events work as they did on the native UI!" );
 	});
 }
+frameObj.login();

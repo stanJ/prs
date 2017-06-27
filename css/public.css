@@ -96,13 +96,41 @@ a:visited{
     background-image: url(../img/nav_icon_drop.png);
 }
 .prs__select.sl-container.sl-open .sl-button{
-	background: none;
+	background-image: url(../img/nav_icon_drop.png);
+	background-repeat: no-repeat;
+	line-height: 40px;
+	background-position: center;
 }
 .prs__select .sl-placeholder-container:hover .sl-button{
 	background-image: url(../img/nav_icon_drop.png);
 	background-position: center;
     background-repeat: no-repeat;
 }
+.prs__select .sl-placeholder-container:focus {
+    outline: none;
+    box-shadow: none;
+}
+.prs__select.sl-container.sl-open .sl-placeholder-container {
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+.prs__select.sl-container .sl-options {
+	width: 100%;
+	box-sizing: border-box;
+}
+.prs__select.sl-container .sl-options .sl-selected {
+    background: #20a0ff;
+    color: #fff;
+}
+.prs__select.sl-container .sl-options li a:hover {
+    background: #e4e8f1;
+    color: #000;
+}
+.prs__select.sl-container .sl-options {
+     border: 0; 
+}
+
 .select{
     line-height: 40px;
     background: #0c4d90;

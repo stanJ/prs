@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="css/public.css"/>
 		<link rel="stylesheet" type="text/css" href="lib/selectify/silver.default.css"/>
 		<link rel="stylesheet" type="text/css" href="lib/jqcloud/jqcloud.css"/>
+		<link rel="stylesheet" type="text/css" href="lib/jqbubblecloud/jqbubblecloud.css"/>
 		<style type="text/css">
 			.bwl--b{
 			    width: 22.6%;
@@ -349,12 +350,16 @@
 		<div class="content" id="app">
 			<div class="tabs__nav">
 				<div class="nav--tab">
-					<div class="tab-title" data-name="tab1">用户标签维护</div>
-					<div class="tab-title is-active" data-name="tab2">消费人群属性分析</div>
-					<div class="tab-title " data-name="tab3">用户购买转换分析</div>
+					<div class="tab-title" data-name="tab1" 
+						data-func="loadTab1" data-page="user">用户标签维护</div>
+					<div class="tab-title is-active" data-name="tab2"
+						data-func="loadTab2" data-page="user">消费人群属性分析</div>
+					<div class="tab-title " data-name="tab3"
+						data-func="loadTab3" data-page="user">用户购买转换分析</div>
 					<div class="tab-title " data-name="tab4"
 						data-func="loadTab4" data-page="user">用户购买特征分析</div>
-					<div class="tab-title " data-name="tab5">用户网络行为分析</div>
+					<div class="tab-title " data-name="tab5"
+						data-func="loadTab5" data-page="user">用户网络行为分析</div>
 				</div>
 				<div class="nav__title clearfix">
 					<span class="title-prefix-md">用户网络行为分析</span>
@@ -765,13 +770,14 @@
 								<el-table :data="buyTimesData" stripe class="table--buy-times">
 									<el-table-column 
 										label="月份" 
-										prop="1" 
+										prop="month" 
 										align="center"
+										:formatter="buyTimesMonth"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column 
 										label="购买人次(万)" 
-										prop="2"
+										prop="buyCount"
 										align="center"
 										:show-overflow-tooltip="true">
 									</el-table-column>
@@ -1161,7 +1167,7 @@
 									<span class="title-prefix-md">职业分布</span>
 									<div class="brand-title fr">Top10职业分布</div>
 								</div>
-								<div class="chart chart--point--jobs" style="height: 300px;"></div>
+								<div class="chart chart--point--jobs" style="height: 280px;"></div>
 							</div>
 						
 						</div>
@@ -1279,14 +1285,17 @@
 				</div>			
 			</div>
 		</div>
+		<script src="js/util.js" type="text/javascript" charset="utf-8"></script>
 		<script src="lib/jquery/jquery-3.2.1.js"></script>
 		<script src="lib/jqcloud/jqcloud-1.0.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="lib/jqbubblecloud/jqbubblecloud-1.0.4.js" type="text/javascript" charset="utf-8"></script>
 		<script src="lib/selectify/jquery.selectify.js" type="text/javascript" charset="utf-8"></script>
 		<script src="lib/vue/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script src="lib/element/index.js"></script>
 		<script src="lib/echarts/echarts.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/user_analysis.js" type="text/javascript" charset="utf-8"></script>
 		<script src="lib/echarts/china.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/frame.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/user_analysis.js" type="text/javascript" charset="utf-8"></script>
+		
 	</body>
 </html>

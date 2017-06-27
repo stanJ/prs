@@ -254,9 +254,10 @@
 
 				<hr class="line"/>
 				<div class="clearfix" style="margin-top: 21px;">
-					<span class="title--normal mr20">渠道基础数据</span>
+					
 					<div class="tabs">
-						<div class="tabs__header">
+						<span class="title--normal mr20">渠道基础数据</span>
+						<div class="tabs__header" style="display: inline-block;width: initial;">
 							<div class="tab-item is-active">新增用户</div>
 							<div class="tab-item">活跃用户</div>
 							<div class="tab-item">启动次数</div>
@@ -264,12 +265,41 @@
 							<div class="tab-item">成交金额</div>
 							<div class="tab-item">成交店铺</div>
 						</div>
-						
+						<div class="tabs__content">
+							<div class="tab-content">
+								<div class="line--basic-wrapper">
+									<div class="chart chart--line--new-customers" style="height: 300px;"></div>
+								</div>
+							</div>
+							<div class="tab-content">
+								<div class="line--basic-wrapper">
+									<div class="chart chart--line--active-customers" style="height: 300px;"></div>
+								</div>
+							</div>
+							<div class="tab-content">
+								<div class="line--basic-wrapper">
+									<div class="chart chart--line--start-times" style="height: 300px;"></div>
+								</div>
+							</div>
+							<div class="tab-content">
+								<div class="line--basic-wrapper">
+									<div class="chart chart--line--channel-sales" style="height: 300px;"></div>
+								</div>
+							</div>
+							<div class="tab-content">
+								<div class="line--basic-wrapper">
+									<div class="chart chart--line--channel-money" style="height: 300px;"></div>
+								</div>
+							</div>
+							<div class="tab-content">
+								<div class="line--basic-wrapper">
+									<div class="chart chart--line--channel-store" style="height: 300px;"></div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div class="line--basic-wrapper">
-					<div class="chart chart--line--basic" style="height: 300px;"></div>
-				</div>
+				
 				
 			</div>
 			<div class="bwl--a">
@@ -377,28 +407,30 @@
 								<el-table :data="dealGoodsData" stripe  height="160">
 									<el-table-column 
 										label="渠道名称" 
-										prop="1" 
+										prop="channelName" 
 										align="center"
 										min-width="90"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column 
 										label="今日商品销量" 
-										prop="2"
+										prop="todayNum"
 										align="center"
 										min-width="110"
 										:show-overflow-tooltip="true">
 									</el-table-column>
 									<el-table-column label="昨日成交销量" 
-										prop="3"
+										prop="yesterdayNum"
 										align="center"
 										min-width="110"
+										:formatter="yesterdayNum"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column label="销量额增长率" 
-										prop="4"
+										prop="numRate"
 										align="center"
 										min-width="100"
+										:formatter="numRate"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column 
@@ -453,28 +485,30 @@
 								<el-table :data="activeStoreData" stripe  height="160">
 									<el-table-column 
 										label="渠道名称" 
-										prop="1" 
+										prop="channelName" 
 										align="center"
 										min-width="90"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column 
 										label="今日活跃店铺" 
-										prop="2"
+										prop="todayActiveShopCount"
 										align="center"
 										min-width="110"
 										:show-overflow-tooltip="true">
 									</el-table-column>
 									<el-table-column label="昨日活跃店铺" 
-										prop="3"
+										prop="yesterdayActiveShopCount"
 										align="center"
 										min-width="110"
+										:formatter="yesterdayActiveShop"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column label="店铺增长率" 
-										prop="4"
+										prop="activeShopCountRate"
 										align="center"
 										min-width="100"
+										:formatter="activeShopRate"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column 
@@ -491,28 +525,30 @@
 								<el-table :data="dealStoreData" stripe  height="160">
 									<el-table-column 
 										label="渠道名称" 
-										prop="1" 
+										prop="channelName" 
 										align="center"
 										min-width="90"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column 
 										label="今日成交店铺" 
-										prop="2"
+										prop="todayShopCount"
 										align="center"
 										min-width="110"
 										:show-overflow-tooltip="true">
 									</el-table-column>
 									<el-table-column label="昨日成交店铺" 
-										prop="3"
+										prop="yesterdayShopCount"
 										align="center"
 										min-width="110"
+										:formatter="yesterdayShop"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column label="店铺增长率" 
-										prop="4"
+										prop="shopCountRate"
 										align="center"
 										min-width="100"
+										:formatter="shopRate"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column 
@@ -545,11 +581,10 @@
 			
 			
 		</div>
+		<script src="js/util.js" type="text/javascript" charset="utf-8"></script>
 		<script src="lib/jquery/jquery-3.2.1.js"></script>
 		<script src="lib/selectify/jquery.selectify.js" type="text/javascript" charset="utf-8"></script>
-		<!--先引入vue-->
 		<script src="lib/vue/vue.js" type="text/javascript" charset="utf-8"></script>
-		<!-- 引入组件库 -->
 		<script src="lib/element/index.js"></script>
 		<script src="lib/echarts/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/frame.js" type="text/javascript" charset="utf-8"></script>
