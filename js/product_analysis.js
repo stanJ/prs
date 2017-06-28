@@ -15,6 +15,37 @@ var app = new Vue({
 		this.fetchData();
 	},
 	methods: {
+		transferW: utilObj.transferW,
+		tansferSeason: function(row){
+			var value = row.season.toString();
+			if(value){
+				var num = value.slice(-1);
+				value = '季度'+num;
+			}
+			return value;
+		},
+		isPositiveNumber: function(value){
+			if(value){
+				if(parseFloat(value)>0){
+					return true;
+				}else {
+					return false;
+				}
+			}else {
+				return false;
+			}
+		},
+		isNegativeNumber: function(value){
+			if(value){
+				if(parseFloat(value)<0){
+					return true;
+				}else {
+					return false;
+				}
+			}else {
+				return false;
+			}
+		},
 		fetchData: function(){
 			this.loadCategoryList();
 			this.loadHighlightList();
@@ -306,43 +337,61 @@ var app = new Vue({
 		},
 		
 		loadCommentActiveList: function(){
-			this.commentActiveData = [{
-				'1': '京东',
-				'2': '2W+',
-				'3': '600+',
-				'4': '100+',
-				'5': '100+',
-				'6': '50',
-				'7': '8',
-				'8': '1.5W',
-			},{
-				'1': '淘宝',
-				'2': '2W+',
-				'3': '500+',
-				'4': '100+',
-				'5': '130+',
-				'6': '55',
-				'7': '8',
-				'8': '3.5W',
-			},{
-				'1': '天猫',
-				'2': '0.9W+',
-				'3': '300+',
-				'4': '100+',
-				'5': '100+',
-				'6': '60',
-				'7': '8',
-				'8': '2.5W',
-			},{
-				'1': '唯品会',
-				'2': '1.7W+',
-				'3': '200+',
-				'4': '100+',
-				'5': '110+',
-				'6': '70',
-				'7': '8',
-				'8': '2.3W',
-			},]
+			var vm = this;
+			var startDate = utilObj.dayStart('2017-05-01');
+			var endDate = utilObj.dayEnd(moment().format("YYYY-MM-DD"));
+			utilObj.ajax({
+				url: '/m/productStats/statsProductRemarkActive',
+				type: 'POST',
+				data: {
+					nextPage: 0,
+					pageSize: 10,
+					productId: 1,
+					startDate: startDate,
+					endDate: endDate,
+					channelIds: '',
+				},
+				success: function(data){
+					vm.commentActiveData = data.object.content;
+				}
+			})
+//			this.commentActiveData = [{
+//				'1': '京东',
+//				'2': '2W+',
+//				'3': '600+',
+//				'4': '100+',
+//				'5': '100+',
+//				'6': '50',
+//				'7': '8',
+//				'8': '1.5W',
+//			},{
+//				'1': '淘宝',
+//				'2': '2W+',
+//				'3': '500+',
+//				'4': '100+',
+//				'5': '130+',
+//				'6': '55',
+//				'7': '8',
+//				'8': '3.5W',
+//			},{
+//				'1': '天猫',
+//				'2': '0.9W+',
+//				'3': '300+',
+//				'4': '100+',
+//				'5': '100+',
+//				'6': '60',
+//				'7': '8',
+//				'8': '2.5W',
+//			},{
+//				'1': '唯品会',
+//				'2': '1.7W+',
+//				'3': '200+',
+//				'4': '100+',
+//				'5': '110+',
+//				'6': '70',
+//				'7': '8',
+//				'8': '2.3W',
+//			},]
 		},
 		loadEmotionAnalysisList: function(){
 			this.emotionAnalysisData = [
@@ -373,6 +422,21 @@ var app = new Vue({
 			]
 		},
 		loadEmotionTrendList: function(){
+			var vm = this;
+			var today = utilObj.dayEnd(moment().format("YYYY-MM-DD"));
+			var daysBefore = 7;
+			utilObj.ajax({
+				url: '/m/productStats/statsProductComment',
+				type: 'POST',
+				data: {
+					productId: 1,
+					today: today,
+					daysBefore: daysBefore,
+				},
+				success: function(data){
+//					vm.emotionTrendData = data.object;
+				}
+			})			
 			this.emotionTrendData = [
 			{
 				'0': '点评数',
@@ -438,44 +502,57 @@ var app = new Vue({
 			]
 		},
 		loadProductSalesList: function(){
-			this.productSalesData = [
-			{
-				'1': '季度1',
-				'2': '4356',
-				'3': '3000',
-				'4': '1356',
-				'5': '4500',
-				'6': '1%',
-				'7': '1%',
-			},
-			{
-				'1': '季度2',
-				'2': '4356',
-				'3': '3200',
-				'4': '1356',
-				'5': '4500',
-				'6': '1%',
-				'7': '3%',
-			},
-			{
-				'1': '季度3',
-				'2': '4356',
-				'3': '3010',
-				'4': '1356',
-				'5': '4500',
-				'6': '2%',
-				'7': '1%',
-			},
-			{
-				'1': '季度4',
-				'2': '4356',
-				'3': '4000',
-				'4': '1356',
-				'5': '4520',
-				'6': '1%',
-				'7': '1%',
-			},
-			]
+			var vm = this;
+			var year = '2017'
+			utilObj.ajax({
+				url: '/m/productStats/statsProductSale',
+				type: 'POST',
+				data: {
+					productId: 1,
+					year: year,
+				},
+				success: function(data){
+					vm.productSalesData = data.object;
+				}
+			})
+//			this.productSalesData = [
+//			{
+//				'1': '季度1',
+//				'2': '4356',
+//				'3': '3000',
+//				'4': '1356',
+//				'5': '4500',
+//				'6': '0.02',
+//				'7': '0',
+//			},
+//			{
+//				'1': '季度2',
+//				'2': '4356',
+//				'3': '3200',
+//				'4': '1356',
+//				'5': '4500',
+//				'6': '0.03',
+//				'7': '0.012',
+//			},
+//			{
+//				'1': '季度3',
+//				'2': '4356',
+//				'3': '3010',
+//				'4': '1356',
+//				'5': '4500',
+//				'6': '-0.05',
+//				'7': '0.0612',
+//			},
+//			{
+//				'1': '季度4',
+//				'2': '4356',
+//				'3': '4000',
+//				'4': '1356',
+//				'5': '4520',
+//				'6': '0.05',
+//				'7': '-0.12',
+//			},
+//			]
 		},
 	}
 })
@@ -487,17 +564,21 @@ var productObj = {
 		radarHotSalesSpot();
 	},
 	loadTab2: function(){
-		barBasicLabel();
+//		barBasicLabel();
+		getBasicLabelData();
 		hotKeyCloud();
 	},
 	loadTab3: function(){
-		linePriceTrend();
-		piePriceSpread();
+		getPriceTrendData();
+//		piePriceSpread();
+		getPriceSpreadData()
 		mapPrice();
 	},
 	loadTab4: function(){
-		lineGoodComment();
-		userCommentCloud();
+//		lineGoodComment();
+		getGoodCommentData();
+//		userCommentCloud();
+		getUserCommentData();
 	},
 }
 function mapPrice(){
@@ -863,14 +944,48 @@ function mapPrice(){
 	};
 	map1.setOption(option)
 }
-
-function piePriceSpread(){
+function getPriceSpreadData(){
+	var startDate = utilObj.dayStart('2017-01-01');
+	var endDate = utilObj.dayEnd(moment().format("YYYY-MM-DD"));
+	utilObj.ajax({
+		url: '/m/productStats/statsProductSaleAmountByChannel',
+		type: 'POST',
+		data: {
+			productId: 1,
+		},
+		success: function(data){
+			var seriesData = utilObj.getPieData(data.object, {
+				value: 'amount',
+				name: 'channelName'
+			})
+			piePriceSpread({
+				seriesData: seriesData,
+				originData: data.object,
+			})
+		}
+	})
+}
+function legendsPriceSpread(data, params){
+	var h = '';
+	for(var i=0;i<data.length;i++){
+		h += '<div class="legend-item clearfix">';
+		h += 	'<div class="legend__icon" style="background: '+params.color[i]+';"></div>';
+		h += 	'<div class="legend__name">'+data[i].channelName+'</div>';
+		h +=	'<div class="legend__value">'+data[i].ratio+'</div>';
+		h += '</div>';
+	}
+	$(".legends--price-spread").html(h);
+}
+function piePriceSpread(params){
+	var color = ['#0c4d90','#53a8e2','#2c82be','#76ddfb',];
+	legendsPriceSpread(params.originData, {
+		color: color,
+	})
 	var pie1 = echarts.init($(".chart--pie--price-spread")[0]);
 	var option = {
-		color: ['#0c4d90','#53a8e2','#2c82be','#76ddfb',],
+		color: color,
 	    tooltip: {
 	        trigger: 'item',
-//	        formatter: "{a} <br/>{b}: {c} ({d}%)"
 	        formatter: "{b}<br/>{d}%"
 	    },
 	    series: [
@@ -889,19 +1004,41 @@ function piePriceSpread(){
 	                    show: false
 	                }
 	            },
-	            data:[
-	                {value:45, name:'淘宝'},
-	                {value:30, name:'天猫'},
-	                {value:20, name:'京东'},
-	                {value:5, name:'唯品会'},
-	            ]
+	            data:params.seriesData,
+//	            data:[
+//	                {value:45, name:'淘宝'},
+//	                {value:30, name:'天猫'},
+//	                {value:20, name:'京东'},
+//	                {value:5, name:'唯品会'},
+//	            ],
 	        }
 	    ]
 	};
 	pie1.setOption(option)
 }
-function lineGoodComment(){
-	var lineGoodComment = echarts.init($(".chart--line--goodcomment")[0]);
+function getGoodCommentData(){
+	var startDate = utilObj.dayStart('2017-01-01');
+	var endDate = utilObj.dayEnd(moment().format("YYYY-MM-DD"));
+	utilObj.ajax({
+		url: '/m/productStats/statsProductGoodComment',
+		type: 'POST',
+		data: {
+			productId: 1,
+			startDate: startDate,
+			endDate: endDate,
+		},
+		success: function(data){
+			var xAxisData = utilObj.getAryByParam(data.object, 'yearMonth', utilObj.getMonth)
+			var seriesData = utilObj.getAryByParam(data.object, 'goodCount')
+			lineGoodComment({
+				xAxisData: xAxisData,
+				seriesData: seriesData,
+			})
+		}
+	})
+}
+function lineGoodComment(params){
+	var line1 = echarts.init($(".chart--line--goodcomment")[0]);
 	var option = {
 		grid: {
 			left: '35',
@@ -922,7 +1059,7 @@ function lineGoodComment(){
         xAxis: {
             type: 'category',
             boundaryGap: true,
-            data:['1月','2月','3月','4月','5月',],
+            data: params.xAxisData,
             axisLine: {
 	            lineStyle: {
 	        		color: '#d7d7d7',
@@ -971,19 +1108,36 @@ function lineGoodComment(){
             'symbol': 'emptyCircle',
             symbolSize: 8,
             hoverAnimation: false,
-            data: [
-            	['1月', 10],
-            	['2月', 30],
-            	['3月', 40],
-            	['4月', 20],
-            	['5月', 80],
-            ]
+            data: params.seriesData,
         }]
     };
-    lineGoodComment.setOption(option)
+    line1.setOption(option)
 }
-function linePriceTrend(){
-	var linePriceTrend = echarts.init($(".chart--line--product-price-trend")[0]);
+function getPriceTrendData(){
+	var startDate = utilObj.dayStart('2017-01-01');
+	var endDate = utilObj.dayEnd(moment().format("YYYY-MM-DD"));
+	utilObj.ajax({
+		url: '/m/productStats/statsProductSalePrice',
+		type: 'POST',
+		data: {
+			productId: 1,
+			startDate: startDate,
+			endDate: endDate,
+			mode: 2,
+		},
+		success: function(data){
+			var xAxisData = utilObj.getAryByParam(data.object, 'ddate', utilObj.getMonth)
+			var seriesData = utilObj.getAryByParam(data.object, 'avgPrice')
+			linePriceTrend({
+				xAxisData: xAxisData,
+				seriesData: seriesData,
+			})
+		}
+	})
+}
+function linePriceTrend(params){
+	
+	var line1 = echarts.init($(".chart--line--product-price-trend")[0]);
 	var option = {
 		grid: {
 			left: '10',
@@ -1005,7 +1159,8 @@ function linePriceTrend(){
         xAxis: {
             type: 'category',
             boundaryGap: true,
-            data:['1月','2月','3月','4月','5月',],
+            data:params.xAxisData,
+//          data:['1月','2月','3月','4月','5月',],
             axisLine: {
 	            lineStyle: {
 	        		color: '#d7d7d7',
@@ -1055,16 +1210,13 @@ function linePriceTrend(){
             'symbol': 'emptyCircle',
             symbolSize: 8,
             hoverAnimation: false,
-            data: [
-            	['1月', 500],
-            	['2月', 1500],
-            	['3月', 2000],
-            	['4月', 1000],
-            	['5月', 2200],
-            ]
+            data: params.seriesData,
+//          data: [
+//          	500, 1500, 2000, 1000, 2200
+//          ],
         }]
     };
-    linePriceTrend.setOption(option)
+    line1.setOption(option)
 }
 
 function lineGoodReputation(){
@@ -1145,24 +1297,41 @@ function lineGoodReputation(){
     };
     lineGoodReputation.setOption(option)
 }
-
-function userCommentCloud(){
-	var word_list = [
-	    {text: "售后服务", weight: 9, link: "https://github.com/DukeLeNoir/jQCloud"},
-	    {text: "以旧换新", weight: 9, html: {title: "My Title", "class": "custom-class"}, link: {href: "http://jquery.com/", target: "_blank"}},
-	    {text: "送货速度", weight: 8},
-	    {text: "包装精美", weight: 9},
-	    {text: "潮流", weight: 8},
-	    {text: "时尚", weight: 6.2},
-	    {text: "耐用", weight: 5},
-	    {text: "喜爱", weight: 5},
-	    {text: "个性", weight: 5},
-	    {text: "送人", weight: 4},
-	    {text: "顺手", weight: 4},
-	    {text: "实用", weight: 4},
-	    {text: "礼物", weight: 3},
-	    {text: "防水", weight: 3},
-	];
+function getUserCommentData(){
+	var productId = 24
+	utilObj.ajax({
+		url: '/m/productStats/statsProductLabel',
+		type: 'POST',
+		data: {
+			productId: productId,
+			topN: 10,
+		},
+		success: function(data){
+			var cloudData = utilObj.getCloudData(data.object, {
+				text: 'content',
+				weight: 'count',
+			});
+			userCommentCloud(cloudData)
+		}
+	})
+}
+function userCommentCloud(word_list){
+//	var word_list = [
+//	    {text: "售后服务", weight: 9, link: "https://github.com/DukeLeNoir/jQCloud"},
+//	    {text: "以旧换新", weight: 9, html: {title: "My Title", "class": "custom-class"}, link: {href: "http://jquery.com/", target: "_blank"}},
+//	    {text: "送货速度", weight: 8},
+//	    {text: "包装精美", weight: 9},
+//	    {text: "潮流", weight: 8},
+//	    {text: "时尚", weight: 6.2},
+//	    {text: "耐用", weight: 5},
+//	    {text: "喜爱", weight: 5},
+//	    {text: "个性", weight: 5},
+//	    {text: "送人", weight: 4},
+//	    {text: "顺手", weight: 4},
+//	    {text: "实用", weight: 4},
+//	    {text: "礼物", weight: 3},
+//	    {text: "防水", weight: 3},
+//	];
 	$(".cloud--user-comment").html('');
     $(".cloud--user-comment").jQCloud(word_list);
 }
@@ -1206,7 +1375,24 @@ function hotKeyCloud(){
 	$(".cloud--hot-key").html('');
     $(".cloud--hot-key").jQCloud(word_list);
 }
-function barBasicLabel(){
+function getBasicLabelData(){
+	var productId = 24;
+	utilObj.ajax({
+		url: '/m/productStats/statsProductLabel',
+		type: 'POST',
+		data: {
+			productId: productId,
+			topN: 10,
+		},
+		success: function(data){
+			barBasicLabel({
+				yAxisData: utilObj.getAryByParam(data.object, 'content'),
+				seriesData: utilObj.getAryByParam(data.object, 'count'),
+			})
+		}
+	})
+}
+function barBasicLabel(params){
 	var b1 = echarts.init($(".chart--bar--basic-label1")[0]);
 	var b2 = echarts.init($(".chart--bar--basic-label2")[0]);
 	var option1 = {
@@ -1225,7 +1411,7 @@ function barBasicLabel(){
 	    yAxis: {
 			inverse: true,
 	        type: 'category',
-	        data: ['系统流畅','外观漂亮','反应快','屏幕大','功能齐全','照相不错','分辨率高','指纹识别','通话质量好','性价比高'],
+	        data: params.yAxisData,
 	        axisLine: {
 	            show: false,
 	        },
@@ -1246,7 +1432,7 @@ function barBasicLabel(){
 	        {
 	            name: '',
 	            type: 'bar',
-	            data: [508, 477, 433, 429, 420, 364,323,321,313,309],
+	            data: params.seriesData,
 	            barCategoryGap: '50%',
 	            label: {
 	            	normal: {

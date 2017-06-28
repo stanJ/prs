@@ -720,4 +720,17 @@ a:visited{
     width: 8px;
     height: 8px;
 }
-
+.increase-arrow, .decrease-arrow{
+	display: inline-block;
+	width: 9px;
+	height: 12px;
+	background-position: center;
+    background-repeat: no-repeat;
+    
+}
+.increase-arrow{
+	background-image: url(../img/icon_top.png);
+}
+.decrease-arrow{
+	background-image: url(../img/icon_down.png);
+}

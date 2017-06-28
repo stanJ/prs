@@ -240,12 +240,13 @@ var app = new Vue({
 	}
 })
 $(function(){
-	lineCustomers();
+//	lineChannelBasic();
+	getChannelBasicData();
 	barStayTime();
 })
-function getSalesData(){
-	var startDate = '2017-04-04 00:00:00';
-	var endDate = '2017-04-20 23:59:59';
+function getChannelBasicData(){
+	var startDate = utilObj.dayStart('2017-04-26');
+	var endDate = utilObj.dayEnd('2017-05-09');
 	utilObj.ajax({
 		url: '/m/productStats/statsChannelSale',
 		type: 'POST',
@@ -255,14 +256,32 @@ function getSalesData(){
 			mode: 3,
 		},
 		success: function(data){
-			
+			var names = utilObj.getNameAry(data.object, 'channelName');
+			var originXAixsData = utilObj.getMultipleAry(data.object, 'ddate')[0];
+			var xAixsData = utilObj.transferDateAry(originXAixsData);
+			var amountData = utilObj.getMultipleAry(data.object, 'amount');
+			var amountMoneyData = utilObj.getMultipleAry(data.object, 'amountMoney');
+			var shopCountData = utilObj.getMultipleAry(data.object, 'shopCount');
+			lineChannelBasic({
+				names: names,
+				xAixsData: xAixsData,
+				amountData: amountData,
+				amountMoneyData: amountMoneyData,
+				shopCountData: shopCountData,
+			})
 		}
 		
 	})
 }
-
-function lineCustomers(){
+function lineChannelBasic(params){
+	$(".tab-content").show();
 	var line1 = echarts.init($(".chart--line--new-customers")[0]);
+	var line2 = echarts.init($(".chart--line--active-customers")[0]);
+	var line3 = echarts.init($(".chart--line--start-times")[0]);
+	var line4 = echarts.init($(".chart--line--channel-sales")[0]);
+	var line5 = echarts.init($(".chart--line--channel-money")[0]);
+	var line6 = echarts.init($(".chart--line--channel-store")[0]);
+	frameObj.loadTabs();
 	var option = {
 		grid: {
 			left: '35',
@@ -373,7 +392,19 @@ function lineCustomers(){
             ]
         }]
     };
+    
     line1.setOption(option)
+    line2.setOption(option)
+    line3.setOption(option)
+    line4.setOption(utilObj.getChartOption(option, params, 'amountData', {
+    	title: '销量'
+    }))
+    line5.setOption(utilObj.getChartOption(option, params, 'amountMoneyData', {
+    	title: '成交金额'
+    }))
+    line6.setOption(utilObj.getChartOption(option, params, 'shopCountData', {
+    	title: '成交店铺'
+    }))
 }
 function barStayTime(){
 	var barStayTime = echarts.init($(".chart--bar--staytime")[0]);

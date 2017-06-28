@@ -213,9 +213,9 @@
 			<div class="tabs__nav">
 				<div class="tab-title " data-name="tab1" style="margin-left: 40px;"
 					data-func="loadTab1" data-page="product">标注总览</div>
-				<div class="tab-title " data-name="tab2" 
+				<div class="tab-title is-active" data-name="tab2" 
 					data-func="loadTab2" data-page="product">属性分析</div>
-				<div class="tab-title is-active" data-name="tab3"
+				<div class="tab-title " data-name="tab3"
 					data-func="loadTab3" data-page="product">销售分析</div>
 				<div class="tab-title " data-name="tab4" 
 					data-func="loadTab4" data-page="product">点评分析</div>
@@ -383,49 +383,67 @@
 								<el-table :data="commentActiveData" stripe>
 									<el-table-column 
 										label="网站" 
-										prop="1" 
+										prop="channelName" 
 										align="center"
 										min-width="54"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
 									<el-table-column 
 										label="好评" 
-										prop="2"
+										prop="goodCount"
 										align="center"
 										min-width="54"
 										:show-overflow-tooltip="true">
+										<template scope="scope">
+											{{ transferW(scope.row['goodCount']) }}
+										</template>										
 									</el-table-column>
 									<el-table-column label="中评" 
-										prop="3"
+										prop="generalCount"
 										align="center"
 										min-width="54"
 										:show-overflow-tooltip="true"> 
+										<template scope="scope">
+											{{ transferW(scope.row['generalCount']) }}
+										</template>	
 									</el-table-column>
 									<el-table-column label="差评" 
-										prop="4"
+										prop="poorCount"
 										align="center"
 										min-width="54"
 										:show-overflow-tooltip="true"> 
+										<template scope="scope">
+											{{ transferW(scope.row['poorCount']) }}
+										</template>	
 									</el-table-column>
 									<el-table-column label="追评" 
-										prop="5"
+										prop="addedCount"
 										align="center"
 										min-width="54"
 										:show-overflow-tooltip="true"> 
+										<template scope="scope">
+											{{ transferW(scope.row['addedCount']) }}
+										</template>	
 									</el-table-column>
 									<el-table-column label="晒图" 
-										prop="6"
+										prop="shineImgCount"
 										align="center"
 										min-width="54"
 										:show-overflow-tooltip="true"> 
+										<template scope="scope">
+											{{ transferW(scope.row['shineImgCount']) }}
+										</template>	
 									</el-table-column>
 									<el-table-column label="无情感" 
-										prop="7"
+										prop="noSenseCount"
 										align="center"
 										:show-overflow-tooltip="true"> 
+										<template scope="scope">
+											{{ transferW(scope.row['noSenseCount']) }}
+										</template>	
 									</el-table-column>
 									<el-table-column label="活跃指数" 
-										prop="8"
+										prop="activeIndex"
 										align="center"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
@@ -595,40 +613,49 @@
 									<el-table :data="productSalesData" stripe class="table--product-sales">
 										<el-table-column 
 											label="季度" 
-											prop="1" 
+											prop="season" 
 											align="center"
+											:formatter="tansferSeason"
 											:show-overflow-tooltip="true"> 
 										</el-table-column>
 										<el-table-column 
 											label="总销量(台)" 
-											prop="2"
+											prop="totalAmount"
 											align="center"
 											:show-overflow-tooltip="true">
 										</el-table-column>
 										<el-table-column label="移动营销(台)" 
-											prop="3"
+											prop="mobileAmt"
 											align="center"
 											:show-overflow-tooltip="true"> 
 										</el-table-column>
 										<el-table-column label="门店销售(台)" 
-											prop="4"
+											prop="shopAmt"
 											align="center"
 											:show-overflow-tooltip="true"> 
 										</el-table-column>
 										<el-table-column label="均价" 
-											prop="5"
+											prop="avgPrice"
 											align="center"
 											:show-overflow-tooltip="true"> 
 										</el-table-column>
 										<el-table-column label="销量增长" 
-											prop="6"
-											align="center"
+											prop="amtIncreaseRate"
+											align="left"
 											:show-overflow-tooltip="true"> 
+											<template scope="scope">
+										        <div :class="{'increase-arrow': isPositiveNumber(scope.row['amtIncreaseRate']),'decrease-arrow': isNegativeNumber(scope.row['amtIncreaseRate'])}"></div>
+										        <span>{{scope.row['amtIncreaseRate'] | rate}}</span>
+										    </template>
 										</el-table-column>
 										<el-table-column label="同比增率" 
-											prop="7"
-											align="center"
+											prop="sameSeasonIncreaseRate"
+											align="left"
 											:show-overflow-tooltip="true"> 
+											<template scope="scope">
+										        <div :class="{'increase-arrow': isPositiveNumber(scope.row['sameSeasonIncreaseRate']),'decrease-arrow': isNegativeNumber(scope.row['sameSeasonIncreaseRate'])}"></div>
+										        <span>{{scope.row['sameSeasonIncreaseRate'] | rate}}</span>
+										    </template>
 										</el-table-column>
 									</el-table>
 								</div>
@@ -656,8 +683,8 @@
 							</div>
 							<div class="chart chart--pie--price-spread fl" style="height: 270px;width: 270px;margin-left: 34px;"></div>
 							<div class="legends-wrapper fr" style="height: 270px;width: 198px;">
-								<div class="fl clearfix legends">
-									<div class="legend-item clearfix">
+								<div class="fl clearfix legends legends--price-spread">
+									<!--<div class="legend-item clearfix">
 										<div class="legend__icon" style="background: #0c4d90;"></div>
 										<div class="legend__name">淘宝</div>
 										<div class="legend__value">45.00%</div>
@@ -676,7 +703,7 @@
 										<div class="legend__icon" style="background: #76ddfb;"></div>
 										<div class="legend__name">唯品会</div>
 										<div class="legend__value">5.00%</div>
-									</div>
+									</div>-->
 								</div>
 							</div>
 						</div>
@@ -879,6 +906,7 @@
 			
 			
 		</div>
+		<script src="lib/moment/moment.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/util.js" type="text/javascript" charset="utf-8"></script>
 		<script src="lib/jquery/jquery-3.2.1.js"></script>
 		<script src="lib/jqcloud/jqcloud-1.0.4.min.js" type="text/javascript" charset="utf-8"></script>

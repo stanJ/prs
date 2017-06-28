@@ -1,9 +1,33 @@
 Vue.filter('rate', function (value) {
 	if(value){
 		value = Math.abs(parseFloat(value))*100;
-		value = value.toFixed(2)+'%';
+		value = value.toFixed(0)+'%';
+	}else {
+//		value = '0%';
 	}
 	return value;
+})
+Vue.filter('isPositiveNumber', function (value) {
+	if(value){
+		if(parseFloat(value)>0){
+			return true;
+		}else {
+			return false;
+		}
+	}else {
+		return false;
+	}
+})
+Vue.filter('isNegativeNumber', function (value) {
+	if(value){
+		if(parseFloat(value)<0){
+			return true;
+		}else {
+			return false;
+		}
+	}else {
+		return false;
+	}
 })
 
 $(function(){
