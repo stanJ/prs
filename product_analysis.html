@@ -211,15 +211,15 @@
 		
 		<div class="content" id="app">
 			<div class="tabs__nav">
-				<div class="tab-title " data-name="tab1" style="margin-left: 40px;"
+				<div class="tab-title is-active" data-name="tab1" style="margin-left: 40px;"
 					data-func="loadTab1" data-page="product">标注总览</div>
-				<div class="tab-title is-active" data-name="tab2" 
+				<div class="tab-title " data-name="tab2" 
 					data-func="loadTab2" data-page="product">属性分析</div>
 				<div class="tab-title " data-name="tab3"
 					data-func="loadTab3" data-page="product">销售分析</div>
 				<div class="tab-title " data-name="tab4" 
 					data-func="loadTab4" data-page="product">点评分析</div>
-				<div class="tab-title" data-name="tab5">竞品分析</div>
+				<div class="tab-title " data-name="tab5">竞品分析</div>
 				<div class="tab-title" data-name="tab6">产品分类</div>
 			</div>
 			<div class="tabs__content clearfix">
@@ -335,7 +335,7 @@
 								<el-table :data="salesData" stripe>
 									<el-table-column 
 										label="品牌名称" 
-										prop="1" 
+										prop="productName" 
 										align="center"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
@@ -348,18 +348,18 @@
 									        <div class="icon--trend" v-if="scope.row[2]=='true'"></div>
 									    </template>
 									</el-table-column>
-									<el-table-column label="网店均价" 
-										prop="3"
+									<el-table-column label="天猫" 
+										prop="tinamao"
 										align="center"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
-									<el-table-column label="实体店价格" 
-										prop="4"
+									<el-table-column label="京东" 
+										prop="jingdong"
 										align="center"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
-									<el-table-column label="热销指数" 
-										prop="5"
+									<el-table-column label="淘宝" 
+										prop="taobao"
 										align="center"
 										:show-overflow-tooltip="true"> 
 									</el-table-column>
@@ -531,6 +531,13 @@
 								
 								<el-table :data="emotionTrendData" stripe class="table--emotion-trend">
 									<el-table-column 
+										min-width="50"
+										:prop="item.prop"
+										label="item.label"
+										align="center"
+										:show-overflow-tooltip="true" v-for="item in configData"> 
+									</el-table-column>
+									<!--<el-table-column 
 										min-width="60"
 										prop="0" 
 										align="center"
@@ -591,7 +598,7 @@
 										prop="8"
 										align="center"
 										:show-overflow-tooltip="true"> 
-									</el-table-column>
+									</el-table-column>-->
 								</el-table>
 							</div>
 							
@@ -644,7 +651,8 @@
 											align="left"
 											:show-overflow-tooltip="true"> 
 											<template scope="scope">
-										        <div :class="{'increase-arrow': isPositiveNumber(scope.row['amtIncreaseRate']),'decrease-arrow': isNegativeNumber(scope.row['amtIncreaseRate'])}"></div>
+										        <!--<div :class="{'increase-arrow': isPositiveNumber(scope.row['amtIncreaseRate']),'decrease-arrow': isNegativeNumber(scope.row['amtIncreaseRate'])}"></div>-->
+										        <div :class="showArrow(scope.row['amtIncreaseRate'])"></div>
 										        <span>{{scope.row['amtIncreaseRate'] | rate}}</span>
 										    </template>
 										</el-table-column>
@@ -653,7 +661,8 @@
 											align="left"
 											:show-overflow-tooltip="true"> 
 											<template scope="scope">
-										        <div :class="{'increase-arrow': isPositiveNumber(scope.row['sameSeasonIncreaseRate']),'decrease-arrow': isNegativeNumber(scope.row['sameSeasonIncreaseRate'])}"></div>
+										        <!--<div :class="{'increase-arrow': isPositiveNumber(scope.row['sameSeasonIncreaseRate']),'decrease-arrow': isNegativeNumber(scope.row['sameSeasonIncreaseRate'])}"></div>-->
+										        <div :class="showArrow(scope.row['sameSeasonIncreaseRate'])"></div>
 										        <span>{{scope.row['sameSeasonIncreaseRate'] | rate}}</span>
 										    </template>
 										</el-table-column>
@@ -779,10 +788,13 @@
 							<div class="clearfix products">
 								<div class="bwl--c">
 									<div class="product-brand">品牌:
-										<span class="brand-name">Apple</span>
+										<span class="brand-name">{{ attrs.bigBrand }}</span>
 										<el-button size="small">+关注</el-button>
 									</div>
 									<div class="product-params">
+										<div class="param--product" v-for="item in attrs.left">{{ item.name }}:<span class="param__value">{{ item.value }}</span></div>
+									</div>
+									<!--<div class="product-params">
 										<div class="param--product">分辨率:<span class="param__value">1334*750(iphone6s)</span></div>
 									</div>
 									<hr class="line--product"/>
@@ -794,17 +806,19 @@
 									<div class="product-params">
 										<div class="param--product">核数:<span class="param__value">其他</span></div>
 										<div class="param--product">频率:<span class="param__value">其他</span></div>
-									</div>
+									</div>-->
 								</div>
 								<div class="bwr--c">
 									<div class="params--right">
-										<div class="param--product">商品名称:<span class="param__value">AppleIPhone 6S</span></div>
+										<div class="param--product" v-for="item in attrs.right">{{ item.name }}:<span class="param__value">{{ item.value }}</span></div>
+										
+										<!--<div class="param--product">商品名称:<span class="param__value">AppleIPhone 6S</span></div>
 										<div class="param--product">热点:<span class="param__value">指纹识别，金属机身，拍照......</span></div>
 										<div class="param--product">系统:<span class="param__value">苹果（IOS）</span></div>
 										<div class="param--product">商品编号:<span class="param__value">4586850</span></div>
 										<div class="param--product">前置摄像头像素:<span class="param__value">其他</span></div>
 										<div class="param--product">商品毛重:<span class="param__value">390.00g</span></div>
-										<div class="param--product">后置摄像头像素:<span class="param__value">500万——1199万</span></div>
+										<div class="param--product">后置摄像头像素:<span class="param__value">500万——1199万</span></div>-->
 									</div>
 								</div>
 							</div>
@@ -842,21 +856,21 @@
 								<tr>
 									<td class="left-top">
 										<div class="overview__text">商品总销量</div>
-										<div class="overview__value">68952</div>
+										<div class="overview__value">{{ product.sumCount }}</div>
 									</td>
 									<td>
 										<div class="overview__text">同类销售比例</div>
-										<div class="overview__value">25</div>
+										<div class="overview__value">{{ product.ratio }}</div>
 									</td>
 								</tr>
 								<tr>
 									<td>
 										<div class="overview__text">商品点评数</div>
-										<div class="overview__value">898952</div>
+										<div class="overview__value">{{ product.sumCommentCount }}</div>
 									</td>
 									<td class="right-bottom">
 										<div class="overview__text">人气数</div>
-										<div class="overview__value">48989</div>
+										<div class="overview__value">{{ product.sumPopulation }}</div>
 									</td>
 								</tr>
 							</table>

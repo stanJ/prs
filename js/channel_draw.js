@@ -18,30 +18,9 @@ var app = new Vue({
 		this.fetchData();
 	},
 	methods: {
-		shopRate: function(row){
-			var value = row.shopCountRate;
-			return utilObj.getRate(value)
-		},
-		yesterdayShop: function(row){
-			var value = row.yesterdayShopCount;
-			return parseInt(value);
-		},
-		numRate: function(row){
-			var value = row.numRate;
-			return utilObj.getRate(value)
-		},
-		yesterdayNum: function(row){
-			var value = row.yesterdayNum;
-			return parseInt(value);
-		},
-		activeShopRate: function(row){
-			var value = row.activeShopCountRate;
-			return utilObj.getRate(value)
-		},
-		yesterdayActiveShop: function(row){
-			var value = row.yesterdayActiveShopCount;
-			return parseInt(value);
-		},
+		showArrow: utilObj.showArrow,
+		transferInteger: utilObj.transferInteger,
+		transferDoubleFloat: utilObj.transferDoubleFloat,
 		fetchData: function(){
 			this.loadQualityList();
 			this.loadFocusList();
@@ -141,8 +120,8 @@ var app = new Vue({
 		},
 		loadMaturityList: function(){
 			var vm = this;
-			var today = '2017-06-27 00:00:00';
-			var yesterday = '2017-06-26 00:00:00';
+			var today = utilObj.dayStart(moment().format("YYYY-MM-DD"));
+			var yesterday = utilObj.dayStart(moment().subtract(1, 'days').format("YYYY-MM-DD"));
 			utilObj.ajax({
 				url: '/m/productStats/statsChannelSaleToday',
 				type: 'POST',
@@ -154,6 +133,7 @@ var app = new Vue({
 					vm.dealStoreData = data.object;
 					vm.activeStoreData = data.object;
 					vm.dealGoodsData = data.object;
+					vm.dealAmountData = data.object;
 				}
 			})
 			this.dealPeopleData = [{
@@ -177,27 +157,27 @@ var app = new Vue({
 				'3': 'xxx',
 				'4': 'xxx',
 			},]
-			this.dealAmountData = [{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},{
-				'1': 'xxx',
-				'2': 'xxx',
-				'3': 'xxx',
-				'4': 'xxx',
-			},]
+//			this.dealAmountData = [{
+//				'1': 'xxx',
+//				'2': 'xxx',
+//				'3': 'xxx',
+//				'4': 'xxx',
+//			},{
+//				'1': 'xxx',
+//				'2': 'xxx',
+//				'3': 'xxx',
+//				'4': 'xxx',
+//			},{
+//				'1': 'xxx',
+//				'2': 'xxx',
+//				'3': 'xxx',
+//				'4': 'xxx',
+//			},{
+//				'1': 'xxx',
+//				'2': 'xxx',
+//				'3': 'xxx',
+//				'4': 'xxx',
+//			},]
 		},
 		loadChannelHealthList: function(){
 			this.channelHealthData1 = [
@@ -262,12 +242,19 @@ function getChannelBasicData(){
 			var amountData = utilObj.getMultipleAry(data.object, 'amount');
 			var amountMoneyData = utilObj.getMultipleAry(data.object, 'amountMoney');
 			var shopCountData = utilObj.getMultipleAry(data.object, 'shopCount');
+			
+			var newUserCountData = utilObj.getMultipleAry(data.object, 'newUserCount');
+			var activeUserCountData = utilObj.getMultipleAry(data.object, 'activeUserCount');
+			var startupTimesData = utilObj.getMultipleAry(data.object, 'startupTimes');
 			lineChannelBasic({
 				names: names,
 				xAixsData: xAixsData,
 				amountData: amountData,
 				amountMoneyData: amountMoneyData,
 				shopCountData: shopCountData,
+				newUserCountData: newUserCountData,
+				activeUserCountData: activeUserCountData,
+				startupTimesData: startupTimesData,
 			})
 		}
 		
@@ -354,7 +341,7 @@ function lineChannelBasic(params){
 	        axisTick: {
 	        	show: false,
 	        },
-	        max: 500,
+//	        max: 500,
         },
         series: [{
             name: 'PARTNER 1',
@@ -393,9 +380,19 @@ function lineChannelBasic(params){
         }]
     };
     
-    line1.setOption(option)
-    line2.setOption(option)
-    line3.setOption(option)
+//  line1.setOption(option)
+//  line2.setOption(option)
+//  line3.setOption(option)
+    line1.setOption(utilObj.getChartOption(option, params, 'newUserCountData', {
+    	title: '新增用户'
+    }))
+    line2.setOption(utilObj.getChartOption(option, params, 'activeUserCountData', {
+    	title: '活跃用户'
+    }))
+    line3.setOption(utilObj.getChartOption(option, params, 'startupTimesData', {
+    	title: '启动次数'
+    }))
+    
     line4.setOption(utilObj.getChartOption(option, params, 'amountData', {
     	title: '销量'
     }))

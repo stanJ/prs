@@ -1,6 +1,18 @@
 var app = new Vue({
 	el: "#app",
 	data: {
+		product: {
+			"ratio": '',
+		    "sumCommentCount": '',
+		    "sumCount": '',
+		    "sumPopulation": '',
+		},
+		attrs: {
+			bigBrand: '',
+			left: [],
+			right: [],
+		},
+		configData: [],
 		categoryData: [],
 		highlightData: [],
 		salesData: [],
@@ -24,28 +36,7 @@ var app = new Vue({
 			}
 			return value;
 		},
-		isPositiveNumber: function(value){
-			if(value){
-				if(parseFloat(value)>0){
-					return true;
-				}else {
-					return false;
-				}
-			}else {
-				return false;
-			}
-		},
-		isNegativeNumber: function(value){
-			if(value){
-				if(parseFloat(value)<0){
-					return true;
-				}else {
-					return false;
-				}
-			}else {
-				return false;
-			}
-		},
+		showArrow: utilObj.showArrow,
 		fetchData: function(){
 			this.loadCategoryList();
 			this.loadHighlightList();
@@ -55,6 +46,37 @@ var app = new Vue({
 			this.loadEmotionTrendList();
 			this.loadProductSalesList();
 			this.loadPromotionWaysList();
+			this.loadProductOverview();
+			this.loadProductAttrs();
+		},
+		loadProductOverview: function(){
+			var vm = this;
+			utilObj.ajax({
+				url: '/m/productStats/statsProduct',
+				type: 'POST',
+				data: {
+					productId: 1,
+				},
+				success: function(data){
+					utilObj.setVmData(vm.product, data.object);
+				}
+			})
+		},
+		loadProductAttrs: function(){
+			var vm = this;
+			utilObj.ajax({
+				url: '/m/productStats/statsProductAttribute',
+				type: 'POST',
+				data: {
+					productId: 1,
+				},
+				success: function(data){
+					var d = data.object;
+					vm.attrs.bigBrand = d[0]? d[0].value: '';
+					vm.attrs.left = d.slice(1,6);
+					vm.attrs.right = d.slice(6);
+				}
+			})
 		},
 		renderHeader: function(createElement, { column}) {
 	        return createElement(
@@ -219,39 +241,57 @@ var app = new Vue({
 			]
 		},
 		loadSalesList: function(){
-			this.salesData = [
-			{
-				'1': 'MIUI/小米',
-				'2': 'true',
-				'3': '1222',
-				'4': '3311',
-				'5': '4333',
-			},{
-				'1': 'Apple/苹果',
-				'2': 'true',
-				'3': '1222',
-				'4': '3311',
-				'5': '4333',
-			},{
-				'1': 'Huawei/华为',
-				'2': 'true',
-				'3': '1222',
-				'4': '3311',
-				'5': '4333',
-			},{
-				'1': 'Samsung/三星',
-				'2': 'true',
-				'3': '1222',
-				'4': '3311',
-				'5': '4333',
-			},{
-				'1': 'VIVO',
-				'2': 'true',
-				'3': '1222',
-				'4': '3311',
-				'5': '4333',
-			},
-			]
+			var vm = this;
+			var startDate = utilObj.dayStart('2017-05-01');
+			var endDate = utilObj.dayEnd(moment().format("YYYY-MM-DD"));
+			utilObj.ajax({
+				url: '/m/productStats/statsCompeteProductSaleAmount',
+				type: 'POST',
+				data: {
+					productId: 1,
+					startDate: startDate,
+					endDate: endDate,
+				},
+				success: function(data){
+					var ary =  data.object.map(function(x){
+						return $.extend(x, {'2': 'true'});
+					})
+					vm.salesData = ary;
+				}
+			})			
+//			this.salesData = [
+//			{
+//				'1': 'MIUI/小米',
+//				'2': 'true',
+//				'3': '1222',
+//				'4': '3311',
+//				'5': '4333',
+//			},{
+//				'1': 'Apple/苹果',
+//				'2': 'true',
+//				'3': '1222',
+//				'4': '3311',
+//				'5': '4333',
+//			},{
+//				'1': 'Huawei/华为',
+//				'2': 'true',
+//				'3': '1222',
+//				'4': '3311',
+//				'5': '4333',
+//			},{
+//				'1': 'Samsung/三星',
+//				'2': 'true',
+//				'3': '1222',
+//				'4': '3311',
+//				'5': '4333',
+//			},{
+//				'1': 'VIVO',
+//				'2': 'true',
+//				'3': '1222',
+//				'4': '3311',
+//				'5': '4333',
+//			},
+//			]
 		},
 		
 		loadPromotionWaysList: function(){
@@ -434,72 +474,73 @@ var app = new Vue({
 					daysBefore: daysBefore,
 				},
 				success: function(data){
-//					vm.emotionTrendData = data.object;
+					vm.emotionTrendData = utilObj.getEmotionData(data.object);
+					vm.configData = utilObj.getConfigData(data.object);
 				}
 			})			
-			this.emotionTrendData = [
-			{
-				'0': '点评数',
-				'1': '9',
-				'2': '4',
-				'3': '4',
-				'4': '23',
-				'5': '10',
-				'6': '15',
-				'7': '8',
-				'8': '6',
-			},{
-				'0': '好评率',
-				'1': '88%',
-				'2': '86%',
-				'3': '84%',
-				'4': '82%',
-				'5': '80%',
-				'6': '90%',
-				'7': '100%',
-				'8': '70%',
-			},{
-				'0': '好评数',
-				'1': '1',
-				'2': '0',
-				'3': '0',
-				'4': '0',
-				'5': '0',
-				'6': '0',
-				'7': '0',
-				'8': '1',
-			},{
-				'0': '中评数',
-				'1': '0',
-				'2': '0',
-				'3': '0',
-				'4': '0',
-				'5': '0',
-				'6': '1',
-				'7': '0',
-				'8': '0',
-			},{
-				'0': '差评数',
-				'1': '0',
-				'2': '0',
-				'3': '0',
-				'4': '1',
-				'5': '0',
-				'6': '0',
-				'7': '0',
-				'8': '0',
-			},{
-				'0': '无情感',
-				'1': '0',
-				'2': '0',
-				'3': '0',
-				'4': '0',
-				'5': '0',
-				'6': '0',
-				'7': '0',
-				'8': '0',
-			},
-			]
+//			this.emotionTrendData = [
+//			{
+//				'0': '点评数',
+//				'1': '9',
+//				'2': '4',
+//				'3': '4',
+//				'4': '23',
+//				'5': '10',
+//				'6': '15',
+//				'7': '8',
+//				'8': '6',
+//			},{
+//				'0': '好评率',
+//				'1': '88%',
+//				'2': '86%',
+//				'3': '84%',
+//				'4': '82%',
+//				'5': '80%',
+//				'6': '90%',
+//				'7': '100%',
+//				'8': '70%',
+//			},{
+//				'0': '好评数',
+//				'1': '1',
+//				'2': '0',
+//				'3': '0',
+//				'4': '0',
+//				'5': '0',
+//				'6': '0',
+//				'7': '0',
+//				'8': '1',
+//			},{
+//				'0': '中评数',
+//				'1': '0',
+//				'2': '0',
+//				'3': '0',
+//				'4': '0',
+//				'5': '0',
+//				'6': '1',
+//				'7': '0',
+//				'8': '0',
+//			},{
+//				'0': '差评数',
+//				'1': '0',
+//				'2': '0',
+//				'3': '0',
+//				'4': '1',
+//				'5': '0',
+//				'6': '0',
+//				'7': '0',
+//				'8': '0',
+//			},{
+//				'0': '无情感',
+//				'1': '0',
+//				'2': '0',
+//				'3': '0',
+//				'4': '0',
+//				'5': '0',
+//				'6': '0',
+//				'7': '0',
+//				'8': '0',
+//			},
+//			]
 		},
 		loadProductSalesList: function(){
 			var vm = this;
@@ -558,15 +599,15 @@ var app = new Vue({
 })
 var productObj = {
 	loadTab1: function(){
-		barLabelOverView();
-		goodsCommentCloud();
-		lineGoodReputation();
+		loadBarH(barLabelOverView);
+		loadCloud(productsCommentCloud)
+//		lineGoodReputation();
+		loadGoodComment(lineGoodReputation);
 		radarHotSalesSpot();
 	},
 	loadTab2: function(){
-//		barBasicLabel();
-		getBasicLabelData();
-		hotKeyCloud();
+		loadBarH(barBasicLabel);
+		loadCloud(hotKeyCloud)
 	},
 	loadTab3: function(){
 		getPriceTrendData();
@@ -576,9 +617,9 @@ var productObj = {
 	},
 	loadTab4: function(){
 //		lineGoodComment();
-		getGoodCommentData();
-//		userCommentCloud();
-		getUserCommentData();
+//		getGoodCommentData();
+		loadGoodComment(lineGoodComment);
+		loadCloud(userCommentCloud)
 	},
 }
 function mapPrice(){
@@ -945,8 +986,6 @@ function mapPrice(){
 	map1.setOption(option)
 }
 function getPriceSpreadData(){
-	var startDate = utilObj.dayStart('2017-01-01');
-	var endDate = utilObj.dayEnd(moment().format("YYYY-MM-DD"));
 	utilObj.ajax({
 		url: '/m/productStats/statsProductSaleAmountByChannel',
 		type: 'POST',
@@ -1016,28 +1055,52 @@ function piePriceSpread(params){
 	};
 	pie1.setOption(option)
 }
-function getGoodCommentData(){
+function loadGoodComment(callback){
+	var goodCommentData = null;
+	var goodCommentDataStr = sessionStorage.getItem('goodCommentData');
+	var productId = 1;
 	var startDate = utilObj.dayStart('2017-01-01');
 	var endDate = utilObj.dayEnd(moment().format("YYYY-MM-DD"));
-	utilObj.ajax({
-		url: '/m/productStats/statsProductGoodComment',
-		type: 'POST',
-		data: {
-			productId: 1,
-			startDate: startDate,
-			endDate: endDate,
-		},
-		success: function(data){
-			var xAxisData = utilObj.getAryByParam(data.object, 'yearMonth', utilObj.getMonth)
-			var seriesData = utilObj.getAryByParam(data.object, 'goodCount')
-			lineGoodComment({
-				xAxisData: xAxisData,
-				seriesData: seriesData,
-			})
-		}
-	})
+	if(goodCommentDataStr){
+		goodCommentData = JSON.parse(goodCommentDataStr);
+		callback(goodCommentData);
+	}else{
+		
+		utilObj.ajax({
+			url: '/m/productStats/statsProductGoodComment',
+			type: 'POST',
+			data: {
+				productId: productId,
+				startDate: startDate,
+				endDate: endDate,
+			},
+			success: function(data){
+				var goodCommentData = data.object;
+				sessionStorage.setItem('goodCommentData', JSON.stringify(goodCommentData));
+				callback(goodCommentData);
+			}
+		})
+	}
 }
-function lineGoodComment(params){
+//function getGoodCommentData(){
+//	var startDate = utilObj.dayStart('2017-01-01');
+//	var endDate = utilObj.dayEnd(moment().format("YYYY-MM-DD"));
+//	utilObj.ajax({
+//		url: '/m/productStats/statsProductGoodComment',
+//		type: 'POST',
+//		data: {
+//			productId: 1,
+//			startDate: startDate,
+//			endDate: endDate,
+//		},
+//		success: function(data){
+//			lineGoodComment(data.object);
+//		}
+//	})
+//}
+function lineGoodComment(data){
+	var xAxisData = utilObj.getAryByParam(data, 'yearMonth', utilObj.getMonth)
+	var seriesData = utilObj.getAryByParam(data, 'goodCount')
 	var line1 = echarts.init($(".chart--line--goodcomment")[0]);
 	var option = {
 		grid: {
@@ -1059,7 +1122,7 @@ function lineGoodComment(params){
         xAxis: {
             type: 'category',
             boundaryGap: true,
-            data: params.xAxisData,
+            data: xAxisData,
             axisLine: {
 	            lineStyle: {
 	        		color: '#d7d7d7',
@@ -1108,7 +1171,87 @@ function lineGoodComment(params){
             'symbol': 'emptyCircle',
             symbolSize: 8,
             hoverAnimation: false,
-            data: params.seriesData,
+            data: seriesData,
+        }]
+    };
+    line1.setOption(option)
+}
+function lineGoodReputation(data){
+	var xAxisData = utilObj.getAryByParam(data, 'yearMonth', utilObj.getMonth)
+	var seriesData = utilObj.getAryByParam(data, 'goodCommentIndex')
+	var line1 = echarts.init($(".chart--line--good-reputation")[0]);
+	var option = {
+		grid: {
+			left: '10',
+			right: '40',
+			top: '40',
+			bottom: '10',
+			containLabel: true,
+		},
+        tooltip: {},
+        legend: {
+            data:[{
+            	name: '好评指数',
+            	icon: 'circle',
+            }],
+            right: '40',
+            top: '0',
+            itemHeight: '9'
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: true,
+            data:xAxisData,
+            axisLine: {
+	            lineStyle: {
+	        		color: '#d7d7d7',
+	        		width: 2,
+	        	}
+	        },
+	        axisTick: {
+	        	show: false,
+	        },
+	        axisLabel: {
+	            textStyle: {
+	            	color: '#000'
+	            },
+	        },
+	        
+        },
+        yAxis: {
+        	axisLine: {
+	            show: false,
+	        },
+	        splitLine: {
+	        	lineStyle: {
+	        		color: '#f7f9fa',
+	        	}
+	        },
+	        axisTick: {
+	        	show: false,
+	        },
+//	        max: 70,
+//	        interval: 10,
+        },
+        series: [{
+            name: '好评指数',
+            type: 'line',
+            lineStyle: {
+            	normal: {
+            		color: '#51a5de'
+            	}
+            	
+            },
+            itemStyle: {
+            	normal: {
+            		color: '#51a5de'
+            	}
+            	
+            },
+            'symbol': 'emptyCircle',
+            symbolSize: 8,
+            hoverAnimation: false,
+            data: seriesData,
         }]
     };
     line1.setOption(option)
@@ -1189,8 +1332,8 @@ function linePriceTrend(params){
 	        axisTick: {
 	        	show: false,
 	        },
-	        max: 3500,
-	        interval: 500,
+//	        max: 3500,
+//	        interval: 500,
         },
         series: [{
             name: '价格',
@@ -1219,179 +1362,90 @@ function linePriceTrend(params){
     line1.setOption(option)
 }
 
-function lineGoodReputation(){
-	var lineGoodReputation = echarts.init($(".chart--line--good-reputation")[0]);
-	var option = {
-		grid: {
-			left: '10',
-			right: '40',
-			top: '40',
-			bottom: '10',
-			containLabel: true,
-		},
-        tooltip: {},
-        legend: {
-            data:[{
-            	name: '好评指数',
-            	icon: 'circle',
-            }],
-            right: '40',
-            top: '0',
-            itemHeight: '9'
-        },
-        xAxis: {
-            type: 'category',
-            boundaryGap: true,
-            data:['1月','2月','3月','4月','5月','6月'],
-            axisLine: {
-	            lineStyle: {
-	        		color: '#d7d7d7',
-	        		width: 2,
-	        	}
-	        },
-	        axisTick: {
-	        	show: false,
-	        },
-	        axisLabel: {
-	            textStyle: {
-	            	color: '#000'
-	            },
-	        },
-	        
-        },
-        yAxis: {
-        	axisLine: {
-	            show: false,
-	        },
-	        splitLine: {
-	        	lineStyle: {
-	        		color: '#f7f9fa',
-	        	}
-	        },
-	        axisTick: {
-	        	show: false,
-	        },
-	        max: 70,
-	        interval: 10,
-        },
-        series: [{
-            name: '好评指数',
-            type: 'line',
-            lineStyle: {
-            	normal: {
-            		color: '#51a5de'
-            	}
-            	
-            },
-            itemStyle: {
-            	normal: {
-            		color: '#51a5de'
-            	}
-            	
-            },
-            'symbol': 'emptyCircle',
-            symbolSize: 8,
-            hoverAnimation: false,
-            data: [10,25,30,20,32,11]
-        }]
-    };
-    lineGoodReputation.setOption(option)
-}
-function getUserCommentData(){
+
+function loadCloud(callback){
+	var cloudData = null;
+	var cloudDataStr = sessionStorage.getItem('cloudData');
 	var productId = 24
-	utilObj.ajax({
-		url: '/m/productStats/statsProductLabel',
-		type: 'POST',
-		data: {
-			productId: productId,
-			topN: 10,
-		},
-		success: function(data){
-			var cloudData = utilObj.getCloudData(data.object, {
-				text: 'content',
-				weight: 'count',
-			});
-			userCommentCloud(cloudData)
-		}
-	})
+	if(cloudDataStr){
+		cloudData = JSON.parse(cloudDataStr);
+		callback(cloudData);
+	}else{
+		utilObj.ajax({
+			url: '/m/productStats/statsProductLabel',
+			type: 'POST',
+			data: {
+				productId: productId,
+				topN: 10,
+			},
+			success: function(data){
+				var cloudData = utilObj.getCloudData(data.object, {
+					text: 'content',
+					weight: 'count',
+				});
+				sessionStorage.setItem('cloudData', JSON.stringify(cloudData));
+				callback(cloudData);
+			}
+		})
+	}
+	
 }
 function userCommentCloud(word_list){
-//	var word_list = [
-//	    {text: "售后服务", weight: 9, link: "https://github.com/DukeLeNoir/jQCloud"},
-//	    {text: "以旧换新", weight: 9, html: {title: "My Title", "class": "custom-class"}, link: {href: "http://jquery.com/", target: "_blank"}},
-//	    {text: "送货速度", weight: 8},
-//	    {text: "包装精美", weight: 9},
-//	    {text: "潮流", weight: 8},
-//	    {text: "时尚", weight: 6.2},
-//	    {text: "耐用", weight: 5},
-//	    {text: "喜爱", weight: 5},
-//	    {text: "个性", weight: 5},
-//	    {text: "送人", weight: 4},
-//	    {text: "顺手", weight: 4},
-//	    {text: "实用", weight: 4},
-//	    {text: "礼物", weight: 3},
-//	    {text: "防水", weight: 3},
-//	];
 	$(".cloud--user-comment").html('');
     $(".cloud--user-comment").jQCloud(word_list);
 }
-function goodsCommentCloud(){
-	var word_list = [
-	    {text: "售后服务", weight: 9, link: "https://github.com/DukeLeNoir/jQCloud"},
-	    {text: "以旧换新", weight: 9, html: {title: "My Title", "class": "custom-class"}, link: {href: "http://jquery.com/", target: "_blank"}},
-	    {text: "送货速度", weight: 8},
-	    {text: "包装精美", weight: 9},
-	    {text: "潮流", weight: 8},
-	    {text: "时尚", weight: 6.2},
-	    {text: "耐用", weight: 5},
-	    {text: "喜爱", weight: 5},
-	    {text: "个性", weight: 5},
-	    {text: "送人", weight: 4},
-	    {text: "顺手", weight: 4},
-	    {text: "实用", weight: 4},
-	    {text: "礼物", weight: 3},
-	    {text: "防水", weight: 3},
-	];
+function productsCommentCloud(word_list){
 	$(".cloud--goods-comment").html('');
     $(".cloud--goods-comment").jQCloud(word_list);
 }
-function hotKeyCloud(){
-	var word_list = [
-	    {text: "售后服务", weight: 9, link: "https://github.com/DukeLeNoir/jQCloud"},
-	    {text: "以旧换新", weight: 9, html: {title: "My Title", "class": "custom-class"}, link: {href: "http://jquery.com/", target: "_blank"}},
-	    {text: "送货速度", weight: 8},
-	    {text: "包装精美", weight: 9},
-	    {text: "潮流", weight: 8},
-	    {text: "时尚", weight: 6.2},
-	    {text: "耐用", weight: 5},
-	    {text: "喜爱", weight: 5},
-	    {text: "个性", weight: 5},
-	    {text: "送人", weight: 4},
-	    {text: "顺手", weight: 4},
-	    {text: "实用", weight: 4},
-	    {text: "礼物", weight: 3},
-	    {text: "防水", weight: 3},
-	];
+function hotKeyCloud(word_list){
 	$(".cloud--hot-key").html('');
     $(".cloud--hot-key").jQCloud(word_list);
 }
-function getBasicLabelData(){
-	var productId = 24;
-	utilObj.ajax({
-		url: '/m/productStats/statsProductLabel',
-		type: 'POST',
-		data: {
-			productId: productId,
-			topN: 10,
-		},
-		success: function(data){
-			barBasicLabel({
-				yAxisData: utilObj.getAryByParam(data.object, 'content'),
-				seriesData: utilObj.getAryByParam(data.object, 'count'),
-			})
-		}
-	})
+function loadBarH(callback){
+	var barHData = null;
+	var barHDataStr = sessionStorage.getItem('barHData');
+	var productId = 24
+	if(barHDataStr){
+		barHData = JSON.parse(barHDataStr);
+		callback(barHData);
+	}else{
+		utilObj.ajax({
+			url: '/m/productStats/statsProductLabel',
+			type: 'POST',
+			data: {
+				productId: productId,
+				topN: 10,
+			},
+			success: function(data){
+				var barHData = {
+					yAxisData: utilObj.getAryByParam(data.object, 'content'),
+					seriesData: utilObj.getAryByParam(data.object, 'count'),
+				};
+				sessionStorage.setItem('barHData', JSON.stringify(barHData));
+				callback(barHData);
+			}
+		})
+	}
+	
 }
+//function getBasicLabelData(){
+//	var productId = 24;
+//	utilObj.ajax({
+//		url: '/m/productStats/statsProductLabel',
+//		type: 'POST',
+//		data: {
+//			productId: productId,
+//			topN: 10,
+//		},
+//		success: function(data){
+//			barBasicLabel({
+//				yAxisData: utilObj.getAryByParam(data.object, 'content'),
+//				seriesData: utilObj.getAryByParam(data.object, 'count'),
+//			})
+//		}
+//	})
+//}
 function barBasicLabel(params){
 	var b1 = echarts.init($(".chart--bar--basic-label1")[0]);
 	var b2 = echarts.init($(".chart--bar--basic-label2")[0]);
@@ -1508,7 +1562,24 @@ function barBasicLabel(params){
 	b1.setOption(option1);
 	b2.setOption(option2);
 }
-function barLabelOverView(){
+//function getLabelOverViewData(){
+//	var productId = 24;
+//	utilObj.ajax({
+//		url: '/m/productStats/statsProductLabel',
+//		type: 'POST',
+//		data: {
+//			productId: productId,
+//			topN: 10,
+//		},
+//		success: function(data){
+//			barLabelOverView({
+//				yAxisData: utilObj.getAryByParam(data.object, 'content'),
+//				seriesData: utilObj.getAryByParam(data.object, 'count'),
+//			})
+//		}
+//	})
+//}
+function barLabelOverView(params){
 	var b1 = echarts.init($(".chart--bar-h1")[0]);
 	var b2 = echarts.init($(".chart--bar-h2")[0]);
 	var option1 = {
@@ -1527,7 +1598,7 @@ function barLabelOverView(){
 	    yAxis: {
 			inverse: true,
 	        type: 'category',
-	        data: ['系统流畅','外观漂亮','反应快','屏幕大','功能齐全','照相不错','分辨率高','指纹识别','通话质量好','性价比高'],
+	        data: params.yAxisData,
 	        axisLine: {
 	            show: false,
 	        },
@@ -1548,7 +1619,7 @@ function barLabelOverView(){
 	        {
 	            name: '',
 	            type: 'bar',
-	            data: [508, 477, 433, 429, 420, 364,323,321,313,309],
+	            data: params.seriesData,
 	            barCategoryGap: '50%',
 	            label: {
 	            	normal: {

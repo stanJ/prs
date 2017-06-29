@@ -24,7 +24,7 @@ var app = new Vue({
 		},
 		fetchData: function(){
 			this.loadPageStayList();
-			this.loadPageAnalysisList();
+//			this.loadPageAnalysisList();
 			this.loadBuyerAmountList();
 			this.loadExpensePlaceList();
 			this.loadBuyTimesList();
@@ -36,120 +36,64 @@ var app = new Vue({
 			
 		},
 		loadPageStayList: function(){
-			this.pageStayData = [
-			{
-				'1': '508',
-				'2': '100%',
-				'3': '256',
-				'4': '256',
-				'5': '1.56',
-				'6': '55.68',
-			},
-			{
-				'1': '159',
-				'2': '90%',
-				'3': '148',
-				'4': '148',
-				'5': '1.26',
-				'6': '53.68',
-			},
-			{
-				'1': '113',
-				'2': '56%',
-				'3': '96',
-				'4': '96',
-				'5': '1.16',
-				'6': '52.68',
-			},
-			{
-				'1': '94',
-				'2': '15%',
-				'3': '76',
-				'4': '76',
-				'5': '1.36',
-				'6': '45.68',
-			},
-			{
-				'1': '86',
-				'2': '6.5%',
-				'3': '50',
-				'4': '50',
-				'5': '1.54',
-				'6': '55.68',
-			},
-			{
-				'1': '52',
-				'2': '4%',
-				'3': '40',
-				'4': '40',
-				'5': '1.51',
-				'6': '35.68',
-			},
-			{
-				'1': '37',
-				'2': '1.8%',
-				'3': '30',
-				'4': '30',
-				'5': '1.86',
-				'6': '25.68',
-			},
-			{
-				'1': '24',
-				'2': '2%',
-				'3': '20',
-				'4': '20',
-				'5': '1.76',
-				'6': '35.68',
-			},
-			{
-				'1': '10',
-				'2': '0.6%',
-				'3': '10',
-				'4': '10',
-				'5': '1.56',
-				'6': '55.68',
-			},
-			]
+			var vm = this;
+			var startDate = utilObj.dayStart('2017-05-01');
+			var endDate = utilObj.dayEnd(moment().format("YYYY-MM-DD"));
+			utilObj.ajax({
+				url: '/m/userStats/statsPageWaitTime',
+				type: 'POST',
+				data: {
+					nextPage: 0,
+					pageSize: 10,
+					startDate: startDate,
+					endDate: endDate,
+				},
+				success: function(data){
+					vm.pageStayData = data.object.content;
+					vm.pageAnalysisData = data.object.content;
+				}
+			})
 		},
-		loadPageAnalysisList: function(){
-			this.pageAnalysisData = [
-			{
-				'1': 'http://www.ui.cn/?p=2#project',
-				'2': '64',
-				'3': '1754',
-			},
-			{
-				'1': 'http://www.cnblogs.com',
-				'2': '54',
-				'3': '1500',
-			},
-			{
-				'1': 'http://www.ui.cn/?p=2#project',
-				'2': '44',
-				'3': '1214',
-			},
-			{
-				'1': 'http://www.cnblogs.com',
-				'2': '34',
-				'3': '600',
-			},
-			{
-				'1': 'http://www.ui.cn/?p=2#project',
-				'2': '54',
-				'3': '800',
-			},
-			{
-				'1': 'http://www.cnblogs.com',
-				'2': '14',
-				'3': '400',
-			},
-			{
-				'1': 'http://www.ui.cn/?p=2#project',
-				'2': '24',
-				'3': '520',
-			},
-			]
-		},
+//		loadPageAnalysisList: function(){
+//			this.pageAnalysisData = [
+//			{
+//				'1': 'http://www.ui.cn/?p=2#project',
+//				'2': '64',
+//				'3': '1754',
+//			},
+//			{
+//				'1': 'http://www.cnblogs.com',
+//				'2': '54',
+//				'3': '1500',
+//			},
+//			{
+//				'1': 'http://www.ui.cn/?p=2#project',
+//				'2': '44',
+//				'3': '1214',
+//			},
+//			{
+//				'1': 'http://www.cnblogs.com',
+//				'2': '34',
+//				'3': '600',
+//			},
+//			{
+//				'1': 'http://www.ui.cn/?p=2#project',
+//				'2': '54',
+//				'3': '800',
+//			},
+//			{
+//				'1': 'http://www.cnblogs.com',
+//				'2': '14',
+//				'3': '400',
+//			},
+//			{
+//				'1': 'http://www.ui.cn/?p=2#project',
+//				'2': '24',
+//				'3': '520',
+//			},
+//			]
+//		},
+//		
 		loadBuyerAmountList: function(){
 			this.buyerAmountData = [
 			{
@@ -472,14 +416,17 @@ var userObj = {
 	},
 	loadTab4: function(){
 		lineO2O();
-		piePriceAnalysis();
-		barBrandPrefer();
+		getPriceAnalysisData();
+//		barBrandPrefer();
+		getBrandPreferData();
 		radarAgeDiff();
 		personalityCloud();
 	},
 	loadTab5: function(){
-		lineVisitTime();
-		lineVisitAmount();
+//		lineVisitTime();
+		getVisitTimeData();
+//		lineVisitAmount();
+		getVisitAmountData();
 	},
 }
 function mapBuyMoney(){
@@ -933,25 +880,44 @@ function barEducation(){
 	bar1.setOption(option);
 }
 function getPriceAnalysisData(){
-	var startDate = utilObj.dayStart('2017-01-01');
-	var endDate = utilObj.dayEnd('2017-12-31');
+	var startDate = utilObj.dayStart('2017-05-01');
+	var endDate = utilObj.dayEnd(moment().format('YYYY-MM-DD'));
 	utilObj.ajax({
 		url: '/m/productStats/statsPrice',
 		type: 'POST',
 		data: {
-			productId: productId,
+			productId: 1,
 			startDate: startDate,
 			endDate: endDate,
 		},
 		success: function(data){
-			
+			piePriceAnalysis(data.object);
 		}
 	})
 }
-function piePriceAnalysis(){
+function legendsPriceAnalysis(data, params){
+	var h = '';
+	for(var i=0;i<data.length;i++){
+		h += '<div class="legend-item clearfix">';
+		h += 	'<div class="legend__icon" style="background: '+params.color[i]+';"></div>';
+		h += 	'<div class="legend__name">'+data[i].key+'</div>';
+		h +=	'<div class="legend__value">'+data[i].ratio+'%</div>';
+		h += '</div>';
+	}
+	$(".legends--price-analysis").html(h);
+}
+function piePriceAnalysis(data){	
+	var seriesData = utilObj.getAryByParams(data, {
+		value: 'ratio',
+		name: 'key',
+	})
+	var color = ['#0c4d90','#53a8e2','#2c82be','#b9d5fe','#53a8e2','#76ddfb',];
+	legendsPriceAnalysis(data, {
+		color: color,
+	})
 	var pie1 = echarts.init($(".chart--pie--price-analysis")[0]);
 	var option = {
-		color: ['#0c4d90','#53a8e2','#2c82be','#b9d5fe','#53a8e2','#76ddfb',],
+		color: color,
 	    tooltip: {
 	        trigger: 'item',
 	        formatter: "{a} <br/>{b}: {c} ({d}%)"
@@ -972,14 +938,7 @@ function piePriceAnalysis(){
 	                    show: false
 	                }
 	            },
-	            data:[
-	                {value:18, name:'1000元以下'},
-	                {value:18, name:'1000-1499元'},
-	                {value:18, name:'1500-1900元'},
-	                {value:28, name:'2000-2499元'},
-	                {value:6, name:'2500-2999元'},
-	                {value:12, name:'3000-3499元'},
-	            ]
+	            data:seriesData,
 	        }
 	    ]
 	};
@@ -1235,8 +1194,8 @@ function radarAgeDiff(){
 	radar1.setOption(option);
 }
 function getBrandPreferData(){
-	var startDate = utilObj.dayStart('2017-01-01');
-	var endDate = utilObj.dayEnd('2017-12-31');
+	var startDate = utilObj.dayStart('2017-05-01');
+	var endDate = utilObj.dayEnd(moment().format('YYYY-MM-DD'));
 	utilObj.ajax({
 		url: '/m/productStats/statsProductBrand',
 		type: 'POST',
@@ -1246,11 +1205,13 @@ function getBrandPreferData(){
 			endDate: endDate,
 		},
 		success: function(data){
-			
+			barBrandPrefer(data.object);
 		}
 	})
 }
-function barBrandPrefer(){
+function barBrandPrefer(data){
+	var yAxisData = utilObj.getAryByParam(data, 'productName');
+	var seriesData = utilObj.getAryByParam(data, 'ratio');
 	var b1 = echarts.init($(".chart--bar-brand-prefer")[0]);
 	var option1 = {
 		color: ['#66b4e7'],
@@ -1264,12 +1225,12 @@ function barBrandPrefer(){
 	    xAxis: {
 	    	show: false,
 	        type: 'value',
-	        max: 8,
+//	        max: 8,
 	    },
 	    yAxis: {
 			inverse: true,
 	        type: 'category',
-	        data: ['IPone 6S PLUS','OPPO R9','OPPO R3','三星 GALAXY J7','三星 GALAXY J5','三星 GALAXY J2','OPPO R9 PLUS','三星 GALAXY GRAND','三星 GALAXY NEO','OPPP R7S'],
+	        data: yAxisData,
 	        axisLine: {
 	            show: false,
 	        },
@@ -1290,7 +1251,7 @@ function barBrandPrefer(){
 	        {
 	            name: '',
 	            type: 'bar',
-	            data: [1.7, 1.0, 0.9, 0.8, 0.7, 0.6,0.6,0.5,0.5,0.4],
+	            data: seriesData,
 	            barCategoryGap: '50%',
 	            label: {
 	            	normal: {
@@ -1312,9 +1273,25 @@ function barBrandPrefer(){
 
 	b1.setOption(option1);
 }
-
-function lineVisitTime(){
-	var lineVisitTime = echarts.init($(".chart--line--visit-time")[0]);
+function getVisitTimeData(){
+	var startDate = utilObj.dayStart('2017-05-01');
+	var endDate = utilObj.dayEnd(moment().format('YYYY-MM-DD'));
+	utilObj.ajax({
+		url: '/m/userStats/statsBrowseTime',
+		type: 'POST',
+		data: {
+			startDate: startDate,
+			endDate: endDate,
+		},
+		success: function(data){
+			lineVisitTime(data.object);
+		}
+	})
+}
+function lineVisitTime(data){
+	var seriesData1 = utilObj.getAryByParam(data, 'count');
+	var seriesData2 = utilObj.getAryByParam(data, 'ratio');
+	var line1 = echarts.init($(".chart--line--visit-time")[0]);
 	var option = {
 		grid: {
 			left: '35',
@@ -1376,7 +1353,7 @@ function lineVisitTime(){
 	        },
         	{	
         		show: false,
-		        max: 100,
+//		        max: 100,
 		        min: 0,
 	            name: '增长率',
 	        },
@@ -1392,7 +1369,7 @@ function lineVisitTime(){
             	}
             	
             },
-            data:[200,300,180,60,100]
+            data:seriesData1,
         },
         {
             name: '增长率',
@@ -1413,12 +1390,12 @@ function lineVisitTime(){
             'symbol': 'circle',
             symbolSize: 8,
             hoverAnimation: false,
-            data: [24.7,33.1,18.8,10.4,12.9]
+            data: seriesData2,
         },
        
         ]
     };
-    lineVisitTime.setOption(option)
+    line1.setOption(option)
 }	
 
 function lineO2O(){
@@ -1537,9 +1514,26 @@ function lineO2O(){
     };
     lineO2O.setOption(option)
 }	
-
-function lineVisitAmount(){
-	var lineVisitAmount = echarts.init($(".chart--line--visit-amount")[0]);
+function getVisitAmountData(){
+	var startDate = utilObj.dayStart('2017-01-01');
+	var endDate = utilObj.dayEnd(moment().format('YYYY-MM-DD'));
+	utilObj.ajax({
+		url: '/m/userStats/statsPageBrowse',
+		type: 'POST',
+		data: {
+			startDate: startDate,
+			endDate: endDate,
+		},
+		success: function(data){
+			lineVisitAmount(data.object);
+		}
+	})
+}
+function lineVisitAmount(data){
+	var xAxisData = utilObj.getAryByParam(data, 'yearMonth', utilObj.getMonth);
+	var seriesData1 = utilObj.getAryByParam(data, 'clickCount');
+	var seriesData2 = utilObj.getAryByParam(data, 'pageViewCount');
+	var line1 = echarts.init($(".chart--line--visit-amount")[0]);
 	var option = {
 		grid: {
 			left: '50',
@@ -1566,7 +1560,7 @@ function lineVisitAmount(){
         xAxis: {
             type: 'category',
             boundaryGap: true,
-            data:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月',],
+            data:xAxisData,
             axisLine: {
 	            lineStyle: {
 	        		color: '#d7d7d7',
@@ -1595,7 +1589,7 @@ function lineVisitAmount(){
 	        axisTick: {
 	        	show: false,
 	        },
-	        max: 15000,
+//	        max: 15000,
         },
         series: [
         {
@@ -1616,7 +1610,7 @@ function lineVisitAmount(){
             'symbol': 'emptyCircle',
             symbolSize: 10,
             hoverAnimation: false,
-            data: [5000,4000,4500,8000,4100,5000,3800,4000,9000,10000,4700,9000]
+            data: seriesData1,
         },
         {
             name:'页面浏览量',
@@ -1636,11 +1630,11 @@ function lineVisitAmount(){
             'symbol': 'emptyCircle',
             symbolSize: 10,
             hoverAnimation: false,
-           data: [4000,3000,4000,4100,3100,4000,2800,3000,5000,8000,4200,4900]
+           data: seriesData2,
         },
         ]
     };
-    lineVisitAmount.setOption(option)
+    line1.setOption(option)
 }	
 
 function lineMoneyPeople(){
@@ -1911,6 +1905,7 @@ function lineIncome(){
 
 function lineBuyTimes(){
 	var line1 = echarts.init($(".chart--line--buy-times")[0]);
+	var months = utilObj.getAryByParam(app.buyTimesData, 'month', utilObj.getMonth);
 	var option = {
 		title: {
 			text: '2011年前三季度团购购买人次月度统计',
@@ -1938,7 +1933,7 @@ function lineBuyTimes(){
         xAxis: {
             type: 'category',
             boundaryGap: true,
-            data:['1月','2月','3月','4月','5月','6月','7月','8月','9月',],
+            data:months,
             axisLine: {
 	            lineStyle: {
 	        		color: '#d7d7d7',
@@ -1967,8 +1962,8 @@ function lineBuyTimes(){
 	        axisTick: {
 	        	show: false,
 	        },
-	        max: 4000,
-	        interval: 500,
+//	        max: 4000,
+//	        interval: 500,
         },
         series: [
         {

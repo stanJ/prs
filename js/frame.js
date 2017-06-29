@@ -7,27 +7,21 @@ Vue.filter('rate', function (value) {
 	}
 	return value;
 })
-Vue.filter('isPositiveNumber', function (value) {
-	if(value){
-		if(parseFloat(value)>0){
-			return true;
-		}else {
-			return false;
-		}
-	}else {
-		return false;
+Vue.filter('rateOneFloat', function (value) {
+	if(!value){
+		value = 0;
 	}
+	value = parseFloat(value)*100;
+	value = value.toFixed(1)+'%';
+	return value;
 })
-Vue.filter('isNegativeNumber', function (value) {
-	if(value){
-		if(parseFloat(value)<0){
-			return true;
-		}else {
-			return false;
-		}
-	}else {
-		return false;
+Vue.filter('doubleFloat', function (value) {
+	if(!value){
+		value = 0;
 	}
+	value = parseFloat(value);
+	value = value.toFixed(2);
+	return value;
 })
 
 $(function(){

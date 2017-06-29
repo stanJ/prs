@@ -45,10 +45,10 @@ var utilObj = {
 						location.reload();
 	//					utilObj.navigate("login");
 					}else{
-						utilObj.alert(data.message);
+						alert('接口出错' + data.message);
 					}
 				}else {
-					utilObj.alert('接口出错');
+					alert('接口出错');
 				}	
 				
 			}else {
@@ -168,5 +168,97 @@ var utilObj = {
 				weight: x[params['weight']],
 			}
 		})
+	},
+	setVmData: function(obj, data){
+		for(var key in obj){
+			obj[key] = data[key];
+		}
+	},
+	isPositiveNumber: function(value){
+		if(value){
+			if(parseFloat(value)>0){
+				return true;
+			}else {
+				return false;
+			}
+		}else {
+			return false;
+		}
+	},
+	isNegativeNumber: function(value){
+		if(value){
+			if(parseFloat(value)<0){
+				return true;
+			}else {
+				return false;
+			}
+		}else {
+			return false;
+		}
+	},
+	showArrow: function(value){
+		return {
+			'increase-arrow': utilObj.isPositiveNumber(value),
+			'decrease-arrow': utilObj.isNegativeNumber(value),
+		}
+	},
+	transferInteger: function(value){
+		return parseInt(value);
+	},
+	transferDoubleFloat: function(value){
+		return parseFloat(value).toFixed(2);
+	},
+	getAryByParams: function(ary, params){
+		return ary.map(function(x){
+			var obj = {};
+			for(var key in params){
+				obj[key] = x[params[key]];
+			}
+			return obj;
+		})
+	},
+	getEmotionData: function(data){
+		var ary = [];
+		var countObj = {};
+		var goodRateObj = {};
+		var goodCountObj = {};
+		var generalCountObj = {};
+		var poorCountObj = {};
+		var noSenseCountObj = {};
+		var dateAry = data.ddate;
+		ary = this.getEmotionAry(countObj, dateAry, '点评数', ary);
+		ary = this.getEmotionAry(goodRateObj, dateAry, '好评率', ary);
+		ary = this.getEmotionAry(goodCountObj, dateAry, '好评数', ary);
+		ary = this.getEmotionAry(generalCountObj, dateAry, '中评数', ary);
+		ary = this.getEmotionAry(poorCountObj, dateAry, '差评数', ary);
+		ary = this.getEmotionAry(noSenseCountObj, dateAry, '无情感', ary);
+		return ary;
+	},
+	getEmotionAry: function(obj, dateAry, title, ary){
+		var length = dateAry.length;
+		for(var i=0;i<length;i++){
+			obj[dateAry[i]] = data.count[i];
+			obj.title = title;
+		}
+		ary.push(obj);
+	},
+	getConfigData: function(data){
+		var ary = [];
+		var dateAry = data.ddate;
+		var labels = dateAry.map(function(x){
+			return x.slice(4,6) + '-' + x.slice(6);
+		})
+		ary.push({
+			label: '',
+			prop: 'title',
+		})
+		for(var i=0;i<dateAry.length;i++){
+			var obj = {
+				label: labels[i],
+				prop: dateAry[i],
+			}
+			ary.push(obj);
+		}
+		return ary;
 	}
 }

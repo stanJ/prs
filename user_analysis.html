@@ -352,13 +352,13 @@
 				<div class="nav--tab">
 					<div class="tab-title" data-name="tab1" 
 						data-func="loadTab1" data-page="user">用户标签维护</div>
-					<div class="tab-title is-active" data-name="tab2"
+					<div class="tab-title " data-name="tab2"
 						data-func="loadTab2" data-page="user">消费人群属性分析</div>
 					<div class="tab-title " data-name="tab3"
 						data-func="loadTab3" data-page="user">用户购买转换分析</div>
 					<div class="tab-title " data-name="tab4"
 						data-func="loadTab4" data-page="user">用户购买特征分析</div>
-					<div class="tab-title " data-name="tab5"
+					<div class="tab-title is-active" data-name="tab5"
 						data-func="loadTab5" data-page="user">用户网络行为分析</div>
 				</div>
 				<div class="nav__title clearfix">
@@ -410,35 +410,40 @@
 							<el-table :data="pageStayData" stripe width="100%">
 								<el-table-column 
 									label="浏览次数" 
-									prop="1" 
+									prop="sumViewCount" 
 									align="center"
 									:show-overflow-tooltip="true"> 
 								</el-table-column>
 								<el-table-column 
 									label="百分比" 
-									prop="2"
+									prop="ratio"
 									align="center"
 									:show-overflow-tooltip="true">
+									<template scope="scope">{{ scope.row['ratio'] | rateOneFloat }}</template>
 								</el-table-column>
 								<el-table-column label="独立访客" 
-									prop="3"
+									prop="uvCount"
 									align="center"
 									:show-overflow-tooltip="true"> 
 								</el-table-column>
 								<el-table-column label="IP" 
-									prop="4"
+									prop="ipCount"
 									align="center"
 									:show-overflow-tooltip="true"> 
 								</el-table-column>
 								<el-table-column label="人均浏览次数" 
-									prop="5"
+									prop="avgUVBrowseTimes"
 									align="center"
 									:show-overflow-tooltip="true"> 
+									<template scope="scope">{{ scope.row['avgUVBrowseTimes'] | doubleFloat }}</template>
+									
 								</el-table-column>
 								<el-table-column label="平均停留时间(秒)" 
-									prop="6"
+									prop="avgWaitTime"
 									align="center"
 									:show-overflow-tooltip="true"> 
+									<template scope="scope">{{ scope.row['avgWaitTime'] | doubleFloat }}</template>
+									
 								</el-table-column>
 							</el-table>
 							<div class="pagination">
@@ -465,20 +470,20 @@
 									<el-table :data="pageAnalysisData" stripe class="table--page-analysis">
 										<el-table-column 
 											label="页面URL" 
-											prop="1" 
+											prop="url" 
 											align="left"
 											min-width="240"
 											:show-overflow-tooltip="true"> 
 										</el-table-column>
 										<el-table-column 
 											label="测试量(PV)" 
-											prop="2"
+											prop="sumViewCount"
 											align="center"
 											min-width="117"
 											:show-overflow-tooltip="true">
 										</el-table-column>
 										<el-table-column label="访客量(UV)" 
-											prop="3"
+											prop="uvCount"
 											align="center"
 											min-width="117"
 											:show-overflow-tooltip="true"> 
@@ -556,8 +561,8 @@
 								</div>
 								<div class="chart chart--pie--price-analysis fl" style="height: 270px;width: 270px;margin-left: 34px;"></div>
 								<div class="legends-wrapper fr" style="height: 270px;width: 198px;margin-right: 10%;">
-									<div class="fl clearfix legends">
-										<div class="legend-item clearfix">
+									<div class="fl clearfix legends legends--price-analysis">
+										<!--<div class="legend-item clearfix">
 											<div class="legend__icon" style="background: #0c4d90;"></div>
 											<div class="legend__name">1000元以下</div>
 											<div class="legend__value">18.00%</div>
@@ -586,7 +591,7 @@
 											<div class="legend__icon" style="background: #76ddfb;"></div>
 											<div class="legend__name">3000-3499元</div>
 											<div class="legend__value">12.00%</div>
-										</div>
+										</div>-->
 									</div>
 								</div>
 								
@@ -599,7 +604,7 @@
 									<span class="title-prefix-md">品牌偏好分析</span>
 									<div class="brand-title fr">偏好度Top10手机型号</div>
 								</div>
-								<div class="chart chart--bar-brand-prefer" style="height: 280px;"></div>
+								<div class="chart chart--bar-brand-prefer" style="height: 280px;width: 90%;"></div>
 							</div>
 						
 						</div>
@@ -1285,6 +1290,7 @@
 				</div>			
 			</div>
 		</div>
+		<script src="lib/moment/moment.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/util.js" type="text/javascript" charset="utf-8"></script>
 		<script src="lib/jquery/jquery-3.2.1.js"></script>
 		<script src="lib/jqcloud/jqcloud-1.0.4.min.js" type="text/javascript" charset="utf-8"></script>
