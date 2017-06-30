@@ -225,27 +225,44 @@ var utilObj = {
 		var generalCountObj = {};
 		var poorCountObj = {};
 		var noSenseCountObj = {};
-		var dateAry = data.ddate;
-		ary = this.getEmotionAry(countObj, dateAry, '点评数', ary);
-		ary = this.getEmotionAry(goodRateObj, dateAry, '好评率', ary);
-		ary = this.getEmotionAry(goodCountObj, dateAry, '好评数', ary);
-		ary = this.getEmotionAry(generalCountObj, dateAry, '中评数', ary);
-		ary = this.getEmotionAry(poorCountObj, dateAry, '差评数', ary);
-		ary = this.getEmotionAry(noSenseCountObj, dateAry, '无情感', ary);
+		
+		ary = this.getEmotionAry(countObj, data, '点评数', ary);
+		ary = this.getEmotionAry(goodRateObj, data, '好评率', ary);
+		ary = this.getEmotionAry(goodCountObj, data, '好评数', ary);
+		ary = this.getEmotionAry(generalCountObj, data, '中评数', ary);
+		ary = this.getEmotionAry(poorCountObj, data, '差评数', ary);
+		ary = this.getEmotionAry(noSenseCountObj, data, '无情感', ary);
 		return ary;
 	},
-	getEmotionAry: function(obj, dateAry, title, ary){
+	getEmotionAry: function(obj, data, title, ary){
+		var dateAry = data.ddate;
 		var length = dateAry.length;
 		for(var i=0;i<length;i++){
-			obj[dateAry[i]] = data.count[i];
-			obj.title = title;
+			var curValue = '';
+			if(title == '点评数'){
+				curValue = data.count[i];
+			}else if(title == '好评率'){
+				curValue = data.goodRate[i];
+			}else if(title == '好评数'){
+				curValue = data.goodCount[i];
+			}else if(title == '中评数'){
+				curValue = data.generalCount[i];
+			}else if(title == '差评数'){
+				curValue = data.poorCount[i];
+			}else if(title == '无情感'){
+				curValue = data.noSenseCount[i];
+			}
+			obj[dateAry[i]] = curValue;
 		}
+		obj.title = title;
 		ary.push(obj);
+		return ary;
 	},
 	getConfigData: function(data){
 		var ary = [];
 		var dateAry = data.ddate;
 		var labels = dateAry.map(function(x){
+			x = x.toString();
 			return x.slice(4,6) + '-' + x.slice(6);
 		})
 		ary.push({
@@ -255,7 +272,7 @@ var utilObj = {
 		for(var i=0;i<dateAry.length;i++){
 			var obj = {
 				label: labels[i],
-				prop: dateAry[i],
+				prop: dateAry[i].toString(),
 			}
 			ary.push(obj);
 		}

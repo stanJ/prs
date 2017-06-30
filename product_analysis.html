@@ -210,6 +210,28 @@
 	<body>
 		
 		<div class="content" id="app">
+			<div class="nav-path">
+				<div class="np-prs">PRS</div>
+				<div class="prs-left">
+					<span class="prs-text fl">PRS System</span>
+					<select name="" class="prs__select" style="display: none;">
+						<option value="">产品分析</option>
+					</select>
+					<div class="breadcrumb fl">
+						<div class="breadcrumb-item">
+							产品分类
+						</div>
+						<span class="arrow-gt"> &gt; </span>
+						<div class="breadcrumb-item">
+							手机
+						</div>
+					</div>
+				</div>
+				<div class="prs-right">
+					<div class="icon icon-mail"></div>
+					<div class="icon icon-star"></div>
+				</div>
+			</div>
 			<div class="tabs__nav">
 				<div class="tab-title is-active" data-name="tab1" style="margin-left: 40px;"
 					data-func="loadTab1" data-page="product">标注总览</div>
@@ -533,72 +555,10 @@
 									<el-table-column 
 										min-width="50"
 										:prop="item.prop"
-										label="item.label"
+										:label="item.label"
 										align="center"
-										:show-overflow-tooltip="true" v-for="item in configData"> 
+										:show-overflow-tooltip="true" v-for="item in configData" :key="item.prop"> 
 									</el-table-column>
-									<!--<el-table-column 
-										min-width="60"
-										prop="0" 
-										align="center"
-										:show-overflow-tooltip="true"> 
-									</el-table-column>
-									<el-table-column 
-										min-width="50"
-										label="04-01" 
-										prop="1" 
-										align="center"
-										:show-overflow-tooltip="true"> 
-									</el-table-column>
-									<el-table-column 
-										min-width="50"
-										label="04-02" 
-										prop="2"
-										align="center"
-										:show-overflow-tooltip="true">
-									</el-table-column>
-									<el-table-column
-										min-width="50"
-										label="04-03" 
-										prop="3"
-										align="center"
-										:show-overflow-tooltip="true"> 
-									</el-table-column>
-									<el-table-column 
-										min-width="50"
-										label="04-04" 
-										prop="4"
-										align="center"
-										:show-overflow-tooltip="true"> 
-									</el-table-column>
-									<el-table-column 
-										min-width="50"
-										label="04-05" 
-										prop="5"
-										align="center"
-										:show-overflow-tooltip="true"> 
-									</el-table-column>
-									<el-table-column 
-										min-width="50"
-										label="04-06" 
-										prop="6"
-										align="center"
-										:show-overflow-tooltip="true"> 
-									</el-table-column>
-									<el-table-column 
-										min-width="50"
-										label="04-07"  
-										prop="7"
-										align="center"
-										:show-overflow-tooltip="true"> 
-									</el-table-column>
-									<el-table-column 
-										min-width="50"
-										label="04-08" 
-										prop="8"
-										align="center"
-										:show-overflow-tooltip="true"> 
-									</el-table-column>-->
 								</el-table>
 							</div>
 							
@@ -622,6 +582,7 @@
 											label="季度" 
 											prop="season" 
 											align="center"
+											min-width="40"
 											:formatter="tansferSeason"
 											:show-overflow-tooltip="true"> 
 										</el-table-column>
@@ -629,29 +590,34 @@
 											label="总销量(台)" 
 											prop="totalAmount"
 											align="center"
+											min-width="73"
 											:show-overflow-tooltip="true">
 										</el-table-column>
 										<el-table-column label="移动营销(台)" 
 											prop="mobileAmt"
 											align="center"
+											min-width="83"
 											:show-overflow-tooltip="true"> 
 										</el-table-column>
 										<el-table-column label="门店销售(台)" 
 											prop="shopAmt"
 											align="center"
+											min-width="80"
 											:show-overflow-tooltip="true"> 
 										</el-table-column>
 										<el-table-column label="均价" 
 											prop="avgPrice"
 											align="center"
+											min-width="60"
 											:show-overflow-tooltip="true"> 
+											<template scope="scope">{{ scope.row['avgPrice'] | doubleFloat }}</template>
 										</el-table-column>
 										<el-table-column label="销量增长" 
 											prop="amtIncreaseRate"
 											align="left"
+											min-width="74"
 											:show-overflow-tooltip="true"> 
 											<template scope="scope">
-										        <!--<div :class="{'increase-arrow': isPositiveNumber(scope.row['amtIncreaseRate']),'decrease-arrow': isNegativeNumber(scope.row['amtIncreaseRate'])}"></div>-->
 										        <div :class="showArrow(scope.row['amtIncreaseRate'])"></div>
 										        <span>{{scope.row['amtIncreaseRate'] | rate}}</span>
 										    </template>
@@ -659,9 +625,9 @@
 										<el-table-column label="同比增率" 
 											prop="sameSeasonIncreaseRate"
 											align="left"
+											min-width="74"
 											:show-overflow-tooltip="true"> 
 											<template scope="scope">
-										        <!--<div :class="{'increase-arrow': isPositiveNumber(scope.row['sameSeasonIncreaseRate']),'decrease-arrow': isNegativeNumber(scope.row['sameSeasonIncreaseRate'])}"></div>-->
 										        <div :class="showArrow(scope.row['sameSeasonIncreaseRate'])"></div>
 										        <span>{{scope.row['sameSeasonIncreaseRate'] | rate}}</span>
 										    </template>
@@ -726,43 +692,49 @@
 								<span class="title-prefix-md">促销方式</span>
 								<el-select placeholder="按季度"></el-select>
 							</div>
-							<div class="tabs">
+							<div class="tabs tabs--sm">
 								<div class="tabs__header">
 									<div class="tab-item is-active">一季度</div>
 									<div class="tab-item ">二季度</div>
 									<div class="tab-item ">三季度</div>
 									<div class="tab-item ">四季度</div>
 								</div>
+								<!--<div class="tabs__content">
+									<div class="tab-content">-->
+										<el-table :data="promotionWaysData" stripe class="table--promotion-ways">
+											<el-table-column 
+												label="促销方式" 
+												prop="1" 
+												align="center"
+												:show-overflow-tooltip="true"> 
+											</el-table-column>
+											<el-table-column 
+												label="销量" 
+												prop="2"
+												align="center"
+												:show-overflow-tooltip="true">
+											</el-table-column>
+											<el-table-column label="均价" 
+												prop="3"
+												align="center"
+												:show-overflow-tooltip="true"> 
+											</el-table-column>
+											<el-table-column label="销量增长" 
+												prop="4"
+												align="center"
+												:show-overflow-tooltip="true"> 
+											</el-table-column>
+											<el-table-column label="平台" 
+												prop="5"
+												align="center"
+												:show-overflow-tooltip="true"> 
+											</el-table-column>
+										</el-table>
+									<!--</div>
+								
+								</div>-->
 							</div>
-							<el-table :data="promotionWaysData" stripe class="table--promotion-ways">
-								<el-table-column 
-									label="促销方式" 
-									prop="1" 
-									align="center"
-									:show-overflow-tooltip="true"> 
-								</el-table-column>
-								<el-table-column 
-									label="销量" 
-									prop="2"
-									align="center"
-									:show-overflow-tooltip="true">
-								</el-table-column>
-								<el-table-column label="均价" 
-									prop="3"
-									align="center"
-									:show-overflow-tooltip="true"> 
-								</el-table-column>
-								<el-table-column label="销量增长" 
-									prop="4"
-									align="center"
-									:show-overflow-tooltip="true"> 
-								</el-table-column>
-								<el-table-column label="平台" 
-									prop="5"
-									align="center"
-									:show-overflow-tooltip="true"> 
-								</el-table-column>
-							</el-table>
+							
 						</div>
 						<div class="bwr--b" style="height: 580px;">
 							<div class="circle--promotion-ways">

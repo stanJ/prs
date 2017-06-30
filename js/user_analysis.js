@@ -1908,7 +1908,7 @@ function lineBuyTimes(){
 	var months = utilObj.getAryByParam(app.buyTimesData, 'month', utilObj.getMonth);
 	var option = {
 		title: {
-			text: '2011年前三季度团购购买人次月度统计',
+			text: '2017年前三季度团购购买人次月度统计',
 			left: 0,
 		},
 		grid: {

@@ -1151,7 +1151,7 @@ function lineGoodComment(data){
 	        axisTick: {
 	        	show: false,
 	        },
-	        max: 100,
+//	        max: 100,
         },
         series: [{
             name: '好评分数',

@@ -225,8 +225,8 @@ $(function(){
 	barStayTime();
 })
 function getChannelBasicData(){
-	var startDate = utilObj.dayStart('2017-04-26');
-	var endDate = utilObj.dayEnd('2017-05-09');
+	var startDate = utilObj.dayStart('2017-06-15');
+	var endDate = utilObj.dayEnd(moment().format('YYYY-MM-DD'));
 	utilObj.ajax({
 		url: '/m/productStats/statsChannelSale',
 		type: 'POST',
@@ -270,11 +270,13 @@ function lineChannelBasic(params){
 	var line6 = echarts.init($(".chart--line--channel-store")[0]);
 	frameObj.loadTabs();
 	var option = {
+		color: ['#2c82be', '#76ddfb','#53a8e2',],
 		grid: {
-			left: '35',
+			left: '10',
 			right: '20',
 			top: '60',
-			bottom: '40'
+			bottom: '10',
+			containLabel: true,
 		},
 		title: {
 			text: 'LINE CHART 2',
@@ -283,10 +285,16 @@ function lineChannelBasic(params){
 			}
 		},
         tooltip: {
+//      	trigger: 'axis',
+//      	axisPointer: {
+//	            lineStyle: {
+//	                color: '#c8f1fd'
+//	            },
+//	        },
 	        formatter: function (params) {
-	            var params = params[0];
-	            var date = new Date(params.name);
-	            return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
+//	            var params = params[0];
+//	            var date = new Date(params.name);
+	            return params.name + '<br />' + params.value;
 	        },
 	    },
         legend: {
@@ -346,18 +354,18 @@ function lineChannelBasic(params){
         series: [{
             name: 'PARTNER 1',
             type: 'line',
-            lineStyle: {
-            	normal: {
-            		color: '#51a5de'
-            	}
-            	
-            },
-            itemStyle: {
-            	normal: {
-            		color: '#51a5de'
-            	}
-            	
-            },
+//          lineStyle: {
+//          	normal: {
+//          		color: '#51a5de'
+//          	}
+//          	
+//          },
+//          itemStyle: {
+//          	normal: {
+//          		color: '#51a5de'
+//          	}
+//          	
+//          },
             'symbol': 'emptyCircle',
             symbolSize: 8,
             hoverAnimation: false,

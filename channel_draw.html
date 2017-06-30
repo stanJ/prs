@@ -51,6 +51,8 @@
 			.line--basic-wrapper{
 				box-shadow: 0 0 5px 1px #dbdbdb;
 				padding-top: 22px;
+				height: 340px;
+    			box-sizing: border-box;
 			}
 			.bar-staytime-wrapper{
 				box-shadow: 0 0 5px 1px #dbdbdb;
@@ -63,6 +65,28 @@
 	<body>
 		
 		<div class="content" id="app">
+			<div class="nav-path">
+				<div class="np-prs">PRS</div>
+				<div class="prs-left">
+					<span class="prs-text fl">PRS System</span>
+					<select name="" class="prs__select" style="display: none;">
+						<option value="">渠道画像</option>
+					</select>
+					<div class="breadcrumb fl">
+						<div class="breadcrumb-item">
+							产品分类
+						</div>
+						<span class="arrow-gt"> &gt; </span>
+						<div class="breadcrumb-item">
+							手机
+						</div>
+					</div>
+				</div>
+				<div class="prs-right">
+					<div class="icon icon-mail"></div>
+					<div class="icon icon-star"></div>
+				</div>
+			</div>
 			<div class="block clearfix">
 				<!--<select class="select select--date">
 					<option value="">2017-04-16</option>

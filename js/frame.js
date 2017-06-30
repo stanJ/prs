@@ -30,6 +30,7 @@ $(function(){
 var frameObj = {
 	init: function(){
 		loadFrame();
+		this.loadMainTabs();
 		this.loadTabs();
 		this.bindEvent();
 //		this.login();
@@ -39,13 +40,54 @@ var frameObj = {
 		$(".tab-title").click(function(){
 			$(".tab-title").removeClass('is-active');
 			$(this).addClass('is-active')
-			_this.loadTabs();
+			_this.loadMainTabs();
 		})
 		$(".tab-item").click(function(){
 			var items = $(this).parents('.tabs:first').find('.tab-item');
 			items.removeClass('is-active');
 			$(this).addClass('is-active')
-			_this.loadTabs();
+			_this.loadTabs($(this));
+		})
+	},
+	loadMainTabs: function(){
+		var tab = $(".tab-title.is-active")
+		if(tab){
+			$(".tab-pane").hide();
+			var name = tab.data('name');
+			$(".tab-pane[data-name='"+name+"']").show();
+			var title = $(".nav__title");
+			if(title){
+				title.find('.title-prefix-md').text(tab.text());
+			}
+			var func = tab.data('func');
+			var page = tab.data('page');
+			if(page){
+				if(func){
+					if(page == 'product'){
+						productObj[func]();
+					}else if(page == 'user'){
+						userObj[func]();
+					}
+					
+				}
+			}
+			
+			
+		}
+	},
+	loadTabs: function(tabAry){
+		if(!tabAry){
+			tabAry = $(".tabs .tabs__header .tab-item.is-active");
+			$(".tab-content").hide();
+		}else{
+			tabAry.parents(".tabs:first").find('.tab-content').hide();
+		}
+//		var tabAry = $(".tabs .tabs__header .tab-item.is-active");
+//		$(".tab-content").hide();
+		tabAry.each(function(i){
+			var index = $(this).index();
+			var tabContent = $(this).parents(".tabs:first").children(".tabs__content").children(".tab-content").eq(index);
+			tabContent.show();
 		})
 	},
 	login: function(){
@@ -83,39 +125,7 @@ var frameObj = {
 			}
 		})
 	},
-	loadTabs: function(){
-		var tab = $(".tab-title.is-active")
-		if(tab){
-			$(".tab-pane").hide();
-			var name = tab.data('name');
-			$(".tab-pane[data-name='"+name+"']").show();
-			var title = $(".nav__title");
-			if(title){
-				title.find('.title-prefix-md').text(tab.text());
-			}
-			var func = tab.data('func');
-			var page = tab.data('page');
-			if(page){
-				if(func){
-					if(page == 'product'){
-						productObj[func]();
-					}else if(page == 'user'){
-						userObj[func]();
-					}
-					
-				}
-			}
-			
-			
-		}
-		var tabAry = $(".tabs .tabs__header .tab-item.is-active");
-		$(".tab-content").hide();
-		tabAry.each(function(i){
-			var index = $(this).index();
-			var tabContent = $(this).parents(".tabs:first").children(".tabs__content").children(".tab-content").eq(index);
-			tabContent.show();
-		})
-	},
+	
 }
 function loadFrame(){
 	var h1 = `<header>
@@ -171,29 +181,29 @@ function loadFrame(){
 		</div>`;
 	$("body").prepend(h1);
 
-	var h2 = `<div class="nav-path">
-				<div class="np-prs">PRS</div>
-				<div class="prs-left">
-					<span class="prs-text fl">PRS System</span>
-					<select name=""  class="prs__select">
-						<option value="">标签管理</option>
-					</select>
-					<div class="breadcrumb fl">
-						<div class="breadcrumb-item">
-							产品分类
-						</div>
-						<span class="arrow-gt"> > </span>
-						<div class="breadcrumb-item">
-							手机
-						</div>
-					</div>
-				</div>
-				<div class="prs-right">
-					<div class="icon icon-mail"></div>
-					<div class="icon icon-star"></div>
-				</div>
-			</div>`;
-	$(".content").prepend(h2)
+//	var h2 = `<div class="nav-path">
+//				<div class="np-prs">PRS</div>
+//				<div class="prs-left">
+//					<span class="prs-text fl">PRS System</span>
+//					<select name=""  class="prs__select">
+//						<option value="">标签管理</option>
+//					</select>
+//					<div class="breadcrumb fl">
+//						<div class="breadcrumb-item">
+//							产品分类
+//						</div>
+//						<span class="arrow-gt"> > </span>
+//						<div class="breadcrumb-item">
+//							手机
+//						</div>
+//					</div>
+//				</div>
+//				<div class="prs-right">
+//					<div class="icon icon-mail"></div>
+//					<div class="icon icon-star"></div>
+//				</div>
+//			</div>`;
+//	$(".content").prepend(h2)
 	$( ".prs__select" ).selectify({
 		btnText: '',
 		classes: {

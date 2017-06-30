@@ -348,9 +348,31 @@
 	</head>
 	<body>
 		<div class="content" id="app">
+			<div class="nav-path">
+				<div class="np-prs">PRS</div>
+				<div class="prs-left">
+					<span class="prs-text fl">PRS System</span>
+					<select name="" class="prs__select" style="display: none;">
+						<option value="">用户画像</option>
+					</select>
+					<div class="breadcrumb fl">
+						<div class="breadcrumb-item">
+							产品分类
+						</div>
+						<span class="arrow-gt"> &gt; </span>
+						<div class="breadcrumb-item">
+							手机
+						</div>
+					</div>
+				</div>
+				<div class="prs-right">
+					<div class="icon icon-mail"></div>
+					<div class="icon icon-star"></div>
+				</div>
+			</div>
 			<div class="tabs__nav">
 				<div class="nav--tab">
-					<div class="tab-title" data-name="tab1" 
+					<div class="tab-title is-active" data-name="tab1" 
 						data-func="loadTab1" data-page="user">用户标签维护</div>
 					<div class="tab-title " data-name="tab2"
 						data-func="loadTab2" data-page="user">消费人群属性分析</div>
@@ -358,7 +380,7 @@
 						data-func="loadTab3" data-page="user">用户购买转换分析</div>
 					<div class="tab-title " data-name="tab4"
 						data-func="loadTab4" data-page="user">用户购买特征分析</div>
-					<div class="tab-title is-active" data-name="tab5"
+					<div class="tab-title " data-name="tab5"
 						data-func="loadTab5" data-page="user">用户网络行为分析</div>
 				</div>
 				<div class="nav__title clearfix">
@@ -396,7 +418,7 @@
 						</div>
 					</div>
 					
-					<div class="block clearfix" style="height: 526px;">
+					<div class="block clearfix">
 						<div class="section clearfix" style="margin-bottom: 10px;">
 							<span class="title-prefix-md">页面停留时间</span>
 							<div class="search-wrapper fr mr10">
@@ -1055,12 +1077,14 @@
 												label="年龄" 
 												prop="1" 
 												align="center"
+												min-width="77"
 												:show-overflow-tooltip="true"> 
 											</el-table-column>
 											<el-table-column 
 												label="占百分比" 
 												prop="2"
 												align="center"
+												min-width="77"
 												:show-overflow-tooltip="true">
 											</el-table-column>
 						
@@ -1085,12 +1109,14 @@
 												label="学历" 
 												prop="1" 
 												align="center"
+												min-width="77"
 												:show-overflow-tooltip="true"> 
 											</el-table-column>
 											<el-table-column 
 												label="占百分比" 
 												prop="2"
 												align="center"
+												min-width="77"
 												:show-overflow-tooltip="true">
 											</el-table-column>
 						
@@ -1148,12 +1174,14 @@
 												label="收入" 
 												prop="1" 
 												align="center"
+												min-width="97"
 												:show-overflow-tooltip="true"> 
 											</el-table-column>
 											<el-table-column 
 												label="占百分比" 
 												prop="2"
 												align="center"
+												min-width="57"
 												:show-overflow-tooltip="true">
 											</el-table-column>
 						
@@ -1190,12 +1218,14 @@
 												label="性别" 
 												prop="1" 
 												align="center"
+												min-width="77"
 												:show-overflow-tooltip="true"> 
 											</el-table-column>
 											<el-table-column 
 												label="占百分比" 
 												prop="2"
 												align="center"
+												min-width="77"
 												:show-overflow-tooltip="true">
 											</el-table-column>
 						

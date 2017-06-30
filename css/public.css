@@ -374,6 +374,7 @@ a:visited{
     letter-spacing: 0;
     text-align: center;
     line-height: 40px;
+    cursor: pointer;
 }
 .tab-item.is-active{
 	background: #8194ab;
@@ -452,6 +453,10 @@ a:visited{
     height: 52px;
     padding: 0 6px;
     position: relative;
+    cursor: pointer;
+}
+.tab-pane{
+	display: none;
 }
 .nav--tab{
 	padding-left: 40px;

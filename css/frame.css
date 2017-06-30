@@ -15,10 +15,14 @@
 	font-family:pingfang_heavy;
 	src: url("../lib/fonts/PingFang_Heavy.ttf");
 }
+html{
+	background-image: url(../img/BG_img.png);
+	background-color: #b3b3b3;
+}
 body{
 	margin: 0;
-	background: #b3b3b3;
-	min-width: 1200px;
+	/*background: #b3b3b3;*/
+	min-width: 1300px;
 	font-size: 12px;
 	font-family: pingfang_bold ,tahoma, arial,"Hiragino Sans GB", "Microsoft Yahei", \5b8b\4f53, sans-serif;
 }
