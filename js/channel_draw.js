@@ -13,6 +13,9 @@ var app = new Vue({
 		channelHealthData2: [],
 		dateRange: '',
 		queryProject: '',
+		channelHealthQuery: {
+			query: '',
+		}
 	},
 	created: function () {
 		this.fetchData();
@@ -225,7 +228,7 @@ $(function(){
 	barStayTime();
 })
 function getChannelBasicData(){
-	var startDate = utilObj.dayStart('2017-06-15');
+	var startDate = utilObj.dayStart(moment().subtract(13, 'days').format('YYYY-MM-DD'));
 	var endDate = utilObj.dayEnd(moment().format('YYYY-MM-DD'));
 	utilObj.ajax({
 		url: '/m/productStats/statsChannelSale',

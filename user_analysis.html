@@ -208,7 +208,7 @@
 			    font-size: 14px;
 			    padding: 0 4px 0 20px;
 			    margin: 12px 0;
-			    font-family: pingfang_medium;
+			    /*font-family: pingfang_medium;*/
 			}
 			.card--purple .reason__main{
 				color: #27609c;
@@ -224,7 +224,8 @@
 			}
 			.row{
 				margin: 10px 10px 10px 20px;
-    			font-size: 15px;
+    			font-size: 14px;
+    			font-weight: bold;
 			}
 			.row__left{
 			    height: 40px;
@@ -384,7 +385,7 @@
 						data-func="loadTab5" data-page="user">用户网络行为分析</div>
 				</div>
 				<div class="nav__title clearfix">
-					<span class="title-prefix-md">用户网络行为分析</span>
+					<span class="title-prefix-md">用户标签维护</span>
 					<div class="query-control">
 						<el-select placeholder="人群筛选" style="margin-right: 6px;"
 							v-model="people">
@@ -472,7 +473,7 @@
 								<span>每页显示</span>
 								<el-select size="mini" class="select--mini" style="margin-right: 2px;line-height: 20px;" 
 									placeholder="" 
-									v-model="pageNum">
+									v-model="stayPageNum">
 									<el-option :label="10" :value="10"></el-option>
 									<el-option :label="9" :value="9"></el-option>
 								</el-select>
@@ -741,9 +742,9 @@
 								<span class="export blue-text">导出</span>
 							</div>
 							<div class="row__right fr">
-								<span class="blue-text">时间筛选</span>
-								<el-select placeholder="自然月" class="blue-bg"></el-select>
-								<el-select placeholder="日期" class="blue-bg"></el-select>
+								<span class="blue-text" style="margin-right: 6px;">时间筛选</span>
+								<el-select placeholder="自然月" class="blue-bg" v-model="timeQuery.month"></el-select>
+								<el-select placeholder="日期" class="blue-bg" v-model="timeQuery.date"></el-select>
 							</div>
 						</div>
 						<hr class="line" />

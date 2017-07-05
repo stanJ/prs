@@ -284,8 +284,8 @@
 						<div class="block clearfix">
 							<div class="section clearfix">
 								<span class="title-prefix-md">产品亮点分析</span>
-								<el-select placeholder="人群筛选"></el-select>
-								<el-select placeholder="产品筛选"></el-select>
+								<el-select placeholder="人群筛选" v-model="highLightQuery.people"></el-select>
+								<el-select placeholder="产品筛选" v-model="highLightQuery.product"></el-select>
 							</div>
 							<div class="table-wrapper" style="margin-bottom: 30px;">
 								
@@ -349,8 +349,8 @@
 						<div class="block clearfix">
 							<div class="section clearfix">
 								<span class="title-prefix-md">品牌销量分析</span>
-								<el-select placeholder="最近一个月"></el-select>
-								<el-select placeholder="人群筛选"></el-select>
+								<el-select placeholder="最近一个月" v-model="saleQuery.month"></el-select>
+								<el-select placeholder="人群筛选" v-model="saleQuery.people"></el-select>
 							</div>
 							<div class="table-wrapper" style="margin-bottom: 36px;">
 								
@@ -397,8 +397,8 @@
 						<div class="block clearfix" style="height: 346px;">
 							<div class="section clearfix">
 								<span class="title-prefix-md">产品评论活跃度</span>
-								<el-select placeholder="网站筛选"></el-select>
-								<el-select placeholder="时间筛选"></el-select>
+								<el-select placeholder="网站筛选" v-model="commentQuery.website"></el-select>
+								<el-select placeholder="时间筛选" v-model="commentQuery.time"></el-select>
 							</div>
 							<div class="table-wrapper">
 								
@@ -544,10 +544,9 @@
 						<div class="block clearfix" style="height: 360px;">
 							<div class="section clearfix">
 								<span class="title-prefix-md">情感指数趋势</span>
-								<el-select placeholder="全部网站">
-									option
+								<el-select placeholder="全部网站" v-model="emotionQuery.website">
 								</el-select>
-								<el-select placeholder="最近一周"></el-select>
+								<el-select placeholder="最近一周" v-model="emotionQuery.week"></el-select>
 							</div>
 							<div class="table-wrapper">
 								
@@ -573,7 +572,7 @@
 							<div class="block clearfix" style="height: 346px;">
 								<div class="section clearfix">
 									<span class="title-prefix-md">产品销售数量</span>
-									<el-select placeholder="按季度"></el-select>
+									<el-select placeholder="按季度" v-model="productSaleQuery.season"></el-select>
 								</div>
 								<div class="table-wrapper">
 									
@@ -642,7 +641,7 @@
 							<div class="block clearfix" style="height: 346px;">
 								<div class="section clearfix" style="margin-bottom: 5px;">
 									<span class="title-prefix-md">产品价格走势</span>
-									<el-select placeholder="按年份"></el-select>
+									<el-select placeholder="按年份" v-model="productPriceTrendQuery.year"></el-select>
 								</div>
 								<div class="chart chart--line--product-price-trend" style="height: 280px;"></div>
 										
@@ -659,26 +658,6 @@
 							<div class="chart chart--pie--price-spread fl" style="height: 270px;width: 270px;margin-left: 34px;"></div>
 							<div class="legends-wrapper fr" style="height: 270px;width: 198px;">
 								<div class="fl clearfix legends legends--price-spread">
-									<!--<div class="legend-item clearfix">
-										<div class="legend__icon" style="background: #0c4d90;"></div>
-										<div class="legend__name">淘宝</div>
-										<div class="legend__value">45.00%</div>
-									</div>
-									<div class="legend-item clearfix">
-										<div class="legend__icon" style="background: #53a8e2;"></div>
-										<div class="legend__name">天猫</div>
-										<div class="legend__value">30.00%</div>
-									</div>
-									<div class="legend-item clearfix">
-										<div class="legend__icon" style="background: #2c82be;"></div>
-										<div class="legend__name">京东</div>
-										<div class="legend__value">20.00%</div>
-									</div>
-									<div class="legend-item clearfix">
-										<div class="legend__icon" style="background: #76ddfb;"></div>
-										<div class="legend__name">唯品会</div>
-										<div class="legend__value">5.00%</div>
-									</div>-->
 								</div>
 							</div>
 						</div>
@@ -690,7 +669,7 @@
 						<div class="bwl--b" style="height: 580px;">
 							<div class="section clearfix">
 								<span class="title-prefix-md">促销方式</span>
-								<el-select placeholder="按季度"></el-select>
+								<el-select placeholder="按季度" v-model="promotionWaysQuery.season"></el-select>
 							</div>
 							<div class="tabs tabs--sm">
 								<div class="tabs__header">
@@ -699,40 +678,155 @@
 									<div class="tab-item ">三季度</div>
 									<div class="tab-item ">四季度</div>
 								</div>
-								<!--<div class="tabs__content">
-									<div class="tab-content">-->
-										<el-table :data="promotionWaysData" stripe class="table--promotion-ways">
+								<div class="tabs__content">
+									<div class="tab-content">
+										<el-table :data="promotionWaysData1" stripe class="table--promotion-ways">
 											<el-table-column 
 												label="促销方式" 
-												prop="1" 
+												prop="promotion" 
 												align="center"
 												:show-overflow-tooltip="true"> 
 											</el-table-column>
 											<el-table-column 
 												label="销量" 
-												prop="2"
+												prop="amount"
 												align="center"
 												:show-overflow-tooltip="true">
 											</el-table-column>
 											<el-table-column label="均价" 
-												prop="3"
+												prop="avgPrice"
 												align="center"
 												:show-overflow-tooltip="true"> 
+												<template scope="scope">{{ scope.row['avgPrice'] | doubleFloat }}</template>
 											</el-table-column>
 											<el-table-column label="销量增长" 
-												prop="4"
+												prop="increaseRate"
 												align="center"
 												:show-overflow-tooltip="true"> 
+												<template scope="scope">
+											        <div :class="showArrow(scope.row['increaseRate'])"></div>
+											        <span>{{scope.row['increaseRate'] | rate}}</span>
+											    </template>
 											</el-table-column>
 											<el-table-column label="平台" 
-												prop="5"
+												prop="channelName"
 												align="center"
 												:show-overflow-tooltip="true"> 
 											</el-table-column>
 										</el-table>
-									<!--</div>
+									</div>
 								
-								</div>-->
+									<div class="tab-content">
+										<el-table :data="promotionWaysData2" stripe class="table--promotion-ways">
+											<el-table-column 
+												label="促销方式" 
+												prop="promotion" 
+												align="center"
+												:show-overflow-tooltip="true"> 
+											</el-table-column>
+											<el-table-column 
+												label="销量" 
+												prop="amount"
+												align="center"
+												:show-overflow-tooltip="true">
+											</el-table-column>
+											<el-table-column label="均价" 
+												prop="avgPrice"
+												align="center"
+												:show-overflow-tooltip="true"> 
+												<template scope="scope">{{ scope.row['avgPrice'] | doubleFloat }}</template>
+											</el-table-column>
+											<el-table-column label="销量增长" 
+												prop="increaseRate"
+												align="center"
+												:show-overflow-tooltip="true"> 
+												<template scope="scope">
+											        <div :class="showArrow(scope.row['increaseRate'])"></div>
+											        <span>{{scope.row['increaseRate'] | rate}}</span>
+											    </template>
+											</el-table-column>
+											<el-table-column label="平台" 
+												prop="channelName"
+												align="center"
+												:show-overflow-tooltip="true"> 
+											</el-table-column>
+										</el-table>
+									</div>
+								
+									<div class="tab-content">
+										<el-table :data="promotionWaysData3" stripe class="table--promotion-ways">
+											<el-table-column 
+												label="促销方式" 
+												prop="promotion" 
+												align="center"
+												:show-overflow-tooltip="true"> 
+											</el-table-column>
+											<el-table-column 
+												label="销量" 
+												prop="amount"
+												align="center"
+												:show-overflow-tooltip="true">
+											</el-table-column>
+											<el-table-column label="均价" 
+												prop="avgPrice"
+												align="center"
+												:show-overflow-tooltip="true"> 
+												<template scope="scope">{{ scope.row['avgPrice'] | doubleFloat }}</template>
+											</el-table-column>
+											<el-table-column label="销量增长" 
+												prop="increaseRate"
+												align="center"
+												:show-overflow-tooltip="true"> 
+												<template scope="scope">
+											        <div :class="showArrow(scope.row['increaseRate'])"></div>
+											        <span>{{scope.row['increaseRate'] | rate}}</span>
+											    </template>
+											</el-table-column>
+											<el-table-column label="平台" 
+												prop="channelName"
+												align="center"
+												:show-overflow-tooltip="true"> 
+											</el-table-column>
+										</el-table>
+									</div>
+								
+									<div class="tab-content">
+										<el-table :data="promotionWaysData4" stripe class="table--promotion-ways">
+											<el-table-column 
+												label="促销方式" 
+												prop="promotion" 
+												align="center"
+												:show-overflow-tooltip="true"> 
+											</el-table-column>
+											<el-table-column 
+												label="销量" 
+												prop="amount"
+												align="center"
+												:show-overflow-tooltip="true">
+											</el-table-column>
+											<el-table-column label="均价" 
+												prop="avgPrice"
+												align="center"
+												:show-overflow-tooltip="true"> 
+												<template scope="scope">{{ scope.row['avgPrice'] | doubleFloat }}</template>
+											</el-table-column>
+											<el-table-column label="销量增长" 
+												prop="increaseRate"
+												align="center"
+												:show-overflow-tooltip="true"> 
+												<template scope="scope">
+											        <div :class="showArrow(scope.row['increaseRate'])"></div>
+											        <span>{{scope.row['increaseRate'] | rate}}</span>
+											    </template>
+											</el-table-column>
+											<el-table-column label="平台" 
+												prop="channelName"
+												align="center"
+												:show-overflow-tooltip="true"> 
+											</el-table-column>
+										</el-table>
+									</div>
+								</div>
 							</div>
 							
 						</div>

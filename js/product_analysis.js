@@ -20,8 +20,36 @@ var app = new Vue({
 		emotionAnalysisData: [],
 		emotionTrendData: [],
 		productSalesData: [],
-		promotionWaysData: [],
+		promotionWaysData1: [],
+		promotionWaysData2: [],
+		promotionWaysData3: [],
+		promotionWaysData4: [],
 		score:4,
+		highLightQuery: {
+			people: '',
+			product: '',
+		},
+		saleQuery: {
+			month: '',
+			people: '',
+		},
+		commentQuery: {
+			website: '',
+			time: '',
+		},
+		emotionQuery: {
+			website: '',
+			week: '',
+		},
+		productSaleQuery: {
+			season: '',
+		},
+		productPriceTrendQuery: {
+			year: '',
+		},
+		promotionWaysQuery: {
+			season: '',
+		},
 	},
 	created: function () {
 		this.fetchData();
@@ -259,121 +287,145 @@ var app = new Vue({
 					vm.salesData = ary;
 				}
 			})			
-//			this.salesData = [
-//			{
-//				'1': 'MIUI/小米',
-//				'2': 'true',
-//				'3': '1222',
-//				'4': '3311',
-//				'5': '4333',
-//			},{
-//				'1': 'Apple/苹果',
-//				'2': 'true',
-//				'3': '1222',
-//				'4': '3311',
-//				'5': '4333',
-//			},{
-//				'1': 'Huawei/华为',
-//				'2': 'true',
-//				'3': '1222',
-//				'4': '3311',
-//				'5': '4333',
-//			},{
-//				'1': 'Samsung/三星',
-//				'2': 'true',
-//				'3': '1222',
-//				'4': '3311',
-//				'5': '4333',
-//			},{
-//				'1': 'VIVO',
-//				'2': 'true',
-//				'3': '1222',
-//				'4': '3311',
-//				'5': '4333',
-//			},
-//			]
 		},
 		
 		loadPromotionWaysList: function(){
-			this.promotionWaysData = [
-			{
-				'1': '团购',
-				'2': '4356',
-				'3': '4500',
-				'4': '1%',
-				'5': '京东',
-			},
-			{
-				'1': '买赠',
-				'2': '4356',
-				'3': '4300',
-				'4': '1%',
-				'5': '天猫',
-			},
-			{
-				'1': '捆绑',
-				'2': '4256',
-				'3': '4500',
-				'4': '1%',
-				'5': '中国电信',
-			},
-			{
-				'1': '搭售',
-				'2': '4356',
-				'3': '4200',
-				'4': '1%',
-				'5': '淘宝',
-			},
-			{
-				'1': '低价',
-				'2': '3356',
-				'3': '4500',
-				'4': '1%',
-				'5': '唯品会',
-			},
-			{
-				'1': '免单',
-				'2': '4356',
-				'3': '3500',
-				'4': '1%',
-				'5': '小红书',
-			},
-			{
-				'1': '秒杀',
-				'2': '2356',
-				'3': '4500',
-				'4': '1%',
-				'5': '亚马逊',
-			},
-			{
-				'1': '积分',
-				'2': '4356',
-				'3': '4500',
-				'4': '1%',
-				'5': '美团',
-			},
-			{
-				'1': '抽奖',
-				'2': '1356',
-				'3': '4500',
-				'4': '1%',
-				'5': '大众点评',
-			},
-			{
-				'1': '打折',
-				'2': '4356',
-				'3': '4500',
-				'4': '1%',
-				'5': '苏宁易购',
-			},
-			{
-				'1': '返券',
-				'2': '4356',
-				'3': '4500',
-				'4': '1%',
-				'5': '国美',
-			},
-			]
+			var vm = this;
+			utilObj.ajax({
+				url: '/m/productStats/statsPromotion',
+				type: 'POST',
+				data: {
+					nextPage: 0,
+					pageSize: 10,
+					productId: 1,
+					year: 2017,
+					season: 1,
+				},
+				success: function(data){
+					vm.promotionWaysData1 = data.object.content;
+				}
+			})			
+			utilObj.ajax({
+				url: '/m/productStats/statsPromotion',
+				type: 'POST',
+				data: {
+					nextPage: 0,
+					pageSize: 10,
+					productId: 1,
+					year: 2017,
+					season: 2,
+				},
+				success: function(data){
+					vm.promotionWaysData2 = data.object.content;
+				}
+			})			
+			utilObj.ajax({
+				url: '/m/productStats/statsPromotion',
+				type: 'POST',
+				data: {
+					nextPage: 0,
+					pageSize: 10,
+					productId: 1,
+					year: 2017,
+					season: 3,
+				},
+				success: function(data){
+					vm.promotionWaysData3 = data.object.content;
+				}
+			})			
+			utilObj.ajax({
+				url: '/m/productStats/statsPromotion',
+				type: 'POST',
+				data: {
+					nextPage: 0,
+					pageSize: 10,
+					productId: 1,
+					year: 2017,
+					season: 4,
+				},
+				success: function(data){
+					vm.promotionWaysData4 = data.object.content;
+				}
+			})			
+//			this.promotionWaysData1 = [
+//			{
+//				'1': '团购',
+//				'2': '4356',
+//				'3': '4500',
+//				'4': '1%',
+//				'5': '京东',
+//			},
+//			{
+//				'1': '买赠',
+//				'2': '4356',
+//				'3': '4300',
+//				'4': '1%',
+//				'5': '天猫',
+//			},
+//			{
+//				'1': '捆绑',
+//				'2': '4256',
+//				'3': '4500',
+//				'4': '1%',
+//				'5': '中国电信',
+//			},
+//			{
+//				'1': '搭售',
+//				'2': '4356',
+//				'3': '4200',
+//				'4': '1%',
+//				'5': '淘宝',
+//			},
+//			{
+//				'1': '低价',
+//				'2': '3356',
+//				'3': '4500',
+//				'4': '1%',
+//				'5': '唯品会',
+//			},
+//			{
+//				'1': '免单',
+//				'2': '4356',
+//				'3': '3500',
+//				'4': '1%',
+//				'5': '小红书',
+//			},
+//			{
+//				'1': '秒杀',
+//				'2': '2356',
+//				'3': '4500',
+//				'4': '1%',
+//				'5': '亚马逊',
+//			},
+//			{
+//				'1': '积分',
+//				'2': '4356',
+//				'3': '4500',
+//				'4': '1%',
+//				'5': '美团',
+//			},
+//			{
+//				'1': '抽奖',
+//				'2': '1356',
+//				'3': '4500',
+//				'4': '1%',
+//				'5': '大众点评',
+//			},
+//			{
+//				'1': '打折',
+//				'2': '4356',
+//				'3': '4500',
+//				'4': '1%',
+//				'5': '苏宁易购',
+//			},
+//			{
+//				'1': '返券',
+//				'2': '4356',
+//				'3': '4500',
+//				'4': '1%',
+//				'5': '国美',
+//			},
+//			]
 		},
 		
 		loadCommentActiveList: function(){

@@ -13,7 +13,12 @@ var app = new Vue({
 		sexData: [],
 		score:null,
 		pageNum: '',
+		stayPageNum: '',
 		people: '',
+		timeQuery: {
+			month: '',
+			date: '',
+		}
 	},
 	created: function () {
 		this.fetchData();

@@ -47,6 +47,7 @@
 			.channel-query__text{
 				font-size: 14px;
     			margin-right: 6px;
+    			font-weight: bold;
 			}
 			.line--basic-wrapper{
 				box-shadow: 0 0 5px 1px #dbdbdb;
@@ -115,7 +116,7 @@
 					<div class="bwl--b clearfix">
 						<div class="section clearfix">
 							<span class="title-prefix-md">渠道基础数据</span>
-							<div class="fr clearfix letter-spacing">
+							<div class="fr clearfix font-zero">
 								<input type="text" name="" class="input--lg mr10"/>
 								<button class="button--md">渠道管理</button>
 							</div>
@@ -238,7 +239,9 @@
 					<div class="bwr--b clearfix">
 						<div class="channel-query">
 							<span class="channel-query__text">渠道健康</span>
-							<el-select placeholder="筛选" class="blue-bg" style="margin-right: 0;"></el-select>
+							<el-select placeholder="筛选" class="blue-bg" 
+								v-model="channelHealthQuery.query"
+								style="margin-right: 0;"></el-select>
 						</div>
 						<div class="sml--half">
 							<el-table :data="channelHealthData1" stripe  height="160" 

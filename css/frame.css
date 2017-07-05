@@ -1,5 +1,5 @@
 /*框架部分*/
-@font-face {
+/*@font-face {
 	font-family:pingfang_regular;
 	src: url("../lib/fonts/PingFang_Regular.ttf");
 }
@@ -14,7 +14,7 @@
 @font-face {
 	font-family:pingfang_heavy;
 	src: url("../lib/fonts/PingFang_Heavy.ttf");
-}
+}*/
 html{
 	background-image: url(../img/BG_img.png);
 	background-color: #b3b3b3;
@@ -24,10 +24,11 @@ body{
 	/*background: #b3b3b3;*/
 	min-width: 1300px;
 	font-size: 12px;
-	font-family: pingfang_bold ,tahoma, arial,"Hiragino Sans GB", "Microsoft Yahei", \5b8b\4f53, sans-serif;
+	/*font-family: pingfang_bold ,tahoma, arial,"Hiragino Sans GB", "Microsoft Yahei", \5b8b\4f53, sans-serif;*/
+	font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
 input{
-	font-family: pingfang_regular ,tahoma, arial,"Hiragino Sans GB", "Microsoft Yahei", \5b8b\4f53, sans-serif;
+	/*font-family: pingfang_regular ,tahoma, arial,"Hiragino Sans GB", "Microsoft Yahei", \5b8b\4f53, sans-serif;*/
 }
 .left-menu{
 	position: fixed;
@@ -97,7 +98,7 @@ header{
 .nav-left{
 	margin-left: 32px;
 	float: left;
-	font-family: "微软雅黑";
+	/*font-family: "微软雅黑";*/
 }
 .nav-left>a{
 	
@@ -111,6 +112,7 @@ header{
 	margin-right: 74px;
 	font-size: 14px;
 	display: table-cell;
+	font-weight: bold;
 }
 .nav-right>span{
     display: inline-block;
