@@ -25,8 +25,9 @@ var utilObj = {
 		};
 		if(noToken[params.url]==undefined){
 			if(!sessionStorage.getItem("t")){
-				sessionStorage.setItem("message","令牌失效，请登录");
-				utilObj.navigate('login');
+//				sessionStorage.setItem("message","令牌失效，请登录");
+
+//				此处应该去获取token
 			}
 		}
 		params.url = utilObj.getApiHost().baseUrl + params.url;
@@ -43,7 +44,6 @@ var utilObj = {
 						sessionStorage.setItem("message","登录过期,请重新登录");
 						sessionStorage.removeItem('t');
 						location.reload();
-	//					utilObj.navigate("login");
 					}else{
 						alert('接口出错' + data.message);
 					}

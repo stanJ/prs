@@ -114,14 +114,10 @@ var frameObj = {
 				sessionStorage.setItem('userinfo',JSON.stringify(response.user));
 			},
 			fail:function(data){
-				utilObj.alert({
-					body:"服务器出错了"
-				})
+//				alert('请求失败')
 			},
 			error:function (data, status, e){
-				utilObj.alert({
-					body:"服务器出错了"
-				})
+//				alert('请求失败')
 			}
 		})
 	},
